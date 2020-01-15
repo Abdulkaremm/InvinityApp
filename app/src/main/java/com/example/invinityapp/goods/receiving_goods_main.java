@@ -232,16 +232,36 @@ public class receiving_goods_main extends AppCompatActivity {
                 return true;
 
             case R.id.sync:
-                progressDialog.show();
-               new ExportReceivedGoods().execute(receiving_goods_main.this);
-               progressDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
-                   @Override
-                   public void onDismiss(DialogInterface dialog) {
-                       Intent intent = new Intent(receiving_goods_main.this, receiving_goods_main.class);
-                       startActivity(intent);
-                       finish();
-                   }
-               });
+
+                Cursor res = db.IfOpenReceiving();
+                if(res.getCount() > 0){
+
+                    AlertDialog dialog = new AlertDialog.Builder(receiving_goods_main.this)
+                            .setTitle("مزامنة البضائع المستلمة !")
+                            .setMessage("هل انت متأكد من عملية المزامنة ؟")
+                            .setPositiveButton("نعم", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+
+                                    progressDialog.show();
+                                    new ExportReceivedGoods().execute(receiving_goods_main.this);
+                                    progressDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                                        @Override
+                                        public void onDismiss(DialogInterface dialog) {
+                                            Intent intent = new Intent(receiving_goods_main.this, receiving_goods_main.class);
+                                            startActivity(intent);
+                                            finish();
+                                        }
+                                    });
+
+                                }
+                            })
+                            .setNegativeButton("إلغاء", null)
+                            .show();
+
+                }else
+                    Toast.makeText(receiving_goods_main.this,"لم يتم استلام بضائع لتصديرها",Toast.LENGTH_SHORT).show();
+
 
                 return true;
 
