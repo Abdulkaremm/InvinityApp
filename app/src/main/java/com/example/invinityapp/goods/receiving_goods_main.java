@@ -234,6 +234,14 @@ public class receiving_goods_main extends AppCompatActivity {
             case R.id.sync:
                 progressDialog.show();
                new ExportReceivedGoods().execute(receiving_goods_main.this);
+               progressDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                   @Override
+                   public void onDismiss(DialogInterface dialog) {
+                       Intent intent = new Intent(receiving_goods_main.this, receiving_goods_main.class);
+                       startActivity(intent);
+                       finish();
+                   }
+               });
 
                 return true;
 

@@ -672,6 +672,23 @@ public class InfinityDB extends SQLiteOpenHelper {
     }
 
 
+    public boolean DeleteGoodsAfterSync(){
+
+        SQLiteDatabase db  = this.getWritableDatabase();
+        int state = db.delete(RECEIVE_FROM_SUPPLIERS,null,null);
+
+        if(state > 0 ) {
+                int del = db.delete(RECEIVED_GOODS, null, null);
+                if (del > 0)
+                    return true;
+                else
+                    return false;
+
+        }else
+            return false;
+    }
+
+
 
     public Cursor GetSuppliers(){
 
