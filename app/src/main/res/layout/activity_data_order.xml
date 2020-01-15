@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".viewcategory.DataOrder"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:orientation="horizontal"
+        android:layoutDirection="rtl"
+        android:layout_marginTop="15dp">
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:text="Barcode"
+            android:textAlignment="center"
+            android:textColor="#03A9F4"
+            android:textSize="20sp"/>
+
+        <EditText
+            android:id="@+id/Barcode"
+            android:layout_width="170dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/edittext"
+            android:ems="10"
+            android:inputType="number"
+            android:screenReaderFocusable="true"
+            android:textAlignment="center"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingRight="10dp"
+        android:orientation="horizontal"
+        android:layoutDirection="rtl"
+        android:layout_marginTop="15dp">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="معلومات الصنف"
+            android:textColor="#03A9F4"
+            android:textSize="30sp"
+            android:visibility="invisible" />
+
+    </LinearLayout>
+
+    <ScrollView
+        android:id="@+id/scrollData"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="10dp"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:orientation="horizontal"
+                android:layoutDirection="rtl"
+                android:layout_marginTop="15dp">
+
+                <TextView
+                    android:id="@+id/name"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:textColor="#03A9F4"
+                    android:textSize="20sp"
+                    android:text="اسم الصنف"/>
+
+                <TextView
+                    android:id="@+id/dataName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@drawable/edittext" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:orientation="horizontal"
+                android:layoutDirection="rtl"
+                android:layout_marginTop="15dp">
+
+                <TextView
+                    android:id="@+id/storage"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:textColor="#03A9F4"
+                    android:textSize="20sp"
+                    android:text="المخزون"/>
+
+                <TextView
+                    android:id="@+id/dataStorage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@drawable/edittext" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:orientation="horizontal"
+                android:layoutDirection="rtl"
+                android:layout_marginTop="15dp">
+
+                <TextView
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:textColor="#03A9F4"
+                    android:textSize="20sp"
+                    android:text="القسم الفرعي"/>
+
+                <TextView
+                    android:id="@+id/dataDep"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@drawable/edittext" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:orientation="horizontal"
+                android:layoutDirection="rtl"
+                android:layout_marginTop="15dp"
+                android:weightSum="100">
+
+                <TextView
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:textColor="#03A9F4"
+                    android:layout_weight="10"
+                    android:textSize="20sp"
+                    android:text="الوحدة"/>
+
+                <Button
+                    android:id="@+id/prev"
+                    android:layout_width="40dp"
+                    android:layout_height="30dp"
+                    android:background="@drawable/button"
+                    android:drawableRight="@drawable/ic_next"
+                    android:onClick="prevUnit"
+                    android:visibility="invisible" />
+
+                <TextView
+                    android:id="@+id/dataUnit"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAlignment="center" />
+
+                <Button
+                    android:id="@+id/next"
+                    android:layout_width="40dp"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="30dp"
+                    android:background="@drawable/button"
+                    android:drawableRight="@drawable/ic_prev"
+                    android:onClick="nextUnit"
+                    android:visibility="invisible" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@drawable/edittext" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:orientation="horizontal"
+                android:layoutDirection="rtl"
+                android:layout_marginTop="15dp">
+
+                <TextView
+                    android:id="@+id/price1"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:textColor="#03A9F4"
+                    android:textSize="20sp"
+                    android:text="السعر الاول"/>
+
+                <TextView
+                    android:id="@+id/dataPrice1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@drawable/edittext" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:orientation="horizontal"
+                android:layoutDirection="rtl"
+                android:layout_marginTop="15dp">
+
+                <TextView
+                    android:id="@+id/price2"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:textColor="#03A9F4"
+                    android:textSize="20sp"
+                    android:text="السعر التاني"/>
+
+                <TextView
+                    android:id="@+id/dataPrice2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@drawable/edittext" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:orientation="horizontal"
+                android:layoutDirection="rtl"
+                android:layout_marginTop="15dp">
+
+                <TextView
+                    android:id="@+id/price3"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:textColor="#03A9F4"
+                    android:textSize="20sp"
+                    android:text="السعر الثالث"/>
+
+                <TextView
+                    android:id="@+id/dataPrice3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@drawable/edittext" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:orientation="horizontal"
+                android:layoutDirection="rtl"
+                android:layout_marginTop="15dp">
+
+                <TextView
+                    android:id="@+id/price4"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:textColor="#03A9F4"
+                    android:textSize="20sp"
+                    android:text="السعر الاول"/>
+
+                <TextView
+                    android:id="@+id/dataPrice4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center" />
+
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+
+
+
+    </ScrollView>
+
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="@android:style/Widget.ProgressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:outlineAmbientShadowColor="@color/colorPrimary"
+        android:outlineSpotShadowColor="@color/colorPrimary"
+        android:progressTint="#00FFFFFF"
+        android:visibility="gone"
+        android:layout_gravity="center"/>
+
+
+
+</LinearLayout>

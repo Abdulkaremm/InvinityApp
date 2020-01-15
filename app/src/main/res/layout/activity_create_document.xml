@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Transport_of_goods.CreateDocument"
+    android:orientation="vertical"
+    android:focusable="auto"
+    android:focusableInTouchMode="true"
+    android:touchscreenBlocksFocus="true">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textSize="18sp"
+        android:text="مستند نقل المخزون"
+        android:textColor="@color/colorMain"
+        android:padding="10dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="100"
+        android:layoutDirection="rtl"
+        android:padding="10dp">
+
+        <TextView
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:textSize="18sp"
+            android:text="من الفرع"
+            android:padding="5dp"
+            android:textColor="@color/colorMain"/>
+        <Spinner
+            android:id="@+id/branchName"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:textAlignment="center"/>
+
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="100"
+        android:layoutDirection="rtl"
+        android:padding="10dp">
+
+        <TextView
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:textSize="18sp"
+            android:text="مخازن الفرع"
+            android:padding="5dp"
+            android:textColor="@color/colorMain"/>
+
+        <Spinner
+            android:id="@+id/fromLocation"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:textAlignment="center"/>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="100"
+        android:layoutDirection="rtl"
+        android:padding="10dp">
+
+        <TextView
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:textSize="18sp"
+            android:text="نقل الى فرع"
+            android:padding="5dp"
+            android:textColor="@color/colorMain"/>
+
+        <Spinner
+            android:id="@+id/toBranch"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:textAlignment="center"/>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="100"
+        android:layoutDirection="rtl"
+        android:padding="10dp">
+
+        <TextView
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:textSize="18sp"
+            android:text="مخازن الفرع"
+            android:padding="5dp"
+            android:textColor="@color/colorMain"/>
+
+        <Spinner
+            android:id="@+id/toLocation"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:textAlignment="center"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="100"
+        android:layoutDirection="rtl"
+        android:padding="10dp">
+
+        <TextView
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:textSize="18sp"
+            android:text="الوصف"
+            android:padding="5dp"
+            android:textColor="@color/colorMain"/>
+
+        <EditText
+            android:id="@+id/discription"
+            android:inputType="textMultiLine"
+            android:lines="8"
+            android:minLines="3"
+            android:gravity="top|left"
+            android:background="@drawable/edittext"
+            android:maxLines="10"
+            android:textAlignment="viewStart"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:scrollbars="vertical"
+            tools:ignore="RtlCompat" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="100"
+        android:layoutDirection="rtl"
+        android:padding="10dp">
+
+        <CheckBox
+            android:id="@+id/checkBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAlignment="viewStart"
+            android:textColor="@color/colorMain"
+            android:textSize="18sp"
+            android:text="دعم تاريخ الصلاحية" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="100"
+        android:layoutDirection="rtl"
+        android:layout_gravity="center"
+        android:layout_marginTop="30dp"
+        android:padding="10dp">
+
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button"
+            android:text="حفظ"
+            android:onClick="addDocument"
+            android:textColor="#FFF"
+            android:textSize="18sp"/>
+
+
+    </LinearLayout>
+
+
+
+</LinearLayout>

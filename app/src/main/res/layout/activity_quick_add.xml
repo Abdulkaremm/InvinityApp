@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".inventoryitems.QuickAdd"
+    android:weightSum="100"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:focusable="auto"
+    android:focusableInTouchMode="true"
+    android:touchscreenBlocksFocus="true"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:orientation="horizontal"
+        android:layoutDirection="rtl"
+        android:layout_marginTop="15dp">
+        <TextView
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:text="Barcode"
+            android:focusable="false"
+            android:textAlignment="center"
+            android:textColor="#03A9F4"
+            android:textSize="20sp"/>
+
+        <EditText
+            android:id="@+id/barcode"
+            android:layout_width="170dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/edittext"
+            android:ems="10"
+            android:inputType="text"
+            android:nextFocusLeft="@id/barcode"
+            android:nextFocusRight="@id/barcode"
+            android:nextFocusUp="@id/barcode"
+            android:nextFocusDown="@id/barcode"
+            android:nextFocusForward="@id/barcode"
+            android:textAlignment="center" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="100">
+
+        <com.baoyz.swipemenulistview.SwipeMenuListView
+            android:id="@+id/listData"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp">
+
+        </com.baoyz.swipemenulistview.SwipeMenuListView>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/msg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#000"
+        android:textSize="18sp"
+        android:padding="5dp"
+        android:textAlignment="center"/>
+</LinearLayout>

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp"
+    android:weightSum="200"
+    android:layoutDirection="rtl">
+
+
+
+    <TextView
+        android:id="@+id/counter"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_weight="40"
+        android:gravity="center"
+        android:textColor="@color/colorMain"
+        android:text="1"
+        android:textAlignment="center"
+        android:textSize="20sp" />
+
+
+        <TextView
+            android:id="@+id/productname"
+            android:layout_width="100dp"
+            android:maxWidth="100dp"
+            android:layout_height="match_parent"
+            android:layout_weight="60"
+            android:gravity="center"
+            android:text="TextView"
+            android:textAlignment="center"
+            android:textSize="10sp" />
+
+
+    <LinearLayout
+        android:layout_width="100dp"
+        android:layout_height="match_parent"
+        android:layout_weight="60"
+        android:orientation="vertical"
+        android:weightSum="100">
+
+        <TextView
+            android:id="@+id/date"
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:gravity="center"
+            android:layout_weight="50"
+            android:text="TextView"
+            android:textAlignment="center"
+            android:textSize="10sp" />
+
+
+
+        <TextView
+            android:id="@+id/barcodes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="50"
+            android:gravity="center"
+            android:text="TextView"
+            android:textAlignment="center"
+            android:textSize="12sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_weight="40"
+        android:weightSum="100"
+        android:orientation="vertical">
+
+        <TextView
+
+            android:id="@+id/uomsname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="50"
+            android:gravity="center"
+            android:text="TextView"
+            android:textAlignment="center"
+            android:textSize="10sp" />
+
+
+        <TextView
+            android:id="@+id/qun"
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:gravity="center"
+            android:layout_weight="50"
+            android:text="TextView"
+            android:textAlignment="center"
+            android:textSize="14sp" />
+    </LinearLayout>-->
+
+</LinearLayout>

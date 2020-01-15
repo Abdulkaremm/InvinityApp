@@ -1,0 +1,420 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layoutDirection="rtl"
+    android:orientation="vertical"
+    android:background="@drawable/edittext"
+    android:layout_height="match_parent"
+    tools:context=".SettingActivity">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="100"
+        >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="مزامنة البيانات"
+            android:padding="5dp"
+            android:textSize="20sp"
+            android:textColor="@color/colorMain"
+            />
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="100"
+        >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=" استراد البيانات"
+            android:textSize="16sp"
+            android:textColor="@color/colorMain"
+            android:background="@drawable/edittext"
+            />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorWhite"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="5dp">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:textDirection="rtl"
+
+                android:layoutDirection="rtl"
+                android:weightSum="100"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="68"
+                    android:text="إعدادات المنضومة"
+                    android:textColor="#3E3E46"
+                    android:textSize="16sp" />
+
+                <Switch
+                    android:id="@+id/Setting"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="20"
+                    android:checked="false"
+                    android:clickable="false"
+
+                    android:gravity="center"
+                    tools:checked="false" />
+
+            </LinearLayout>
+
+            <TextView
+                android:visibility="gone"
+                android:id="@+id/settingDate"
+                android:layout_width="wrap_content"
+                android:text="12/5/2019"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="5dp">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:textDirection="rtl"
+                android:layoutDirection="rtl"
+                android:padding="5dp"
+                android:weightSum="100"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" بيانات الأصناف"
+                    android:textSize="16sp"
+                    android:textColor="#FF3E3E46"
+                    android:layout_weight="70"
+                    />
+
+                <Switch
+                    android:id="@+id/productsData"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="false"
+                    android:gravity="center"
+                    android:clickable="false"
+                    android:layout_weight="20"
+
+                    />
+
+            </LinearLayout>
+
+            <TextView
+                android:visibility="gone"
+                android:id="@+id/productsDate"
+                android:layout_width="wrap_content"
+                android:textColor="#000"
+                android:text="12/5/2019"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="5dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:textDirection="rtl"
+                android:layoutDirection="rtl"
+                android:padding="5dp"
+                android:weightSum="100"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" بيانات الوحدات"
+                    android:textSize="16sp"
+                    android:textColor="#FF3E3E46"
+                    android:layout_weight="70"
+                    />
+
+                <Switch
+                    android:id="@+id/UnitsDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="false"
+                    android:gravity="center"
+                    android:clickable="false"
+                    android:layout_weight="20"
+
+                    />
+
+
+            </LinearLayout>
+
+            <TextView
+                android:visibility="gone"
+                android:id="@+id/unitsDate"
+                android:layout_width="wrap_content"
+                android:text="12/5/2019"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="5dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:textDirection="rtl"
+                android:padding="5dp"
+                android:layoutDirection="rtl"
+                android:weightSum="100"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" بيانات الموردين"
+                    android:textSize="16sp"
+                    android:textColor="#FF3E3E46"
+                    android:layout_weight="70"
+                    />
+
+                <Switch
+                    android:id="@+id/SuppliersDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="false"
+                    android:gravity="center"
+                    android:clickable="false"
+                    android:layout_weight="20"
+
+                    />
+
+
+            </LinearLayout>
+
+            <TextView
+                android:visibility="gone"
+                android:id="@+id/supgDate"
+                android:layout_width="wrap_content"
+                android:text="12/5/2019"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+    </LinearLayout>
+
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp"
+        android:weightSum="100"
+        >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=" تصدير البيانات"
+            android:padding="5dp"
+            android:textSize="16sp"
+            android:textColor="@color/colorMain"
+            android:background="@drawable/edittext"
+            />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="wrap_content"
+        android:background="@color/colorWhite"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="5dp">
+
+            <LinearLayout
+                android:id="@+id/SyncInvetory"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:textDirection="rtl"
+                android:padding="5dp"
+                android:layoutDirection="rtl"
+                android:weightSum="100"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" بيانات الجرد"
+                    android:textSize="16sp"
+                    android:textColor="#FF3E3E46"
+                    android:layout_weight="70"
+                    />
+
+                <TextView
+                    android:visibility="invisible"
+                    android:id="@+id/invetoryCount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    android:textAlignment="center"
+                    android:textColor="#FF3E3E46"
+                    android:layout_weight="30"
+                    />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="5dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:textDirection="rtl"
+                android:padding="5dp"
+                android:layoutDirection="rtl"
+                android:weightSum="100"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" البضائع المستلمة"
+                    android:textSize="16sp"
+                    android:textColor="#FF3E3E46"
+                    android:layout_weight="70"
+                    />
+
+                <Switch
+                    android:id="@+id/GoodsData"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="false"
+                    android:gravity="center"
+                    android:clickable="false"
+                    android:layout_weight="20"
+
+                    />
+
+
+            </LinearLayout>
+
+            <TextView
+                android:visibility="gone"
+                android:id="@+id/goodsgDate"
+                android:layout_width="wrap_content"
+                android:text="12/5/2019"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="5dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:textDirection="rtl"
+                android:layoutDirection="rtl"
+                android:weightSum="100"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" النواقص"
+                    android:textSize="16sp"
+                    android:textColor="#FF3E3E46"
+                    android:layout_weight="70"
+                    />
+
+                <Switch
+                    android:id="@+id/Shortfalls"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="false"
+                    android:gravity="center"
+                    android:clickable="false"
+                    android:layout_weight="20"
+
+                    />
+
+
+            </LinearLayout>
+
+            <TextView
+                android:visibility="gone"
+                android:id="@+id/ShortDate"
+                android:layout_width="wrap_content"
+                android:text="12/5/2019"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+    </LinearLayout>
+
+
+
+</LinearLayout>

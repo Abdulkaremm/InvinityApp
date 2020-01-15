@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".goods.UpdateProductActivity">
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:orientation="horizontal"
+        android:layoutDirection="rtl"
+        android:layout_marginTop="15dp">
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:text="Barcode"
+            android:textAlignment="center"
+            android:textColor="#03A9F4"
+            android:textSize="20sp"/>
+
+        <EditText
+            android:id="@+id/barcode"
+            android:layout_width="170dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/edittext"
+            android:ems="10"
+            android:inputType="number"
+            android:screenReaderFocusable="true"
+            android:enabled="false"
+            android:textAlignment="center"/>
+
+    </LinearLayout>
+
+
+
+    <LinearLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layoutDirection="rtl"
+        android:visibility="visible"
+        >
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="20dp"
+            android:textDirection="rtl"
+            android:layoutDirection="rtl"
+            android:padding="10dp"
+            android:weightSum="100">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="أسم الصنف"
+                android:textColor="#03A9F4"
+                android:textSize="18sp"
+                android:layout_weight="20"
+                />
+
+            <EditText
+                android:id="@+id/ProductName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint=" الصنف"
+                android:singleLine="true"
+                android:textSize="14dp"
+                android:width="120dp"
+                android:layout_weight="50"
+                android:background="@drawable/edittext"
+                android:padding="5dp"
+                />
+
+
+        </LinearLayout>
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:orientation="horizontal"
+            android:layoutDirection="rtl"
+            android:layout_marginTop="15dp"
+            android:weightSum="100">
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_weight="25"
+                android:layout_height="wrap_content"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:text="الوحدة"
+                android:textColor="#03A9F4"
+                android:textSize="20sp"
+                android:layout_width="20dp" />
+
+            <Spinner
+                android:id="@+id/UnitsSpinner"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:layout_weight="40"
+                android:background="@color/colorMain"
+                android:textAlignment="center"/>
+
+
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="العبوة"
+                android:layout_marginRight="20dp"
+                android:textSize="18sp"
+                android:textColor="#03A9F4"
+                android:layout_weight="10"
+                />
+
+            <EditText
+                android:id="@+id/packageing"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="15"
+                android:paddingRight="5dp"
+                android:paddingBottom="3dp"
+                android:paddingTop="3dp"
+                android:width="20dp"
+                android:background="@drawable/edittext"
+                android:hint="0.."
+                android:textSize="14dp"
+                android:inputType="number" />
+
+        </LinearLayout>
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:orientation="horizontal"
+            android:layoutDirection="rtl"
+            android:weightSum="100"
+            android:layout_marginTop="15dp">
+
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="90dp"
+                android:layout_weight="10"
+                android:layout_height="wrap_content"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:text="الكمية"
+                android:textColor="#03A9F4"
+                android:textSize="20sp" />
+
+            <TextView
+                android:visibility="invisible"
+                android:id="@+id/mines"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="20"
+                android:background="@drawable/btn_danger"
+                android:onClick="mines"
+                android:text="-"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:textAlignment="center"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp" />
+
+            <EditText
+                android:id="@+id/quantity"
+                android:layout_width="80dp"
+                android:layout_weight="20"
+                android:layout_height="wrap_content"
+                android:background="@drawable/edittext"
+                android:ems="10"
+                android:hint="0"
+                android:inputType="number"
+                android:padding="5dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:textAlignment="center"
+                android:textSize="20sp"/>
+            <TextView
+                android:id="@+id/plus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="20"
+                android:background="@drawable/btn_success"
+                android:onClick="plus"
+                android:text="+"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:textAlignment="center"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"/>
+        </LinearLayout>
+
+
+
+        <LinearLayout
+            android:id="@+id/Exdate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="20dp"
+            android:padding="10dp"
+            android:textDirection="rtl"
+            android:layoutDirection="rtl"
+            android:weightSum="100">
+
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="تاريخ الصلاحية"
+                android:textSize="18sp"
+                android:textColor="#03A9F4"
+                android:layout_weight="30"
+                />
+            <TextView
+                android:id="@+id/date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/edittext"
+                android:hint="يوم/شهر/سنة"
+                android:paddingLeft="10dp"
+                android:paddingTop="5dp"
+                android:paddingRight="10dp"
+                android:paddingBottom="5dp"
+                android:textAlignment="center"
+                android:textColor="#726F6F"
+                android:textSize="18sp" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:orientation="horizontal"
+            android:layoutDirection="rtl"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp">
+
+            <Button
+                android:onClick="UpdateProduct"
+                android:id="@+id/update"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button"
+                android:text="تعديل"
+                android:textColor="@color/colorWhite"
+                android:textSize="18sp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</LinearLayout>

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.invinityapp">
+
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:largeHeap="true"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".Transport_of_goods.UpdateProductWihtDate"></activity>
+        <activity android:name=".Transport_of_goods.UpdateProductWihtoutDate" />
+        <activity android:name=".Transport_of_goods.AddProdutWihtoutDate" />
+        <activity android:name=".Transport_of_goods.AddProductWithDate" />
+        <activity
+            android:name=".Transport_of_goods.ScanProduct"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity android:name=".Transport_of_goods.CreateDocument" />
+        <activity android:name=".Transport_of_goods.TransportGoods" />
+        <activity android:name=".DeviceConfigActivity" />
+        <activity android:name=".inventoryitems.UpdateProductHaveDate" />
+        <activity android:name=".inventoryitems.ProductHaveDate" />
+        <activity
+            android:name=".SyncDataActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".SettingActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".goods.UpdateProductActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".goods.ViewGoodsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".goods.SuppliersList"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".goods.ReceiveGoods"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".goods.AddNewSup"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".goods.receiving_goods_main"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".inventoryitems.ViewInfoProducts"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".inventoryitems.ViewAllDataInventory"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".inventoryitems.QuickAdd"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity android:name=".registration_of_deficiencies.RegistrationOfDeficiencies" />
+        <activity
+            android:name=".inventoryitems.DataRepeted"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".inventoryitems.UpdateDate"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".viewcategory.DataOrder"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".viewcategory.NetworkState"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".inventoryitems.InventoryAddData"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".inventoryitems.inventroyscan"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".MainActivity"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>

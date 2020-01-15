@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" >
+
+    <item
+        android:id="@+id/inventoryType"
+        android:title="نوع الجرد"
+        app:actionViewClass="android.widget.TextView"
+        android:visible="false"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/search"
+        android:icon="@drawable/ic_search_item"
+        android:title="بحث"
+        android:visible="false"
+        app:showAsAction="always"
+        app:actionViewClass="android.widget.SearchView"/>
+
+    <item
+        android:id="@+id/viewAllData"
+        android:icon="@drawable/ic_eye"
+        android:title="عرض كل البينات"
+        android:visible="false"
+        app:showAsAction="always" />
+
+
+    <item
+        android:id="@+id/sync"
+        android:icon="@drawable/ic_sync_black_24dp"
+        android:title="تصدير بينات الجرد"
+        android:visible="false"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/QR"
+        android:icon="@drawable/ic_center_focus_weak_black_24dp"
+        android:title="BarcodeScanner"
+        android:visible="false"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/openCam"
+        android:title="فتح الكميرا"
+        android:icon="@drawable/ic_camera"
+        android:visible="false"
+        app:showAsAction="ifRoom"
+
+        />
+
+    <item
+        android:id="@+id/addnew"
+        android:title="جرد صنف جديد"
+        android:visible="false"
+        android:icon="@drawable/ic_add_new"
+        app:showAsAction="always"
+        />
+
+    <item
+        android:id="@+id/back"
+        android:title="رجوع"
+        android:icon="@drawable/ic_back"
+        app:showAsAction="always"
+        />
+
+
+</menu>

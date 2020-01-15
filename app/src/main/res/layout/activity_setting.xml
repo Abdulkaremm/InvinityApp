@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layoutDirection="rtl"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    tools:context=".SettingActivity"
+    android:focusableInTouchMode="true"
+    android:background="@drawable/edittext">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layoutDirection="rtl">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="5dp"
+
+            android:weightSum="100"
+            >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="الإعدادات"
+                android:padding="5dp"
+                android:textSize="30sp"
+                android:textColor="@color/colorMain"
+                />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:textDirection="rtl"
+            android:padding="5dp"
+            android:layoutDirection="rtl"
+            android:weightSum="100"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:background="@color/colorWhite"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="أستخدام الكاميرة لقرأة الباركود"
+                    android:textSize="16sp"
+                    android:textColor="#FF3E3E46"
+                    android:layout_weight="70"
+                    />
+
+                <Switch
+                    android:id="@+id/UseCamera"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_weight="20"
+                    android:checked="false"
+                    android:enabled="false"
+                    />
+            </LinearLayout>
+
+              <TextView
+                  android:layout_marginTop="10dp"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:background="@drawable/edittext"
+                  android:text="في حالة عدم تفعيل هذه الخدمة فإن قرأة الباركود تتم افتراضياً عن طريق قارئ الباركود, في حالة جهازك لا يدعم قارئ الباركود قم بتفعيلها"
+                  />
+
+        </LinearLayout>
+
+
+
+
+
+
+
+        <LinearLayout
+            android:id="@+id/SyncDatePage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="30dp"
+            android:background="@color/colorWhite"
+            android:weightSum="100"
+            android:padding="5dp"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="مزامنة البيانات"
+                android:textSize="20sp"
+                android:textColor="#FF3E3E46"
+                android:layout_weight="95"
+                />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="5"/>
+               <!-- android:drawableRight="@drawable/ic_arrow_left" -->
+
+
+
+        </LinearLayout>
+
+        <View
+            android:id="@+id/divider3"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="?android:attr/listDivider" />
+
+
+        <LinearLayout
+            android:id="@+id/DeviceConfig"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:onClick="configPage"
+            android:layout_marginTop="30dp"
+
+            android:background="@color/colorWhite"
+            android:weightSum="100"
+            android:padding="5dp"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="اعدادات الجهاز"
+                android:textSize="20sp"
+                android:textDirection="rtl"
+                android:textColor="#FF3E3E46"
+                android:layout_weight="95"
+                />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="5"/>
+<!--                android:drawableRight="@drawable/ic_arrow_left" />-->
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/removeAllDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:onClick="configPage"
+            android:layout_marginTop="30dp"
+
+            android:background="@color/colorWhite"
+            android:weightSum="100"
+            android:padding="5dp"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="حدف جميع البيانات"
+                android:textSize="20sp"
+                android:textDirection="rtl"
+                android:textColor="@color/colorDanger"
+                android:layout_weight="95"
+                />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+</ScrollView>
+

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layoutDirection="rtl">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="100"
+        android:layoutDirection="rtl">
+
+        <TextView
+            android:id="@+id/productName"
+            android:text="Name here"
+            android:textSize="18dp"
+            android:textColor="#000"
+            android:textDirection="rtl"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="50"/>
+
+        <TextView
+            android:id="@+id/ProductQun"
+            android:text="Quantity"
+            android:textSize="14dp"
+            android:textColor="#000"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:textDirection="rtl"
+            android:layout_weight="50"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="100"
+        android:layoutDirection="rtl">
+
+        <TextView
+            android:id="@+id/ProductBar"
+            android:text="Barcode"
+            android:textSize="16dp"
+            android:textAlignment="center"
+            android:textColor="#000"
+            android:textDirection="rtl"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="50"/>
+
+        <TextView
+            android:id="@+id/productUN"
+            android:text="Unite"
+            android:textSize="16dp"
+            android:textColor="#000"
+            android:textAlignment="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textDirection="rtl"
+            android:layout_weight="50"
+            />
+
+    </LinearLayout>
+</LinearLayout>

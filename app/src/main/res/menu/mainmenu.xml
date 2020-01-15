@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+   <!--
+
+            <item
+        android:id="@+id/ImportAllUnits"
+        android:title="استراد الوحدات"
+        />
+    <item
+        android:id="@+id/ImportAllSuppliers"
+        android:title="استراد الموردين"
+        />-->
+
+    <item
+        android:id="@+id/SyncData"
+        android:title="الاعدادات"
+        />
+
+    <item
+        android:id="@+id/importSetting"
+        android:title="مزامنة الاعدادات"
+        />
+    <item
+        android:id="@+id/ImportProducts"
+        android:title="مزامنة الاصناف"
+        />
+
+</menu>
