@@ -27,6 +27,7 @@ import java.net.URL;
 public class ExportDocumntsAndProducts extends AsyncTask<Context, Void, Boolean> {
 
     private Context context;
+    private boolean ifHaveDocument = true;
 
     @Override
     protected Boolean doInBackground(Context... contexts) {
@@ -41,94 +42,144 @@ public class ExportDocumntsAndProducts extends AsyncTask<Context, Void, Boolean>
         Cursor result = db.ExbordSetting();
         result.moveToFirst();
 
-        String url = "http://"+result.getString(7)+"/api/InfinityRetail/StockTransfer";
+
+        String urls[] =  new String[]{
+
+                "http://"+result.getString(7)+"/api/InfinityRetail/GetAllBranchs",
+                "http://"+result.getString(7)+"/api/InfinityRetail/StockTransfer"
+        };
 
         Cursor dv = db.ExbordSetting();
         dv.moveToFirst();
         String ip = dv.getString(8);
 
+        HttpURLConnection urlConToBransh;
+        InputStream inputStreamBransh;
+        BufferedReader bufferedReaderBransh;
+        URL urlIfSupBransh;
+
+
         try { // connection
 
-            JSONArray MainArray = new JSONArray();
+            String idBranch= "";
+            urlIfSupBransh = new URL(urls[0]);
+            urlConToBransh = (HttpURLConnection) urlIfSupBransh.openConnection();
+            inputStreamBransh = urlConToBransh.getInputStream();
+            bufferedReaderBransh = new BufferedReader(new InputStreamReader(inputStreamBransh,"utf-8"));
+            String data = bufferedReaderBransh.readLine();
 
-            Cursor res = db.SelectAllDocument();
-            int count = 0;
 
-            while (res.moveToNext()) {
-                JSONObject MainObj;
+            JSONArray arrayBransh = new JSONArray(data);
 
-                MainObj = new JSONObject();
-                MainObj.put("FromBranch", Integer.parseInt(res.getString(5)));
-                MainObj.put("FromLocation", Integer.parseInt(res.getString(7)));
-                MainObj.put("ToBarnch", Integer.parseInt(res.getString(9)));
-                MainObj.put("ToLocation", Integer.parseInt(res.getString(11)));
-                MainObj.put("CreateDate", res.getString(1));
-                MainObj.put("DeviceID", ip);
-                MainObj.put("Note", res.getString(3));
+            for(int i = 0 ; i <  arrayBransh.length() ;i++){
 
-                JSONArray ScundArray = new JSONArray();
+                JSONObject branshObjuct = arrayBransh.getJSONObject(i);
 
-                Cursor products = db.SelectAllDocumentProduct(res.getString(0));
+                if(branshObjuct.getBoolean("IsCurrentBranch")){
 
-                int count2 = 0;
 
-                while (products.moveToNext()){
-
-                    JSONObject ScundObj = new JSONObject();
-
-                    ScundObj.put("ProductID", Integer.parseInt(products.getString(1)));
-                    ScundObj.put("ProductName", products.getString(2));
-                    ScundObj.put("UOM_FK", Integer.parseInt(products.getString(4)));
-                    ScundObj.put("BaseUOM", products.getString(5));
-                    ScundObj.put("Barcode", products.getString(6));
-                    ScundObj.put("Quantity", Integer.parseInt(products.getString(7)));
-                    ScundObj.put("ExpiryDate", products.getString(8));
-                    ScundObj.put("CountingDate", products.getString(9));
-                    ScundObj.put("DeviceID", products.getString(10));
-
-                    ScundArray.put(ScundObj);
-
-                    ScundArray.put(count2, ScundObj);
-                    count2++;
-
+                    idBranch =  branshObjuct.getString("BranchID_PK");
+                    break;
                 }
 
-                MainObj.put("Products", ScundArray);
-                MainArray.put(count, MainObj);
-                count++;
             }
 
-
-            urlConnection = (HttpURLConnection) ((new URL(url).openConnection()));
-            urlConnection.setDoOutput(true);
-            urlConnection.setRequestMethod("POST");
-            urlConnection.setRequestProperty("Content-Type", "application/json");
-            urlConnection.setRequestProperty("Accept", "application/json");
-            urlConnection.connect();
-            // write
-            OutputStream outputStream = urlConnection.getOutputStream();
-            BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
-            writer.write(MainArray.toString());
-            writer.close();
-            outputStream.close();
+            inputStreamBransh.close();
+            urlConToBransh.disconnect();
 
 
-            //// read
+            Cursor res = db.SelectDocumentByToBransh(idBranch);
 
-            InputStream inputStream = urlConnection.getInputStream();
-            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "utf-8"));
-            String line = bufferedReader.readLine();
+            if(res.getCount() == 0){
 
-            Log.i("DATA", MainArray.toString());
-
-            if(line.compareTo("true") == 0){
-
-                return true;
+                ifHaveDocument = false;
 
             }else{
 
-                return false;
+                JSONArray MainArray = new JSONArray();
+                int count = 0;
+
+                while (res.moveToNext()) {
+
+
+
+
+                    JSONObject MainObj;
+
+                    MainObj = new JSONObject();
+                    MainObj.put("FromBranch", Integer.parseInt(res.getString(5)));
+                    MainObj.put("FromLocation", Integer.parseInt(res.getString(7)));
+                    MainObj.put("ToBarnch", Integer.parseInt(res.getString(9)));
+                    MainObj.put("ToLocation", Integer.parseInt(res.getString(11)));
+                    MainObj.put("CreateDate", res.getString(1));
+                    MainObj.put("DeviceID", ip);
+                    MainObj.put("Note", res.getString(3));
+
+                    JSONArray ScundArray = new JSONArray();
+
+                    Cursor products = db.SelectAllDocumentProduct(res.getString(0));
+
+                    int count2 = 0;
+
+                    while (products.moveToNext()){
+
+                        JSONObject ScundObj = new JSONObject();
+
+                        ScundObj.put("ProductID", Integer.parseInt(products.getString(1)));
+                        ScundObj.put("ProductName", products.getString(2));
+                        ScundObj.put("UOM_FK", Integer.parseInt(products.getString(4)));
+                        ScundObj.put("BaseUOM", products.getString(5));
+                        ScundObj.put("Barcode", products.getString(6));
+                        ScundObj.put("Quantity", Integer.parseInt(products.getString(7)));
+                        ScundObj.put("ExpiryDate", products.getString(8));
+                        ScundObj.put("CountingDate", products.getString(9));
+                        ScundObj.put("DeviceID", products.getString(10));
+
+                        ScundArray.put(ScundObj);
+
+                        ScundArray.put(count2, ScundObj);
+                        count2++;
+
+                    }
+
+                    MainObj.put("Products", ScundArray);
+                    MainArray.put(count, MainObj);
+                    count++;
+                }
+
+
+                urlConnection = (HttpURLConnection) ((new URL(urls[1]).openConnection()));
+                urlConnection.setDoOutput(true);
+                urlConnection.setRequestMethod("POST");
+                urlConnection.setRequestProperty("Content-Type", "application/json");
+                urlConnection.setRequestProperty("Accept", "application/json");
+                urlConnection.connect();
+                // write
+                OutputStream outputStream = urlConnection.getOutputStream();
+                BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
+                writer.write(MainArray.toString());
+                writer.close();
+                outputStream.close();
+
+
+                //// read
+
+                InputStream inputStream = urlConnection.getInputStream();
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "utf-8"));
+                String line = bufferedReader.readLine();
+
+                if(line.compareTo("true") == 0){
+
+                    return true;
+
+                }else{
+
+                    return false;
+                }
+
             }
+
+
 
 
         }catch (ProtocolException e) {
@@ -146,15 +197,25 @@ public class ExportDocumntsAndProducts extends AsyncTask<Context, Void, Boolean>
     protected void onPostExecute(Boolean aBoolean) {
         super.onPostExecute(aBoolean);
 
+        if(ifHaveDocument){
 
-        if(aBoolean){
+            if(aBoolean){
 
-            Toast.makeText(context, "تمت عملية المزامنة بنجاح", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "تمت عملية المزامنة بنجاح", Toast.LENGTH_SHORT).show();
+
+            }else{
+
+                Toast.makeText(context, "فشلت عملية المزامنة", Toast.LENGTH_SHORT).show();
+
+            }
+
         }else{
 
-            Toast.makeText(context, "فشلت عملية المزامنة", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "لا توجد مستندات", Toast.LENGTH_SHORT).show();
 
         }
+
+
 
         TransportGoods.progressDialog.dismiss();
     }
