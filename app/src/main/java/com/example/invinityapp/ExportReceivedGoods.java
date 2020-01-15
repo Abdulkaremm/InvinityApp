@@ -119,6 +119,12 @@ public class ExportReceivedGoods extends AsyncTask<Context,Void,Boolean> {
                 InputStream inputStream = urlConnection.getInputStream();
                 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "utf-8"));
                 line = bufferedReader.readLine();
+
+                if(line.compareTo("true") == 0)
+                    return true;
+                else
+                    return false;
+
             }
 
         } catch (JSONException | IOException e) {
