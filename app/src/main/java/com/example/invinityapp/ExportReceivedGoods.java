@@ -2,6 +2,7 @@ package com.example.invinityapp;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.AsyncTask;
 import android.util.Log;
@@ -120,8 +121,12 @@ public class ExportReceivedGoods extends AsyncTask<Context,Void,Boolean> {
                 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "utf-8"));
                 line = bufferedReader.readLine();
 
-                if(line.compareTo("true") == 0)
+                if(line.compareTo("true") == 0){
+
+                        db.DeleteGoodsAfterSync();
+
                     return true;
+                }
                 else
                     return false;
 
@@ -141,9 +146,9 @@ public class ExportReceivedGoods extends AsyncTask<Context,Void,Boolean> {
 
         receiving_goods_main.progressDialog.dismiss();
         if(state)
-            Toast.makeText(context,"تمت عملية الاستراد بنجاح",Toast.LENGTH_SHORT).show();
+            Toast.makeText(context,"تمت عملية التصدير بنجاح",Toast.LENGTH_SHORT).show();
         else
-            Toast.makeText(context,"فشلت عملية الاستراد",Toast.LENGTH_SHORT).show();
+            Toast.makeText(context,"فشلت عملية التصدير",Toast.LENGTH_SHORT).show();
 
     }
 }
