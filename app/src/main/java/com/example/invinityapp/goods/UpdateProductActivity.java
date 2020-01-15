@@ -2,11 +2,10 @@ package com.example.invinityapp.goods;
 
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -14,7 +13,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
@@ -26,7 +24,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.invinityapp.R;
 import com.example.invinityapp.inventoryitems.InfinityDB;
+import com.shawnlin.numberpicker.NumberPicker;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -45,6 +45,10 @@ public class UpdateProductActivity extends AppCompatActivity {
     String AnyActivity;
     InfinityDB db = new InfinityDB(this);
     LinearLayout Exdate;
+    private Dialog datePiker;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,40 +75,71 @@ public class UpdateProductActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Calendar cal = Calendar.getInstance();
-                int yer = cal.get(Calendar.YEAR);
-                int mon = cal.get(Calendar.MONTH);
-                int day = cal.get(Calendar.DAY_OF_MONTH);
-
-                DatePickerDialog datePickerDialog = new DatePickerDialog(
-                        UpdateProductActivity.this,
-                        android.R.style.Theme_Holo_Light_Dialog_MinWidth,
-                        mydate,
-                        yer,mon,day);
-
-                datePickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                datePickerDialog.show();
+                createDilog();
+                datePiker.show();
 
             }
         });
 
-        mydate = new DatePickerDialog.OnDateSetListener(){
-
-
-            @Override
-            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                month++;
-                String DataDate = dayOfMonth + "/" + month + "/" + year;
-                date.setText(DataDate);
-
-
-
-            }
-        }; /// date end here
 
 
         GetdateToUpdate();
 
+    }
+
+
+    public void createDilog(){
+
+        datePiker =  new Dialog(this);
+        datePiker.setContentView(R.layout.date_piker);
+
+        final NumberPicker year = datePiker.findViewById(R.id.year);
+        final NumberPicker mont = datePiker.findViewById(R.id.mont);
+        final NumberPicker day  = datePiker.findViewById(R.id.day);
+        TextView pikdate  = datePiker.findViewById(R.id.pikDate);
+        TextView close  = datePiker.findViewById(R.id.close);
+        TextView qun = datePiker.findViewById(R.id.title_q);
+        LinearLayout qunLayout = datePiker.findViewById(R.id.qunLayout);
+
+
+        qunLayout.setVisibility(View.GONE);
+        qun.setVisibility(View.GONE);
+
+
+
+        Calendar c = Calendar.getInstance();
+        SimpleDateFormat df = new SimpleDateFormat("YYYY");
+        String AdapterDate = df.format(c.getTime());
+
+
+        year.setMinValue(Integer.parseInt(AdapterDate));
+        year.setMaxValue(Integer.parseInt(AdapterDate) + 30);
+
+        mont.setMinValue(1);
+        mont.setMaxValue(12);
+
+        day.setMinValue(1);
+        day.setMaxValue(31);
+
+
+        pikdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View h) {
+
+                String dateFormat = year.getValue() + "-" + mont.getValue() + "-" + day.getValue();
+                date.setText(dateFormat);
+                datePiker.dismiss();
+
+            }
+        });
+
+        close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                datePiker.dismiss();
+            }
+        });
     }
 
 
@@ -233,6 +268,8 @@ public class UpdateProductActivity extends AppCompatActivity {
                     finish();
                 }else{
                     Intent intent = new Intent(this, ReceiveGoods.class);
+                    intent.putExtra("NAME",SupplierName);
+                    intent.putExtra("ID",SuppllierID);
                     startActivity(intent);
                     finish();
                 }

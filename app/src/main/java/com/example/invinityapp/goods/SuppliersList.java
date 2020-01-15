@@ -3,16 +3,14 @@ package com.example.invinityapp.goods;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,7 +27,6 @@ public class SuppliersList extends AppCompatActivity {
     ListView supList;
     TextView title;
     LinearLayout container;
-    EditText search;
 
 
     @Override
@@ -40,7 +37,7 @@ public class SuppliersList extends AppCompatActivity {
         supList = findViewById(R.id.SupList);
         title = findViewById(R.id.Title);
         container = findViewById(R.id.container);
-        search = findViewById(R.id.SearchSup);
+
 
         InfinityDB db = new InfinityDB(this);
         Cursor res;
@@ -63,7 +60,7 @@ public class SuppliersList extends AppCompatActivity {
                                     int position, long id) {
                 String name = ((TextView) view.findViewById(R.id.Supname)).getText().toString();
                 String supid   = ((TextView) view.findViewById(R.id.supID)).getText().toString();
-                Intent intent = new Intent(SuppliersList.this,AddNewSup.class);
+                Intent intent = new Intent(SuppliersList.this, AddNewSup.class);
                 intent.putExtra("Supplier",name);
                 intent.putExtra("ID",supid);
                 startActivity(intent);
@@ -71,25 +68,6 @@ public class SuppliersList extends AppCompatActivity {
             }
 
         });
-
-
-        search.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                GetSupplires(s.toString());
-            }
-        });
-
 
     }
 
@@ -163,6 +141,28 @@ public class SuppliersList extends AppCompatActivity {
         MenuInflater menuInflater = getMenuInflater();
 
         menuInflater.inflate(R.menu.inventorymenu, menu);
+
+        MenuItem search = menu.findItem(R.id.search);
+
+        SearchView searchView = (SearchView) search.getActionView();
+
+        searchView.setQueryHint("بحث");
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                GetSupplires(newText);
+                return false;
+            }
+        });
+
+        search.setVisible(true);
+
         return true;
     }
 
@@ -186,7 +186,7 @@ public class SuppliersList extends AppCompatActivity {
 
     public void bacToMain(View view){
 
-        Intent intent = new Intent(this,AddNewSup.class);
+        Intent intent = new Intent(this, AddNewSup.class);
         startActivity(intent);
         finish();
     }

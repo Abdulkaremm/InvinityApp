@@ -141,6 +141,7 @@ public class InfinityDB extends SQLiteOpenHelper {
                 " Product_Name VARCHAR(200) NOT NULL," +
                 " Quantity INTEGER NOT NULL," +
                 " EndDate DATE," +
+                " CountingDate DATETIME," +
                 " BaseUnitQ VARCHAR(200) NOT NULL ,"+
                 " ProductBarcode VARCHAR(200) NOT NULL," +
                 " IsNew VARCHAR(20) NOT NULL," +
@@ -634,7 +635,27 @@ public class InfinityDB extends SQLiteOpenHelper {
 
         SQLiteDatabase db  = this.getWritableDatabase();
 
-        String query = "SELECT Supplier_PK ,Supplier_Name ,Receive_Date FROM "+ RECEIVE_FROM_SUPPLIERS + " ORDER BY Supplier_PK DESC";
+        String query = "SELECT Supplier_PK ,Supplier_Name ,Receive_Date ,Bill_Number, SupplierID_FK FROM "+ RECEIVE_FROM_SUPPLIERS + " ORDER BY Supplier_PK DESC";
+
+        return db.rawQuery(query,null);
+    }
+
+    public Cursor GetGoodsBySupllier(int ID){
+
+        SQLiteDatabase db  = this.getWritableDatabase();
+
+        String query = "SELECT * FROM "+ RECEIVED_GOODS +" WHERE Supplier_FK ="+ ID;
+
+        return db.rawQuery(query,null);
+
+    }
+
+
+    public Cursor GetProductIfExist(String barcode, int ID){
+
+        SQLiteDatabase db  = this.getWritableDatabase();
+
+        String query = "SELECT * FROM "+ RECEIVED_GOODS +" WHERE Supplier_FK ="+ ID +" AND "+ "ProductBarcode = "+ barcode;
 
         return db.rawQuery(query,null);
     }

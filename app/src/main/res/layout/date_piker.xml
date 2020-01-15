@@ -18,6 +18,7 @@
         android:textColor="@color/colorMain"/>
 
     <LinearLayout
+        android:id="@+id/qunLayout"
         android:layout_below="@+id/title_q"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -3,6 +3,7 @@ package com.example.invinityapp;
 import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.os.AsyncTask;
 import android.widget.Toast;
 
@@ -33,16 +34,18 @@ public class ImportAllSuppliers extends AsyncTask<Context,Void,Boolean> {
     protected Boolean doInBackground(Context... contexts) {
 
 
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd:mm:yyyy", Locale.getDefault());
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
         LastSync = simpleDateFormat.format(new Date());
 
         context = contexts[0];
         InfinityDB db = new InfinityDB(contexts[0]);
+        Cursor result = db.ExbordSetting();
+        result.moveToFirst();
 
         HttpURLConnection urlConnection;
         InputStream stream;
         BufferedReader reader;
-        String url ="http://41.208.74.28/api/InfinityRetail/GetAllSuppliers";
+        String url ="http://"+result.getString(7)+"/api/InfinityRetail/GetAllSuppliers";
 
         try {
             urlConnection = (HttpURLConnection) (new URL(url)).openConnection();
@@ -81,7 +84,7 @@ public class ImportAllSuppliers extends AsyncTask<Context,Void,Boolean> {
     protected void onPostExecute(Boolean state) {
         super.onPostExecute(state);
 
-        MainActivity.progressDialog.dismiss();
+        SyncDataActivity.progressDialog.dismiss();
         if(state)
             Toast.makeText(context,"تمت عملية الاستراد بنجاح",Toast.LENGTH_SHORT).show();
         else

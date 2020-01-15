@@ -39,22 +39,18 @@ public class SyncDataActivity extends AppCompatActivity {
 
     Switch  setting,
             prudects,
-            units,
-            suppliers,
-            invetory,
             goods,
             Shortfalls;
 
     TextView    settingDate,
-                productsDate,
-                unitsDate,
-                supDate,
-                invetoryDate,
-                goodsDate,
-                shortDate,
-                invetoryCount;
+            productsDate,
+            unitsDate,
+            supDate,
+            invetoryCount,
+            suppliers,
+            units;
 
-    public ProgressDialog progressDialog;
+    public static ProgressDialog progressDialog;
     String title,msg;
     InfinityDB db;
     LinearLayout SyncInvetory;
@@ -81,11 +77,11 @@ public class SyncDataActivity extends AppCompatActivity {
         prudects = findViewById(R.id.productsData);
         productsDate = findViewById(R.id.productsDate);
 
-        units = findViewById(R.id.UnitsDate);
+        units = findViewById(R.id.SyncUnits);
         unitsDate= findViewById(R.id.unitsDate);
 
-        suppliers = findViewById(R.id.SuppliersDate);
-        supDate = findViewById(R.id.supgDate);
+        suppliers = findViewById(R.id.SyncSuppliers);
+        supDate = findViewById(R.id.SuppliersDate);
 
         goods = findViewById(R.id.GoodsData);
         Shortfalls = findViewById(R.id.Shortfalls);
@@ -120,6 +116,61 @@ public class SyncDataActivity extends AppCompatActivity {
                         .setNegativeButton("لا", null)
                         .show();
 
+            }
+        });
+
+
+
+
+
+        suppliers.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                title = "مزامنة الموردين";
+                msg = "الرجاء الانتظار حتى يتم استراد الموردين..";
+
+                AlertDialog dialog = new AlertDialog.Builder(SyncDataActivity.this)
+                        .setTitle("مزامنة الموردين !")
+                        .setMessage("هل انت متأكد من عملية المزامنة ؟")
+                        .setPositiveButton("نعم", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                                progressDialog.show();
+                                Cursor result = db.ExbordSetting();
+                                result.moveToFirst();
+                                new ImportAllSuppliers().execute(SyncDataActivity.this);
+                            }
+                        })
+                        .setNegativeButton("إلغاء", null)
+                        .show();
+            }
+        });
+
+
+        units.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                title = "مزامنة الوحدات";
+                msg = "الرجاء الانتظار حتى يتم استراد الوحدات..";
+
+                AlertDialog dialog = new AlertDialog.Builder(SyncDataActivity.this)
+                        .setTitle("مزامنة |لوحدات !")
+                        .setMessage("هل انت متأكد من عملية المزامنة ؟")
+                        .setPositiveButton("نعم", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                                progressDialog.show();
+                                Cursor result = db.ExbordSetting();
+                                result.moveToFirst();
+                                new ImportAllUnits().execute(SyncDataActivity.this);
+                            }
+                        })
+                        .setNegativeButton("لا", null)
+                        .show();
             }
         });
 

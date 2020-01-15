@@ -3,12 +3,11 @@ package com.example.invinityapp.goods;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -17,7 +16,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
@@ -35,9 +33,13 @@ import com.example.invinityapp.R;
 import com.example.invinityapp.inventoryitems.InfinityDB;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
+import com.shawnlin.numberpicker.NumberPicker;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 public class ReceiveGoods extends AppCompatActivity {
 
@@ -56,13 +58,13 @@ public class ReceiveGoods extends AppCompatActivity {
     InfinityDB db = new InfinityDB(this);
     boolean Isnew;
     SwipeMenuListView swiplist;
-    ArrayList<String> productsID = new ArrayList<>();
-    ArrayList<String> productNames = new ArrayList<>();
-    ArrayList<String> productQun = new ArrayList<>();
-    ArrayList<String> productBar = new ArrayList<>();
     ArrayList<String> productUn = new ArrayList<>();
     LinearLayout linearLayout,ExDate;
     String baseunit;
+    private Dialog datePiker;
+    private ArrayList<ProductsModel> productsModels;
+
+
 
 
     @Override
@@ -132,36 +134,11 @@ public class ReceiveGoods extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Calendar cal = Calendar.getInstance();
-                int yer = cal.get(Calendar.YEAR);
-                int mon = cal.get(Calendar.MONTH);
-                int day = cal.get(Calendar.DAY_OF_MONTH);
-
-                DatePickerDialog datePickerDialog = new DatePickerDialog(
-                        ReceiveGoods.this,
-                        android.R.style.Theme_Holo_Light_Dialog_MinWidth,
-                        mydate,
-                        yer,mon,day);
-
-                datePickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                datePickerDialog.show();
+                createDilog();
+                datePiker.show();
 
             }
         });
-
-        mydate = new DatePickerDialog.OnDateSetListener(){
-
-
-            @Override
-            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                month++;
-                String DataDate = dayOfMonth + "/" + month + "/" + year;
-                date.setText(DataDate);
-
-
-
-            }
-        }; /// date end here
 
         GoodsList();
 
@@ -210,41 +187,95 @@ public class ReceiveGoods extends AppCompatActivity {
 
 
 
+    public void createDilog(){
+
+        datePiker =  new Dialog(this);
+        datePiker.setContentView(R.layout.date_piker);
+
+        final NumberPicker year = datePiker.findViewById(R.id.year);
+        final NumberPicker mont = datePiker.findViewById(R.id.mont);
+        final NumberPicker day  = datePiker.findViewById(R.id.day);
+        TextView pikdate  = datePiker.findViewById(R.id.pikDate);
+        TextView close  = datePiker.findViewById(R.id.close);
+        TextView qun = datePiker.findViewById(R.id.title_q);
+        LinearLayout qunLayout = datePiker.findViewById(R.id.qunLayout);
+
+
+        qunLayout.setVisibility(View.GONE);
+        qun.setVisibility(View.GONE);
+
+
+
+        Calendar c = Calendar.getInstance();
+        SimpleDateFormat df = new SimpleDateFormat("YYYY");
+        String AdapterDate = df.format(c.getTime());
+
+
+        year.setMinValue(Integer.parseInt(AdapterDate));
+        year.setMaxValue(Integer.parseInt(AdapterDate) + 30);
+
+        mont.setMinValue(1);
+        mont.setMaxValue(12);
+
+        day.setMinValue(1);
+        day.setMaxValue(31);
+
+
+        pikdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View h) {
+
+                String dateFormat = year.getValue() + "-" + mont.getValue() + "-" + day.getValue();
+                date.setText(dateFormat);
+                datePiker.dismiss();
+
+            }
+        });
+
+        close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                datePiker.dismiss();
+            }
+        });
+    }
+
+
     private void GoodsList(){
 
         Cursor result;
-        GoodsListAdaptare adaptare;
+
         result = db.LastAddedGoods(SuppllierID);
+
+        productsModels = new ArrayList<>();
+
+        GoodsListAdaptare productAdabter =new GoodsListAdaptare(this, productsModels);
+
         if(result.getCount() > 0){
             while (result.moveToNext()){
-                productsID.add(result.getString(0));
-                productNames.add(result.getString(1));
-                productQun.add(result.getString(2));
-                productBar.add(result.getString(3));
 
                 Cursor res1 = db.LastGoodUnit(result.getString(4),result.getString(5));
                 if(res1.getCount() > 0){
                     res1.moveToFirst();
-                    productUn.add(res1.getString(0));
                 }
+                productAdabter.add(new ProductsModel(result.getString(0), result.getString(3),result.getString(1), result.getString(2), res1.getString(0)));
             }
 
 
         }
 
+        swiplist.setAdapter(productAdabter);
 
-        adaptare = new GoodsListAdaptare(this,productBar,productNames,productQun,productUn);
-        adaptare.notifyDataSetChanged();
-        swiplist.setAdapter(adaptare);
         swiplist.setOnMenuItemClickListener(new SwipeMenuListView.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(final int position, SwipeMenu menu, int index) {
                 switch (index) {
 
                     case 1:
-                        Intent intent = new Intent(ReceiveGoods.this,UpdateProductActivity.class);
+                        Intent intent = new Intent(ReceiveGoods.this, UpdateProductActivity.class);
                         intent.putExtra("SupplierID",SuppllierID);
-                        intent.putExtra("ProductID",productsID.get(position));
+                        intent.putExtra("ProductID",productsModels.get(position).id);
                         intent.putExtra("ACTIVITY","Receive");
                         startActivity(intent);
                         finish();
@@ -258,9 +289,9 @@ public class ReceiveGoods extends AppCompatActivity {
                                 .setPositiveButton("نعم", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
-                                        if(db.DeleteAddedProduct(productsID.get(position))) {
+                                        if(db.DeleteAddedProduct(productsModels.get(position).id)) {
                                             Toast.makeText(ReceiveGoods.this, "تم الحدف", Toast.LENGTH_SHORT).show();
-                                            Intent intent = new Intent(ReceiveGoods.this,ReceiveGoods.class);
+                                            Intent intent = new Intent(ReceiveGoods.this, ReceiveGoods.class);
                                             intent.putExtra("ID",SuppllierID);
                                             intent.putExtra("NAME",SupplierName);
                                             startActivity(intent);
@@ -350,7 +381,41 @@ public class ReceiveGoods extends AppCompatActivity {
 
           container.setVisibility(View.VISIBLE);
       }else{
-          dialog.show();
+
+
+          final Cursor result = db.GetProductIfExist(Barcode.getText().toString(),Integer.parseInt(SuppllierID));
+          if(result.getCount() > 0){
+
+              AlertDialog dialog = new AlertDialog.Builder(ReceiveGoods.this)
+                      .setTitle("تم أستلام هذا الصنف !")
+                      .setMessage("تم أستلام الصنف سابقأ هل ترغب في.. ")
+                      .setPositiveButton("إضافة", new DialogInterface.OnClickListener() {
+                          @Override
+                          public void onClick(DialogInterface dialog, int which) {
+                              AddNewProduct();
+                          }
+                      })
+                      .setNegativeButton("تعديل", new DialogInterface.OnClickListener() {
+                          @Override
+                          public void onClick(DialogInterface dialog, int which) {
+
+                              if(result.getCount() == 1){
+
+                                  result.moveToFirst();
+                                  Intent intent = new Intent(ReceiveGoods.this, UpdateProductActivity.class);
+                                  intent.putExtra("SupplierID",SuppllierID);
+                                  intent.putExtra("ProductID",result.getString(0));
+                                  intent.putExtra("ACTIVITY","Receive");
+                                  startActivity(intent);
+                                  finish();
+                              }
+                          }
+                      })
+                      .setNeutralButton("إلغاء", null)
+                      .show();
+
+          }else
+            dialog.show();
 
       }
 
@@ -415,6 +480,9 @@ public class ReceiveGoods extends AppCompatActivity {
 
                    else{
 
+                        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+                        String datetime = simpleDateFormat.format(new Date());
+
                        ContentValues values = new ContentValues();
 
                         values.put("ProductID_PK",Integer.parseInt(productID));
@@ -425,13 +493,14 @@ public class ReceiveGoods extends AppCompatActivity {
                         values.put("BaseUnitQ",packageing.getText().toString());
                         values.put("ProductBarcode",Barcode.getText().toString());
                         values.put("IsNew",Isnew);
+                        values.put("CountingDate",datetime);
                         if(!date.getText().toString().isEmpty())
                             values.put("EndDate",date.getText().toString());
 
 
                         if(db.AddGoods(values)) {
                             Toast.makeText(this, "تمت عملية الاضافة", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(ReceiveGoods.this,ReceiveGoods.class);
+                            Intent intent = new Intent(ReceiveGoods.this, ReceiveGoods.class);
                             intent.putExtra("ID",SuppllierID);
                             intent.putExtra("NAME",SupplierName);
                             startActivity(intent);

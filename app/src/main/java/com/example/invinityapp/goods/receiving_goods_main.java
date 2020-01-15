@@ -1,6 +1,7 @@
 package com.example.invinityapp.goods;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
@@ -19,6 +20,7 @@ import com.baoyz.swipemenulistview.SwipeMenu;
 import com.baoyz.swipemenulistview.SwipeMenuCreator;
 import com.baoyz.swipemenulistview.SwipeMenuItem;
 import com.baoyz.swipemenulistview.SwipeMenuListView;
+import com.example.invinityapp.ExportReceivedGoods;
 import com.example.invinityapp.MainActivity;
 import com.example.invinityapp.R;
 import com.example.invinityapp.inventoryitems.InfinityDB;
@@ -34,12 +36,19 @@ public class receiving_goods_main extends AppCompatActivity {
             dates = new ArrayList<>(),
             IDs = new ArrayList<>();
 
+    public static ProgressDialog progressDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_receiving_goods_main);
         title = findViewById(R.id.Title);
         swiplist = findViewById(R.id.listData);
+
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setTitle("تصدير الاصناف");
+        progressDialog.setMessage("يتم العمل على تصدير بيانات الاصناف...");
+        progressDialog.setCanceledOnTouchOutside(false);
 
         IfOpenReceiving();
 
@@ -136,14 +145,14 @@ public class receiving_goods_main extends AppCompatActivity {
                 public boolean onMenuItemClick(final int position, SwipeMenu menu, int index) {
                     switch (index) {
                         case 0:
-                            Intent intent = new Intent(receiving_goods_main.this,ReceiveGoods.class);
+                            Intent intent = new Intent(receiving_goods_main.this, ReceiveGoods.class);
                             intent.putExtra("ID",IDs.get(position));
                             intent.putExtra("NAME",names.get(position));
                             startActivity(intent);
                             finish();
                             break;
                         case 1:
-                            Intent intent1 = new Intent(receiving_goods_main.this,ViewGoodsActivity.class);
+                            Intent intent1 = new Intent(receiving_goods_main.this, ViewGoodsActivity.class);
                             intent1.putExtra("ID",IDs.get(position));
                             intent1.putExtra("NAME",names.get(position));
                             startActivity(intent1);
@@ -160,7 +169,7 @@ public class receiving_goods_main extends AppCompatActivity {
                                         public void onClick(DialogInterface dialog, int which) {
                                             if(db.DeleteOpenReceivie(IDs.get(position))) {
                                                 Toast.makeText(receiving_goods_main.this, "تم حدف الجلسة", Toast.LENGTH_SHORT).show();
-                                                Intent intent = new Intent(receiving_goods_main.this,receiving_goods_main.class);
+                                                Intent intent = new Intent(receiving_goods_main.this, receiving_goods_main.class);
                                                 startActivity(intent);
                                                 finish();
                                             }else
@@ -197,7 +206,9 @@ public class receiving_goods_main extends AppCompatActivity {
         menuInflater.inflate(R.menu.inventorymenu, menu);
 
         MenuItem addNew = menu.findItem(R.id.addnew);
+        MenuItem sync = menu.findItem(R.id.sync);
         addNew.setVisible(true);
+        sync.setVisible(true);
 
         return true;
     }
@@ -215,11 +226,16 @@ public class receiving_goods_main extends AppCompatActivity {
 
             case R.id.addnew:
 
-                Intent intent = new Intent(this,AddNewSup.class);
+                Intent intent = new Intent(this, AddNewSup.class);
                 startActivity(intent);
                 finish();
                 return true;
 
+            case R.id.sync:
+                progressDialog.show();
+               new ExportReceivedGoods().execute(receiving_goods_main.this);
+
+                return true;
 
             default:
                 return super.onOptionsItemSelected(item);

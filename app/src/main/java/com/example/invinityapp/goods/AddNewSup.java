@@ -1,11 +1,8 @@
 package com.example.invinityapp.goods;
 
-import android.app.DatePickerDialog;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -13,7 +10,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,18 +20,19 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.invinityapp.R;
 import com.example.invinityapp.inventoryitems.InfinityDB;
 
-import java.util.Calendar;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 public class AddNewSup extends AppCompatActivity {
 
     EditText    Supplier,
                 BillNum;
-    TextView date,
-             addSup;
+    TextView addSup;
     String id;
-    String Supname;
+    String Supname ,date;
 
-    private DatePickerDialog.OnDateSetListener mydate;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +41,6 @@ public class AddNewSup extends AppCompatActivity {
 
         Supplier = findViewById(R.id.supplier);
         BillNum = findViewById(R.id.billNumber);
-        date = findViewById(R.id.date);
         addSup = findViewById(R.id.addSup);
 
 
@@ -79,40 +75,7 @@ public class AddNewSup extends AppCompatActivity {
         });
 
         ///// to choose date
-        date.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-                Calendar cal = Calendar.getInstance();
-                int yer = cal.get(Calendar.YEAR);
-                int mon = cal.get(Calendar.MONTH);
-                int day = cal.get(Calendar.DAY_OF_MONTH);
-
-                DatePickerDialog datePickerDialog = new DatePickerDialog(
-                        AddNewSup.this,
-                        android.R.style.Theme_Holo_Light_Dialog_MinWidth,
-                        mydate,
-                        yer,mon,day);
-
-                datePickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                datePickerDialog.show();
-
-            }
-        });
-
-        mydate = new DatePickerDialog.OnDateSetListener(){
-
-
-            @Override
-            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                month++;
-                String DataDate = dayOfMonth + "/" + month + "/" + year;
-                date.setText(DataDate);
-
-
-
-            }
-        }; /// date end here
 
        Supplier.addTextChangedListener(new TextWatcher() {
            @Override
@@ -151,19 +114,15 @@ public class AddNewSup extends AppCompatActivity {
 
                 Toast.makeText(this,"الرجاء ادخال رقم الفاتورة",Toast.LENGTH_SHORT).show();
 
-        }else
-            if(date.getText().toString().isEmpty()){
-
-                Toast.makeText(this,"الرجاء ادخال تاريخ الإستلام ",Toast.LENGTH_SHORT).show();
-
-            }else{
-
+        }else {
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+                date = simpleDateFormat.format(new Date());
                 ContentValues values = new ContentValues();
                 Supname = Supplier.getText().toString();
                 values.put("SupplierID_FK", Integer.parseInt(id));
                 values.put("Supplier_Name", Supname);
                 values.put("Bill_Number", BillNum.getText().toString());
-                values.put("Receive_Date", date.getText().toString());
+                values.put("Receive_Date", date);
 
                 if(!db.Openreceiving(values)){
                     Toast.makeText(this,"حدث خطأ! الرجاء اعادة المحاولة",Toast.LENGTH_SHORT).show();

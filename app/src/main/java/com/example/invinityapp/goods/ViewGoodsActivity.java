@@ -29,13 +29,11 @@ public class ViewGoodsActivity extends AppCompatActivity {
 
     InfinityDB db = new InfinityDB(this);
     SwipeMenuListView swiplist;
-    ArrayList<String> productsID = new ArrayList<>();
-    ArrayList<String> productNames = new ArrayList<>();
-    ArrayList<String> productQun = new ArrayList<>();
-    ArrayList<String> productBar = new ArrayList<>();
-    ArrayList<String> productUn = new ArrayList<>();
+
+
     String SupID;
     TextView supplier;
+    private ArrayList<ProductsModel> productsModels;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,28 +100,27 @@ public class ViewGoodsActivity extends AppCompatActivity {
 
 
         Cursor res;
-        GoodsListAdaptare adaptare;
         res = db.LastAddedGoods(SupID);
+
+        productsModels = new ArrayList<>();
+
+        GoodsListAdaptare productAdabter =new GoodsListAdaptare(this, productsModels);
+
         if(res.getCount() > 0){
             while (res.moveToNext()){
-                productsID.add(res.getString(0));
-                productNames.add(res.getString(1));
-                productQun.add(res.getString(2));
-                productBar.add(res.getString(3));
 
                 Cursor res1 = db.LastGoodUnit(res.getString(4),res.getString(5));
                 if(res1.getCount() > 0){
                     res1.moveToFirst();
-                    productUn.add(res1.getString(0));
+
                 }
+                productAdabter.add(new ProductsModel(res.getString(0), res.getString(3),res.getString(1), res.getString(2), res1.getString(0)));
             }
 
 
         }
 
-        adaptare = new GoodsListAdaptare(this,productBar,productNames,productQun,productUn);
-        swiplist.setAdapter(adaptare);
-
+        swiplist.setAdapter(productAdabter);
 
 
         swiplist.setOnMenuItemClickListener(new SwipeMenuListView.OnMenuItemClickListener() {
@@ -134,7 +131,7 @@ public class ViewGoodsActivity extends AppCompatActivity {
                     case 1:
                         Intent intent = new Intent(ViewGoodsActivity.this,UpdateProductActivity.class);
                         intent.putExtra("SupplierID",SupID);
-                        intent.putExtra("ProductID",productsID.get(position));
+                        intent.putExtra("ProductID",productsModels.get(position).id);
                         intent.putExtra("NAME",supplier.getText().toString());
                         intent.putExtra("ACTIVITY","View");
                         startActivity(intent);
@@ -149,9 +146,9 @@ public class ViewGoodsActivity extends AppCompatActivity {
                                 .setPositiveButton("نعم", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
-                                        if(db.DeleteAddedProduct(productsID.get(position))) {
+                                        if(db.DeleteAddedProduct(productsModels.get(position).id)) {
                                             Toast.makeText(ViewGoodsActivity.this, "تم الحدف", Toast.LENGTH_SHORT).show();
-                                            Intent intent = new Intent(ViewGoodsActivity.this,ViewGoodsActivity.class);
+                                            Intent intent = new Intent(ViewGoodsActivity.this, ViewGoodsActivity.class);
                                             intent.putExtra("ID",SupID);
                                             intent.putExtra("NAME",supplier.getText().toString());
                                             startActivity(intent);
