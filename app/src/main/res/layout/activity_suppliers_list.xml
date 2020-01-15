@@ -30,18 +30,6 @@
         app:layout_constraintTop_toBottomOf="@+id/Title"
         android:visibility="invisible">
 
-        <EditText
-            android:id="@+id/SearchSup"
-            android:layout_width="200dp"
-            android:hint="بحث.."
-            android:background="@drawable/edittext"
-            android:padding="5dp"
-            android:singleLine="true"
-            android:textDirection="rtl"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            />
-
         <ListView
             android:id="@+id/SupList"
             android:layout_marginTop="10dp"
