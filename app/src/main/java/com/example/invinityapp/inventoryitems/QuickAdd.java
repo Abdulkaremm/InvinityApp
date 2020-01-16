@@ -346,6 +346,7 @@ public class QuickAdd extends AppCompatActivity {
             values.put("UOMID_PK", idUOMS);
             values.put("BaseUnitQ", BaseUnit);
             values.put("barcode", bar);
+            values.put("endDate", "");
             values.put("quantity", qunt);
             values.put("dateTime", thisTime);
             values.put("deviceIP", ip);
