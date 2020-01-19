@@ -204,8 +204,10 @@ public class DataOrder extends AppCompatActivity implements LoaderManager.Loader
         menuInflater.inflate(R.menu.inventorymenu, menu);
         MenuItem camera = menu.findItem(R.id.openCam);
         MenuItem bReader = menu.findItem(R.id.QR);
+        MenuItem view = menu.findItem(R.id.viewAllData);
 
         camera.setVisible(true);
+        view.setVisible(true);
         bReader.setVisible(true);
 
 
@@ -236,6 +238,12 @@ public class DataOrder extends AppCompatActivity implements LoaderManager.Loader
 
                 OPenCAM();
 
+                return true;
+
+            case R.id.viewAllData:
+
+                Intent intent = new Intent(this,ProductPaymentDetails.class);
+                startActivity(intent);
                 return true;
 
             default:

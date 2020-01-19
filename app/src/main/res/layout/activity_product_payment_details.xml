@@ -1,0 +1,893 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".viewcategory.ProductPaymentDetails"
+    android:orientation="vertical"
+    android:background="@drawable/edittext">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingRight="10dp"
+        android:orientation="horizontal"
+        android:layoutDirection="rtl"
+        android:layout_marginTop="15dp">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="بيانات الشراء "
+            android:textColor="#03A9F4"
+            android:textSize="30sp"
+            android:visibility="visible" />
+
+    </LinearLayout>
+
+
+
+
+    <LinearLayout
+        android:background="@color/colorWhite"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingRight="10dp"
+        android:orientation="horizontal"
+        android:layoutDirection="rtl"
+        android:layout_marginTop="15dp"
+        android:weightSum="100">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="اسم الصنف"
+            android:textColor="#03A9F4"
+            android:textSize="30sp"
+            android:visibility="visible"
+            android:layout_weight="30"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="60"
+            android:text=" اسم الصنف لعرض بيناته "
+            android:textSize="20sp"
+            />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:background="@color/colorWhite"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingRight="10dp"
+        android:orientation="vertical"
+        android:layoutDirection="rtl"
+        android:layout_marginTop="20dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="أخر 5 أسعار شراء للصنف "
+            android:textColor="#03A9F4"
+            android:textSize="24sp"
+            android:visibility="visible" />
+
+    </LinearLayout>
+
+    <ScrollView
+        android:id="@+id/scrollData"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="5dp"
+        android:visibility="visible">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="6dp"
+                android:background="@drawable/edittext" />
+
+
+            <LinearLayout
+                android:id="@+id/viewDetails1"
+                android:background="@color/colorWhite"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:orientation="vertical"
+                android:layoutDirection="rtl">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="100">
+
+                    <TextView
+                        android:layout_width="120dp"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="textStart"
+                        android:textColor="#03A9F4"
+                        android:textSize="20sp"
+                        android:layout_weight="95"
+                        android:layout_marginStart="15dp"
+                        android:text="السعر الأول"/>
+
+                    <TextView
+                        android:id="@+id/arrow1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableRight="@drawable/ic_arrow_down" />
+
+                </LinearLayout>
+
+
+
+
+                <LinearLayout
+                    android:id="@+id/pricedetails1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="6dp"
+                        android:background="@drawable/edittext" />
+
+                    <LinearLayout
+                        android:background="@color/colorWhite"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:orientation="horizontal"
+                        android:layoutDirection="rtl">
+
+                        <TextView
+
+                            android:layout_width="120dp"
+                            android:layout_height="wrap_content"
+                            android:textAlignment="textStart"
+                            android:textColor="#03A9F4"
+                            android:textSize="20sp"
+                            android:text="المورد"/>
+
+                        <TextView
+                            android:id="@+id/supplier4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAlignment="center" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:background="@color/colorWhite"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:orientation="horizontal"
+                        android:layoutDirection="rtl">
+
+                        <TextView
+
+                            android:layout_width="120dp"
+                            android:layout_height="wrap_content"
+                            android:textAlignment="textStart"
+                            android:textColor="#03A9F4"
+                            android:textSize="20sp"
+                            android:text="السعر"/>
+
+                        <TextView
+                            android:id="@+id/price1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAlignment="center" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:background="@color/colorWhite"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:orientation="horizontal"
+                        android:layoutDirection="rtl">
+
+                        <TextView
+
+                            android:layout_width="120dp"
+                            android:layout_height="wrap_content"
+                            android:textAlignment="textStart"
+                            android:textColor="#03A9F4"
+                            android:textSize="20sp"
+                            android:text="الكمية"/>
+
+                        <TextView
+                            android:id="@+id/qun4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAlignment="center" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:background="@color/colorWhite"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:orientation="horizontal"
+                        android:layoutDirection="rtl">
+
+                        <TextView
+
+                            android:layout_width="120dp"
+                            android:layout_height="wrap_content"
+                            android:textAlignment="textStart"
+                            android:textColor="#03A9F4"
+                            android:textSize="20sp"
+                            android:text="تاريخ الشراء"/>
+
+                        <TextView
+                            android:id="@+id/date3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAlignment="center" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@drawable/edittext" />
+
+
+            <LinearLayout
+                android:id="@+id/viewDetails2"
+                android:background="@color/colorWhite"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:orientation="vertical"
+                android:layoutDirection="rtl"
+                android:layout_marginTop="15dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="100">
+
+                    <TextView
+                        android:layout_width="120dp"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="textStart"
+                        android:textColor="#03A9F4"
+                        android:textSize="20sp"
+                        android:layout_weight="95"
+                        android:layout_marginStart="15dp"
+                        android:text=" السعر الثاني"/>
+
+                    <TextView
+                        android:id="@+id/arrow2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableRight="@drawable/ic_arrow_down" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/pricedetails2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="6dp"
+                        android:background="@drawable/edittext" />
+
+                    <LinearLayout
+                        android:background="@color/colorWhite"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:orientation="horizontal"
+                        android:layoutDirection="rtl">
+
+                        <TextView
+
+                            android:layout_width="120dp"
+                            android:layout_height="wrap_content"
+                            android:textAlignment="textStart"
+                            android:textColor="#03A9F4"
+                            android:textSize="20sp"
+                            android:text="المورد"/>
+
+                        <TextView
+                            android:id="@+id/supplier2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAlignment="center" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:background="@color/colorWhite"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:orientation="horizontal"
+                        android:layoutDirection="rtl">
+
+                        <TextView
+
+                            android:layout_width="120dp"
+                            android:layout_height="wrap_content"
+                            android:textAlignment="textStart"
+                            android:textColor="#03A9F4"
+                            android:textSize="20sp"
+                            android:text="السعر"/>
+
+                        <TextView
+                            android:id="@+id/price2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAlignment="center" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:background="@color/colorWhite"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:orientation="horizontal"
+                        android:layoutDirection="rtl">
+
+                        <TextView
+
+                            android:layout_width="120dp"
+                            android:layout_height="wrap_content"
+                            android:textAlignment="textStart"
+                            android:textColor="#03A9F4"
+                            android:textSize="20sp"
+                            android:text="الكمية"/>
+
+                        <TextView
+                            android:id="@+id/qun2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAlignment="center" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:background="@color/colorWhite"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:orientation="horizontal"
+                        android:layoutDirection="rtl">
+
+                        <TextView
+
+                            android:layout_width="120dp"
+                            android:layout_height="wrap_content"
+                            android:textAlignment="textStart"
+                            android:textColor="#03A9F4"
+                            android:textSize="20sp"
+                            android:text="تاريخ الشراء"/>
+
+                        <TextView
+                            android:id="@+id/date2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAlignment="center" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@drawable/edittext" />
+
+            <LinearLayout
+                android:id="@+id/viewDetails3"
+                android:background="@color/colorWhite"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:orientation="vertical"
+                android:layoutDirection="rtl"
+                android:layout_marginTop="15dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="100">
+
+                    <TextView
+                        android:layout_width="120dp"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="textStart"
+                        android:textColor="#03A9F4"
+                        android:textSize="20sp"
+                        android:layout_weight="95"
+                        android:layout_marginStart="15dp"
+                        android:text="السعر الثالث"/>
+
+                    <TextView
+                        android:id="@+id/arrow3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableRight="@drawable/ic_arrow_down" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/pricedetails3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="6dp"
+                        android:background="@drawable/edittext" />
+
+                    <LinearLayout
+                        android:background="@color/colorWhite"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:orientation="horizontal"
+                        android:layoutDirection="rtl">
+
+                        <TextView
+
+                            android:layout_width="120dp"
+                            android:layout_height="wrap_content"
+                            android:textAlignment="textStart"
+                            android:textColor="#03A9F4"
+                            android:textSize="20sp"
+                            android:text="المورد"/>
+
+                        <TextView
+                            android:id="@+id/supplier3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAlignment="center" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:background="@color/colorWhite"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:orientation="horizontal"
+                        android:layoutDirection="rtl">
+
+                        <TextView
+
+                            android:layout_width="120dp"
+                            android:layout_height="wrap_content"
+                            android:textAlignment="textStart"
+                            android:textColor="#03A9F4"
+                            android:textSize="20sp"
+                            android:text="السعر"/>
+
+                        <TextView
+                            android:id="@+id/price3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAlignment="center" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:background="@color/colorWhite"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:orientation="horizontal"
+                        android:layoutDirection="rtl">
+
+                        <TextView
+
+                            android:layout_width="120dp"
+                            android:layout_height="wrap_content"
+                            android:textAlignment="textStart"
+                            android:textColor="#03A9F4"
+                            android:textSize="20sp"
+                            android:text="الكمية"/>
+
+                        <TextView
+                            android:id="@+id/qun3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAlignment="center" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:background="@color/colorWhite"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:orientation="horizontal"
+                        android:layoutDirection="rtl">
+
+                        <TextView
+
+                            android:layout_width="120dp"
+                            android:layout_height="wrap_content"
+                            android:textAlignment="textStart"
+                            android:textColor="#03A9F4"
+                            android:textSize="20sp"
+                            android:text="تاريخ الشراء"/>
+
+                        <TextView
+                            android:id="@+id/date4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAlignment="center" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@drawable/edittext" />
+
+            <LinearLayout
+                android:id="@+id/viewDetails4"
+                android:background="@color/colorWhite"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:orientation="vertical"
+                android:layoutDirection="rtl"
+                android:layout_marginTop="15dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="100">
+
+                    <TextView
+                        android:layout_width="120dp"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="textStart"
+                        android:textColor="#03A9F4"
+                        android:textSize="20sp"
+                        android:layout_weight="95"
+                        android:layout_marginStart="15dp"
+                        android:text="السعر الرابع"/>
+
+                    <TextView
+                        android:id="@+id/arrow4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableRight="@drawable/ic_arrow_down" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/pricedetails4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="6dp"
+                        android:background="@drawable/edittext" />
+
+                    <LinearLayout
+                        android:background="@color/colorWhite"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:orientation="horizontal"
+                        android:layoutDirection="rtl">
+
+                        <TextView
+
+                            android:layout_width="120dp"
+                            android:layout_height="wrap_content"
+                            android:textAlignment="textStart"
+                            android:textColor="#03A9F4"
+                            android:textSize="20sp"
+                            android:text="المورد"/>
+
+                        <TextView
+                            android:id="@+id/supplier"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAlignment="center" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:background="@color/colorWhite"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:orientation="horizontal"
+                        android:layoutDirection="rtl">
+
+                        <TextView
+
+                            android:layout_width="120dp"
+                            android:layout_height="wrap_content"
+                            android:textAlignment="textStart"
+                            android:textColor="#03A9F4"
+                            android:textSize="20sp"
+                            android:text="السعر"/>
+
+                        <TextView
+                            android:id="@+id/price4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAlignment="center" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:background="@color/colorWhite"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:orientation="horizontal"
+                        android:layoutDirection="rtl">
+
+                        <TextView
+
+                            android:layout_width="120dp"
+                            android:layout_height="wrap_content"
+                            android:textAlignment="textStart"
+                            android:textColor="#03A9F4"
+                            android:textSize="20sp"
+                            android:text="الكمية"/>
+
+                        <TextView
+                            android:id="@+id/qun"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAlignment="center" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:background="@color/colorWhite"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:orientation="horizontal"
+                        android:layoutDirection="rtl">
+
+                        <TextView
+
+                            android:layout_width="120dp"
+                            android:layout_height="wrap_content"
+                            android:textAlignment="textStart"
+                            android:textColor="#03A9F4"
+                            android:textSize="20sp"
+                            android:text="تاريخ الشراء"/>
+
+                        <TextView
+                            android:id="@+id/date"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAlignment="center" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@drawable/edittext" />
+
+            <LinearLayout
+                android:id="@+id/viewDetails5"
+                android:background="@color/colorWhite"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:orientation="vertical"
+                android:layoutDirection="rtl"
+                android:layout_marginTop="15dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="100">
+
+                    <TextView
+                        android:layout_width="120dp"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="textStart"
+                        android:textColor="#03A9F4"
+                        android:textSize="20sp"
+                        android:layout_weight="95"
+                        android:layout_marginStart="15dp"
+                        android:text="السعر الخامس"/>
+
+                    <TextView
+                        android:id="@+id/arrow5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableRight="@drawable/ic_arrow_down" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/pricedetails5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="6dp"
+                        android:background="@drawable/edittext" />
+
+                    <LinearLayout
+                        android:background="@color/colorWhite"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:orientation="horizontal"
+                        android:layoutDirection="rtl">
+
+                        <TextView
+
+                            android:layout_width="120dp"
+                            android:layout_height="wrap_content"
+                            android:textAlignment="textStart"
+                            android:textColor="#03A9F4"
+                            android:textSize="20sp"
+                            android:text="المورد"/>
+
+                        <TextView
+                            android:id="@+id/supplier5"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAlignment="center" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:background="@color/colorWhite"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:orientation="horizontal"
+                        android:layoutDirection="rtl">
+
+                        <TextView
+
+                            android:layout_width="120dp"
+                            android:layout_height="wrap_content"
+                            android:textAlignment="textStart"
+                            android:textColor="#03A9F4"
+                            android:textSize="20sp"
+                            android:text="السعر"/>
+
+                        <TextView
+                            android:id="@+id/price5"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAlignment="center" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:background="@color/colorWhite"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:orientation="horizontal"
+                        android:layoutDirection="rtl">
+
+                        <TextView
+
+                            android:layout_width="120dp"
+                            android:layout_height="wrap_content"
+                            android:textAlignment="textStart"
+                            android:textColor="#03A9F4"
+                            android:textSize="20sp"
+                            android:text="الكمية"/>
+
+                        <TextView
+                            android:id="@+id/qun5"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAlignment="center" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:background="@color/colorWhite"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:orientation="horizontal"
+                        android:layoutDirection="rtl">
+
+                        <TextView
+
+                            android:layout_width="120dp"
+                            android:layout_height="wrap_content"
+                            android:textAlignment="textStart"
+                            android:textColor="#03A9F4"
+                            android:textSize="20sp"
+                            android:text="تاريخ الشراء"/>
+
+                        <TextView
+                            android:id="@+id/date5"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAlignment="center" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+
+
+
+    </ScrollView>
+
+
+</LinearLayout>

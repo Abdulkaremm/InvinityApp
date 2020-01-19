@@ -37,14 +37,14 @@
         android:icon="@drawable/ic_center_focus_weak_black_24dp"
         android:title="BarcodeScanner"
         android:visible="false"
-        app:showAsAction="ifRoom" />
+        app:showAsAction="always" />
 
     <item
         android:id="@+id/openCam"
         android:title="فتح الكميرا"
         android:icon="@drawable/ic_camera"
         android:visible="false"
-        app:showAsAction="ifRoom"
+        app:showAsAction="always"
 
         />
 
