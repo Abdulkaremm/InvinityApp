@@ -229,10 +229,10 @@ public class QuickAdd extends AppCompatActivity {
         result.moveToFirst();
         int x = db.checkInventoryByID(result.getString(0));
 
-
         if (x > 0) {
 
             SearchUsePRODUCT_ID = result.getString(0);
+
             CreateDilog();
             dialog.show();
 

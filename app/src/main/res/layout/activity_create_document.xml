@@ -170,7 +170,7 @@
             android:textAlignment="viewStart"
             android:textColor="@color/colorMain"
             android:textSize="18sp"
-            android:text="دعم تاريخ الصلاحية" />
+            android:text="ادخال تاريخ الصلاحية اجبارى ؟" />
 
 
     </LinearLayout>
