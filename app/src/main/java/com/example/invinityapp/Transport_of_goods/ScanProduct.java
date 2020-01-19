@@ -341,8 +341,20 @@ public class ScanProduct extends AppCompatActivity {
 
             Intent goTOAdd;
 
+            Cursor dataDocument = db.SelectDocumentByID(Integer.toString(ScanProduct.DocumentID_PK));
+            dataDocument.moveToFirst();
 
-            if(Integer.parseInt(result.getString(5)) == 6) {
+            boolean CanEmpty = false;
+
+            if(dataDocument.getString(2).compareTo("0") == 0){
+
+                CanEmpty = true;
+            }
+
+            dataDocument.close();
+
+
+            if(Integer.parseInt(result.getString(5)) == 6 && CanEmpty == false) {
 
                 goTOAdd = new Intent(ScanProduct.this, AddProductWithDate.class);
             }else{
@@ -370,13 +382,26 @@ public class ScanProduct extends AppCompatActivity {
         TextView edit = dialog.findViewById(R.id.edit);
         TextView no = dialog.findViewById(R.id.no);
 
+
+        Cursor dataDocument = db.SelectDocumentByID(Integer.toString(ScanProduct.DocumentID_PK));
+        dataDocument.moveToFirst();
+
+        boolean CanEmpty = false;
+
+        if(dataDocument.getString(2).compareTo("0") == 0){
+
+            CanEmpty = true;
+        }
+
+        dataDocument.close();
+
         if(!barcode.getText().toString().isEmpty()){
 
 
             Cursor result = db.getDataProduct(barcode.getText().toString());
             result.moveToFirst();
 
-            if(Integer.parseInt(result.getString(5)) == 6){
+            if(Integer.parseInt(result.getString(5)) == 6 && CanEmpty == false){
 
                 equnt.setVisibility(View.GONE);
 
