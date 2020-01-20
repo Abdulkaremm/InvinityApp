@@ -58,7 +58,6 @@ public class ReceiveGoods extends AppCompatActivity {
     InfinityDB db = new InfinityDB(this);
     boolean Isnew;
     SwipeMenuListView swiplist;
-    ArrayList<String> productUn = new ArrayList<>();
     LinearLayout linearLayout,ExDate;
     String baseunit;
     private Dialog datePiker;
