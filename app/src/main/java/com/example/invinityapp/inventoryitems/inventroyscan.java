@@ -118,19 +118,6 @@ public class inventroyscan extends AppCompatActivity {
             @Override
             public void create(SwipeMenu menu) {
 
-               /* SwipeMenuItem view = new SwipeMenuItem(getApplicationContext());
-
-                // set item background
-
-                view.setBackground(R.color.colorMain);
-                // set item width
-                view.setWidth(170);
-                // set item title
-                view.setIcon(R.drawable.ic_eye);
-
-                // add to menu
-                menu.addMenuItem(view);*/
-
                 // create "open" item
 
                 SwipeMenuItem Update = new SwipeMenuItem(getApplicationContext());
@@ -165,11 +152,6 @@ public class inventroyscan extends AppCompatActivity {
             @Override
             public boolean onMenuItemClick(final int position, SwipeMenu menu, int index) {
                 switch (index) {
-                  /*  case 0:
-
-                        //ViewData(productData.get(position).Product_id);
-
-                        break;*/
 
                     case 0:
 

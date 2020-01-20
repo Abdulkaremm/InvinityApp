@@ -8,12 +8,12 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class InfinityDB extends SQLiteOpenHelper {
 
-    private static final String DATABASE_NAME = "invinity.db";// اسم قاعدة البيانات
-    private static final String TABLE_NAME    = "categories";// اسم جدول الاصناف الخاص بالجرد
-    private static final String TABLE_SETTING    = "setting";// اسم جدول الاعدادات
-    private static final String DATA_PRODUCTS    = "Data_Products";// اسم جدول الاصناف
-    private static final String DATA_PRODUCTS_UOMS    = "Data_Products_UOMS";// اسم جدول الاصناف
-    private static final String DATA_PRODUCT_BARCODES    = "Data_Product_Barcodes";// اسم جدول الباركود
+    public static final String DATABASE_NAME = "invinity.db";// اسم قاعدة البيانات
+    public static final String TABLE_NAME    = "categories";// اسم جدول الاصناف الخاص بالجرد
+    public static final String TABLE_SETTING    = "setting";// اسم جدول الاعدادات
+    public static final String DATA_PRODUCTS    = "Data_Products";// اسم جدول الاصناف
+    public static final String DATA_PRODUCTS_UOMS    = "Data_Products_UOMS";// اسم جدول الاصناف
+    public static final String DATA_PRODUCT_BARCODES    = "Data_Product_Barcodes";// اسم جدول الباركود
     private final String ALL_UNITS = "all_units"; //   جدول لكل الوحدات المستلمة من المنضومة عند المزامنة
     private final String SUPPLIERS_TABLE = "suppliers_table"; // جدول للموردين من المنضومة الرئيسية
     private final String RECEIVE_FROM_SUPPLIERS = "receive_from_suppliers";//
@@ -22,9 +22,6 @@ public class InfinityDB extends SQLiteOpenHelper {
     private final String BRANCH_LOCATION = "branch_location";
     private final String TRANSFER_DOCUMENT = "transfer_document";
     private final String DOCUMENT_PRODUCT = "document_product";
-    private final String CLIENT_TABLE = "clients_table";
-    private final String PURCHASE_BILLS = "purchase_bills";
-    private final String PURCHASED_PRODUCTS = "purchase_products";
 
 
 
@@ -195,44 +192,6 @@ public class InfinityDB extends SQLiteOpenHelper {
                         " DocumentID_FK INTEGER NOT NULL," +
                         " userName VARCHAR(255),"+
                         "FOREIGN KEY(DocumentID_FK) REFERENCES "+ TRANSFER_DOCUMENT+"(DocumentID_PK) ON DELETE CASCADE ON UPDATE CASCADE )");
-
-
-
-    /////************************  جداول اصدار فاتورة *********************************//
-
-
-        db.execSQL("CREATE TABLE IF NOT EXISTS " + CLIENT_TABLE+ " ( " + // جدول الزبائن
-                " ClientID INTEGER NOT NULL PRIMARY KEY, " +
-                " Client_Name VARCHAR(200) NOT NULL," +
-                " Last_Sync_Date DATE)");
-
-
-        //***** جدول الموردين المستلم منهم البضائع ******
-        db.execSQL("CREATE TABLE IF NOT EXISTS " + PURCHASE_BILLS + " ( " + // جدول الفواتير
-                " PurchaseID_PK INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, " +
-                " ClientID_FK INTEGER , " +
-                " Client_Name VARCHAR(200) NOT NULL," +
-                " Create_Date DATE)");
-
-        //********** جدول البضائع المستلمة ******
-
-        db.execSQL("CREATE TABLE IF NOT EXISTS " + PURCHASED_PRODUCTS + " ( " + // جدول الاصناف التي تم ضمها لاحد الفواتير
-                " ProductID_PK INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, " +
-                " ProductID INTEGER NOT NULL, " +
-                " PurchaseID_FK INTEGER NOT NULL, " +
-                " ProductUOMID_FK INTEGER NOT NULL,"+ // رقم الوحدة من وحدات الصنف
-                " Product_Name VARCHAR(200) NOT NULL," +
-                " Quantity INTEGER NOT NULL," +
-                " CountingDate DATETIME," +
-                " BaseUnitQ VARCHAR(200) NOT NULL ,"+
-                " ProductBarcode VARCHAR(200) NOT NULL," +
-                " FOREIGN KEY(PurchaseID_FK) REFERENCES "+ PURCHASE_BILLS+"(PurchaseID_PK) ON DELETE CASCADE ON UPDATE CASCADE )");
-
-
-
-
-
-
 
 
 
@@ -1184,28 +1143,10 @@ public class InfinityDB extends SQLiteOpenHelper {
 
     }
 
+
+
+
+
     //#######################
-
-
-
-    //*************************** Bills Methods Start From Here *********************//////
-
-
-    public Cursor GetAllBills(){
-
-        SQLiteDatabase db  = this.getWritableDatabase();
-
-        String query = "SELECT * FROM "+PURCHASE_BILLS+" ORDER BY PurchaseID_PK  DESC";
-        return db.rawQuery(query,null);
-    }
-
-
-    public Cursor GetAllClients(){
-
-        SQLiteDatabase db  = this.getWritableDatabase();
-
-        String query = "SELECT * FROM "+CLIENT_TABLE;
-        return db.rawQuery(query,null);
-    }
 
 }

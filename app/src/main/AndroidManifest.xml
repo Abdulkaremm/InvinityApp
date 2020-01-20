@@ -19,10 +19,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ExportAPurchaseBill.ClientsList"></activity>
-        <activity android:name=".ExportAPurchaseBill.ViewBillProducts" />
-        <activity android:name=".ExportAPurchaseBill.CreateNewBillActivity" />
-        <activity android:name=".viewcategory.ProductPaymentDetails" />
+        <activity android:name=".viewcategory.ProductPaymentDetails"></activity>
         <activity android:name=".ExportAPurchaseBill.PurchaseBillActivity" />
         <activity android:name=".Transport_of_goods.UpdateProductWihtDate" />
         <activity android:name=".Transport_of_goods.UpdateProductWihtoutDate" />

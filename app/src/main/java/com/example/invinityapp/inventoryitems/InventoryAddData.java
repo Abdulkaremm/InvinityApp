@@ -63,8 +63,6 @@ public class InventoryAddData extends AppCompatActivity {
 
         Intent GetData = getIntent();
 
-        Log.i("ID", "BARCODE = " + GetData.getStringExtra("Barcode"));
-
         Cursor res = mydata.getDataProduct(GetData.getStringExtra("Barcode"));
 
         while (res.moveToNext()) {
@@ -123,6 +121,8 @@ public class InventoryAddData extends AppCompatActivity {
         MenuInflater menuInflater = getMenuInflater();
 
         menuInflater.inflate(R.menu.inventorymenu, menu);
+
+
 
         return true;
     }
