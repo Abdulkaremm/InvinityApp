@@ -3,6 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto" >
 
     <item
+        android:id="@+id/getStock"
+        android:icon="@drawable/ic_storage_black_24dp"
+        android:title="عرض المخزون"
+        android:visible="false"
+        app:showAsAction="always" />
+
+    <item
         android:id="@+id/inventoryType"
         android:title="نوع الجرد"
         app:actionViewClass="android.widget.TextView"

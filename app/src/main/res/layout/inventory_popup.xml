@@ -21,7 +21,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text=" هذا الصنف تم جردة مسبقا هل تريد اضافته كصنف جديد او التعديل عليه ؟"
+            android:text=" هذا الصنف تم اخده مسبقا هل تريد اضافته كصنف جديد او التعديل عليه ؟"
             android:textAlignment="viewEnd"
             android:textColor="#000000"
             android:paddingRight="10dp"

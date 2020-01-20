@@ -3,6 +3,7 @@ import com.example.invinityapp.Transport_of_goods.TransportGoods;
 import com.example.invinityapp.goods.receiving_goods_main;
 import com.example.invinityapp.inventoryitems.InfinityDB;
 import com.example.invinityapp.inventoryitems.inventroyscan;
+import com.example.invinityapp.registration_of_deficiencies.RegistrationOfDeficiencies;
 import com.example.invinityapp.viewcategory.DataOrder;
 
 import androidx.annotation.NonNull;
@@ -218,12 +219,15 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+    public void PURCHASE_ORDERS(View view){
 
 
-    public  void  coomingSoon(View view){
+        Intent intent = new Intent(this, RegistrationOfDeficiencies.class);
+        startActivity(intent);
 
-        Toast.makeText(activity, "عذراً, هذه الخدمة غير متوفرة حالياً", Toast.LENGTH_SHORT).show();
+
     }
+
 
 
 }

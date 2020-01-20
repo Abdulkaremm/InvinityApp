@@ -8,12 +8,12 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class InfinityDB extends SQLiteOpenHelper {
 
-    public static final String DATABASE_NAME = "invinity.db";// اسم قاعدة البيانات
-    public static final String TABLE_NAME    = "categories";// اسم جدول الاصناف الخاص بالجرد
-    public static final String TABLE_SETTING    = "setting";// اسم جدول الاعدادات
-    public static final String DATA_PRODUCTS    = "Data_Products";// اسم جدول الاصناف
-    public static final String DATA_PRODUCTS_UOMS    = "Data_Products_UOMS";// اسم جدول الاصناف
-    public static final String DATA_PRODUCT_BARCODES    = "Data_Product_Barcodes";// اسم جدول الباركود
+    private static final String DATABASE_NAME = "invinity.db";// اسم قاعدة البيانات
+    private static final String TABLE_NAME    = "categories";// اسم جدول الاصناف الخاص بالجرد
+    private static final String TABLE_SETTING    = "setting";// اسم جدول الاعدادات
+    private static final String DATA_PRODUCTS    = "Data_Products";// اسم جدول الاصناف
+    private static final String DATA_PRODUCTS_UOMS    = "Data_Products_UOMS";// اسم جدول الاصناف
+    private static final String DATA_PRODUCT_BARCODES    = "Data_Product_Barcodes";// اسم جدول الباركود
     private final String ALL_UNITS = "all_units"; //   جدول لكل الوحدات المستلمة من المنضومة عند المزامنة
     private final String SUPPLIERS_TABLE = "suppliers_table"; // جدول للموردين من المنضومة الرئيسية
     private final String RECEIVE_FROM_SUPPLIERS = "receive_from_suppliers";//
@@ -22,6 +22,7 @@ public class InfinityDB extends SQLiteOpenHelper {
     private final String BRANCH_LOCATION = "branch_location";
     private final String TRANSFER_DOCUMENT = "transfer_document";
     private final String DOCUMENT_PRODUCT = "document_product";
+    private final String PURCHASE_ORDERS = "purchase_orders";
 
 
 
@@ -196,6 +197,19 @@ public class InfinityDB extends SQLiteOpenHelper {
 
 
 
+        db.execSQL("CREATE TABLE IF NOT EXISTS  " + PURCHASE_ORDERS + " (" +
+                        " purchaseID INTEGER PRIMARY KEY AUTOINCREMENT," +
+                        " Product_ID_PK INTEGER NOT NULL ,"+
+                        " ProductName VARCHAR(200) NOT NULL ,"+
+                        " UOMName VARCHAR(200),"+
+                        " UOMID_PK VAECHAR(200),"+
+                        " BaseUnitQ VARCHAR(200) NOT NULL ,"+
+                        " barcode VARCHAR(20) NOT NULL," +
+                        " quantity INTEGER NOT NULL," +
+                        " discription VARCHAR(200) ," +
+                        " dateTime VARCHAR(200) NOT NULL," +
+                        " deviceIP VARCHAR(15) NOT NULL," +
+                        " userName VARCHAR(255))");
 
 
 
@@ -1142,6 +1156,92 @@ public class InfinityDB extends SQLiteOpenHelper {
         return db.delete(DOCUMENT_PRODUCT, "Product_ID_PK = ? AND DocumentID_FK = ?", new String[] {id, DocumentID});
 
     }
+
+
+
+
+    public Cursor SelectPurchaseProducts(){
+
+        SQLiteDatabase db  = this.getWritableDatabase();
+
+        Cursor result = db.rawQuery("SELECT * FROM " + PURCHASE_ORDERS + " ORDER BY dateTime DESC LIMIT 30", null);
+
+
+        return result;
+    }
+
+
+    public Cursor getPurchaseProductById(String id){
+
+        SQLiteDatabase db  = this.getWritableDatabase();
+
+
+        Cursor res = db.rawQuery("SELECT purchaseID, Product_ID_PK, ProductName ,barcode, quantity, discription FROM " + PURCHASE_ORDERS + " WHERE purchaseID = ? ORDER BY dateTime DESC", new String[]{id});
+
+        return res;
+    }
+
+
+    public int DeletePurchaseProductByID(String id){
+
+        SQLiteDatabase db  = this.getWritableDatabase();
+
+        return db.delete(PURCHASE_ORDERS, "purchaseID = ?", new String[] {id});
+
+    }
+
+
+
+    public int checkPurchaseProductByID(String Product_ID){
+
+        SQLiteDatabase db  = this.getWritableDatabase();
+
+
+        Cursor res = db.rawQuery("SELECT Product_ID_PK FROM " + PURCHASE_ORDERS + " WHERE Product_ID_PK = ?", new String[]{Product_ID});
+
+        return res.getCount();
+    }
+
+
+    public Cursor GetBarcodeByPurchaseProductID(String Product_ID){
+
+        SQLiteDatabase db  = this.getWritableDatabase();
+
+
+        Cursor res = db.rawQuery("SELECT barcode FROM " + PURCHASE_ORDERS + " WHERE Product_ID_PK = ?", new String[]{Product_ID});
+
+        return res;
+    }
+
+
+    public Cursor SelectPurchasePriductByBarcode(String barcod){
+
+        SQLiteDatabase db  = this.getWritableDatabase();
+
+
+        Cursor res = db.rawQuery("SELECT purchaseID, Product_ID_PK, ProductName ,barcode, quantity, discription  FROM " + PURCHASE_ORDERS + " WHERE barcode = ?", new String[]{barcod});
+
+        return res;
+    }
+
+
+    public boolean InsertPurchaseProduct(ContentValues values){
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        long result = db.insert(PURCHASE_ORDERS,null, values);
+
+        if(result == -1){
+
+            return false;
+
+        }else{
+
+            return true;
+        }
+    }
+
+
+
 
 
 
