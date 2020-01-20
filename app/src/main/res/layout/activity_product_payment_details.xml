@@ -45,9 +45,9 @@
             android:layout_height="wrap_content"
             android:text="اسم الصنف"
             android:textColor="#03A9F4"
-            android:textSize="30sp"
+            android:textSize="20sp"
             android:visibility="visible"
-            android:layout_weight="30"/>
+            android:layout_weight="20"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -74,7 +74,7 @@
             android:layout_height="wrap_content"
             android:text="أخر 5 أسعار شراء للصنف "
             android:textColor="#03A9F4"
-            android:textSize="24sp"
+            android:textSize="20sp"
             android:visibility="visible" />
 
     </LinearLayout>
