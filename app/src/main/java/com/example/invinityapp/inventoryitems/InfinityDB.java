@@ -22,6 +22,9 @@ public class InfinityDB extends SQLiteOpenHelper {
     private final String BRANCH_LOCATION = "branch_location";
     private final String TRANSFER_DOCUMENT = "transfer_document";
     private final String DOCUMENT_PRODUCT = "document_product";
+    private final String CLIENTS_TABLE = "clients";
+    private final String PURCHASE_BILLS = "bills";
+    private final String BILL_PRODUCTS = "bill_products";
 
 
 
@@ -193,6 +196,41 @@ public class InfinityDB extends SQLiteOpenHelper {
                         " userName VARCHAR(255),"+
                         "FOREIGN KEY(DocumentID_FK) REFERENCES "+ TRANSFER_DOCUMENT+"(DocumentID_PK) ON DELETE CASCADE ON UPDATE CASCADE )");
 
+
+
+
+
+        /////***********************  bills dep tables **********************************************\\\\\\\\\\\\
+
+
+        db.execSQL("CREATE TABLE IF NOT EXISTS " + CLIENTS_TABLE + " ( " +
+                " ClientID_PK INTEGER NOT NULL PRIMARY KEY, " +
+                " Client_Name VARCHAR(200) NOT NULL," +
+                " Last_Sync_Date DATE)");
+
+
+        //***** جدول الموردين المستلم منهم البضائع ******
+        db.execSQL("CREATE TABLE IF NOT EXISTS " + PURCHASE_BILLS + " ( " +
+                " Purchase_PK INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, " +
+                " ClientID_FK INTEGER NOT NULL, " +
+                " Client_Name VARCHAR(200) NOT NULL," +
+                " CreateDate DATE)");
+
+        //********** جدول البضائع المستلمة ******
+
+        db.execSQL("CREATE TABLE IF NOT EXISTS " + BILL_PRODUCTS + " ( " +
+                " ProductID_PK INTEGER NOT NULL PRIMARY KEY , " +
+                " Purchase_FK INTEGER NOT NULL, " +
+                " ProductUOMID_FK INTEGER NOT NULL,"+ // رقم الوحدة من وحدات الصنف او من جدول الوحدات اذا غير موجود
+                " Product_Name VARCHAR(200) NOT NULL," +
+                " Quantity INTEGER NOT NULL," +
+                " CountingDate DATETIME," +
+                " BaseUnitQ VARCHAR(200) NOT NULL ,"+
+                " ProductBarcode VARCHAR(200) NOT NULL," +
+                " FOREIGN KEY(Purchase_FK) REFERENCES "+ PURCHASE_BILLS+"(Purchase_PK) ON DELETE CASCADE ON UPDATE CASCADE )");
+
+
+        //*************************************************************\\\\
 
 
 
