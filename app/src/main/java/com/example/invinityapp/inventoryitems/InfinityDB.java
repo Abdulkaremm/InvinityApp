@@ -178,6 +178,21 @@ public class InfinityDB extends SQLiteOpenHelper {
                 " ToLocationID INTEGER NOT NULL)");
 
 
+        db.execSQL("CREATE TABLE IF NOT EXISTS  " + PURCHASE_ORDERS + " (" +
+                " purchaseID INTEGER PRIMARY KEY AUTOINCREMENT," +
+                " Product_ID_PK INTEGER NOT NULL ,"+
+                " ProductName VARCHAR(200) NOT NULL ,"+
+                " UOMName VARCHAR(200),"+
+                " UOMID_PK VAECHAR(200),"+
+                " BaseUnitQ VARCHAR(200) NOT NULL ,"+
+                " barcode VARCHAR(20) NOT NULL," +
+                " quantity INTEGER NOT NULL," +
+                " discription VARCHAR(200) ," +
+                " dateTime VARCHAR(200) NOT NULL," +
+                " deviceIP VARCHAR(15) NOT NULL," +
+                " userName VARCHAR(255))");
+
+
         db.execSQL("CREATE TABLE IF NOT EXISTS  " + DOCUMENT_PRODUCT + " (" +
                         " DocProductID INTEGER PRIMARY KEY AUTOINCREMENT," +
                         " Product_ID_PK INTEGER NOT NULL ,"+
@@ -197,19 +212,6 @@ public class InfinityDB extends SQLiteOpenHelper {
 
 
 
-        db.execSQL("CREATE TABLE IF NOT EXISTS  " + PURCHASE_ORDERS + " (" +
-                        " purchaseID INTEGER PRIMARY KEY AUTOINCREMENT," +
-                        " Product_ID_PK INTEGER NOT NULL ,"+
-                        " ProductName VARCHAR(200) NOT NULL ,"+
-                        " UOMName VARCHAR(200),"+
-                        " UOMID_PK VAECHAR(200),"+
-                        " BaseUnitQ VARCHAR(200) NOT NULL ,"+
-                        " barcode VARCHAR(20) NOT NULL," +
-                        " quantity INTEGER NOT NULL," +
-                        " discription VARCHAR(200) ," +
-                        " dateTime VARCHAR(200) NOT NULL," +
-                        " deviceIP VARCHAR(15) NOT NULL," +
-                        " userName VARCHAR(255))");
 
 
 
