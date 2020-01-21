@@ -198,7 +198,6 @@ public class InfinityDB extends SQLiteOpenHelper {
 
 
 
-
         ContentValues values = new ContentValues();
 
         values.put("mainSetting", "mainSetting");
