@@ -52,7 +52,7 @@ public class CreateNewBillActivity extends AppCompatActivity {
         AddClient.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent Goadd = new Intent(CreateNewBillActivity.this, SuppliersList.class);
+                Intent Goadd = new Intent(CreateNewBillActivity.this, ClientsList.class);
                 startActivity(Goadd);
                 finish();
             }

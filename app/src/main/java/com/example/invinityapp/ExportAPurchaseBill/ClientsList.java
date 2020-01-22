@@ -62,7 +62,7 @@ public class ClientsList extends AppCompatActivity {
 
         }else{
 
-            title.setText("قائمة الموردينلا يوجد زبائن لعرضهم ");
+            //title.setText("قائمة الموردينلا يوجد زبائن لعرضهم ");
         }
 
 
