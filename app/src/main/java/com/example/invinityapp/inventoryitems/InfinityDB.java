@@ -1314,7 +1314,33 @@ public class InfinityDB extends SQLiteOpenHelper {
         }
 
 
+    public boolean InsertNewBill(ContentValues values){
 
+        SQLiteDatabase db  = this.getWritableDatabase();
+
+        long result = db.insert(PURCHASE_BILLS,null, values);
+
+        if(result == -1){
+
+            return false;
+
+        }else{
+
+            return true;
+        }
+    }
+
+    public boolean DeletePurchaseBill(String id){
+
+        SQLiteDatabase db  = this.getWritableDatabase();
+
+         int state = db.delete(PURCHASE_BILLS, "Purchase_PK = ?", new String[] {id});
+
+         if(state > 0)
+             return true;
+         else
+             return false;
+    }
 
 
 

@@ -149,7 +149,7 @@ public class PurchaseBillActivity extends AppCompatActivity {
                                     .setPositiveButton("نعم", new DialogInterface.OnClickListener() {
                                         @Override
                                         public void onClick(DialogInterface dialog, int which) {
-                                            if(db.DeleteOpenReceivie(BillsData.get(position).id)) {
+                                            if(db.DeletePurchaseBill(BillsData.get(position).id)) {
                                                 Toast.makeText(PurchaseBillActivity.this, "تم حدف الفاتورة", Toast.LENGTH_SHORT).show();
                                                 Intent intent = new Intent(PurchaseBillActivity.this, PurchaseBillActivity.class);
                                                 startActivity(intent);

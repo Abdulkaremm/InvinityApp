@@ -102,6 +102,11 @@ public class CreateNewBillActivity extends AppCompatActivity {
             values.put("ClientID_FK",id);
             values.put("Client_Name",client.getText().toString());
             values.put("CreateDate",date);
+            if(db.InsertNewBill(values)){
+                Toast.makeText(this, "تمت الاضافة", Toast.LENGTH_SHORT).show();
+                
+            }else
+                Toast.makeText(this, "حدث خطأ", Toast.LENGTH_SHORT).show();
 
         }
     }

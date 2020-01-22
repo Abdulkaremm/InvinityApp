@@ -32,7 +32,7 @@ public class BillsAdapatare extends ArrayAdapter<BillsModel> {
         }
 
 
-        TextView T1 = convertView.findViewById(R.id.client);
+        TextView T1 = convertView.findViewById(R.id.clientName);
         TextView T2 = convertView.findViewById(R.id.date);
 
         T1.setText(bill.name);
