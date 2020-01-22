@@ -1,4 +1,5 @@
 package com.example.invinityapp;
+import com.example.invinityapp.ExportAPurchaseBill.PurchaseBillActivity;
 import com.example.invinityapp.Transport_of_goods.TransportGoods;
 import com.example.invinityapp.goods.receiving_goods_main;
 import com.example.invinityapp.inventoryitems.InfinityDB;
@@ -213,6 +214,15 @@ public class MainActivity extends AppCompatActivity {
 
             Toast.makeText(activity, "الرجاء استراد وحدات الاصناف من المنظومة الرئيسية", Toast.LENGTH_SHORT).show();
         }
+
+
+    }
+
+
+    public void PurchaseBillsDep(View v){
+
+        Intent intent = new Intent(this, PurchaseBillActivity.class);
+        startActivity(intent);
 
 
     }

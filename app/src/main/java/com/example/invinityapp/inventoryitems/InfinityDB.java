@@ -23,8 +23,9 @@ public class InfinityDB extends SQLiteOpenHelper {
     private final String TRANSFER_DOCUMENT = "transfer_document";
     private final String DOCUMENT_PRODUCT = "document_product";
     private final String PURCHASE_ORDERS = "purchase_orders";
-
-
+    private final String CLIENTS_TABLE = "clients";
+    private final String PURCHASE_BILLS = "bills";
+    private final String BILL_PRODUCTS = "bill_products";
 
     public InfinityDB(Context context) {
         super(context, DATABASE_NAME, null, 1);
@@ -212,6 +213,40 @@ public class InfinityDB extends SQLiteOpenHelper {
                 " dateTime VARCHAR(200) NOT NULL," +
                 " deviceIP VARCHAR(15) NOT NULL," +
                 " userName VARCHAR(255))");
+
+
+        /////***********************  bills dep tables **********************************************\\\\\\\\\\\\
+
+
+        db.execSQL("CREATE TABLE IF NOT EXISTS " + CLIENTS_TABLE + " ( " +
+                " ClientID_PK INTEGER NOT NULL PRIMARY KEY, " +
+                " Client_Name VARCHAR(200) NOT NULL," +
+                " Last_Sync_Date DATE)");
+
+
+        //***** جدول الموردين المستلم منهم البضائع ******
+        db.execSQL("CREATE TABLE IF NOT EXISTS " + PURCHASE_BILLS + " ( " +
+                " Purchase_PK INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, " +
+                " ClientID_FK INTEGER NOT NULL, " +
+                " Client_Name VARCHAR(200) NOT NULL," +
+                " CreateDate DATE)");
+
+        //********** جدول البضائع المستلمة ******
+
+        db.execSQL("CREATE TABLE IF NOT EXISTS " + BILL_PRODUCTS + " ( " +
+                " ProductID_PK INTEGER NOT NULL PRIMARY KEY , " +
+                " Purchase_FK INTEGER NOT NULL, " +
+                " ProductUOMID_FK INTEGER NOT NULL,"+ // رقم الوحدة من وحدات الصنف او من جدول الوحدات اذا غير موجود
+                " Product_Name VARCHAR(200) NOT NULL," +
+                " Quantity INTEGER NOT NULL," +
+                " CountingDate DATETIME," +
+                " ProductBarcode VARCHAR(200) NOT NULL," +
+                " FOREIGN KEY(Purchase_FK) REFERENCES "+ PURCHASE_BILLS+"(Purchase_PK) ON DELETE CASCADE ON UPDATE CASCADE )");
+
+
+        //*************************************************************\\\\
+
+
 
 
 
@@ -1243,6 +1278,7 @@ public class InfinityDB extends SQLiteOpenHelper {
     }
 
 
+
     public int updatePurchaseData(ContentValues values){
 
         SQLiteDatabase db = this.getWritableDatabase();
@@ -1250,10 +1286,6 @@ public class InfinityDB extends SQLiteOpenHelper {
 
         return db.update(PURCHASE_ORDERS, values, "purchaseID = ?", new String[]{values.get("purchaseID").toString()});
     }
-
-
-
-
 
 
 
