@@ -37,6 +37,7 @@
 
         <activity android:name=".viewcategory.ProductPaymentDetails"></activity>
         <activity android:name=".ExportAPurchaseBill.PurchaseBillActivity" />
+        <activity android:name=".ExportAPurchaseBill.CreateNewBillActivity" />
         <activity android:name=".Transport_of_goods.UpdateProductWihtDate" />
         <activity android:name=".Transport_of_goods.UpdateProductWihtoutDate" />
         <activity android:name=".Transport_of_goods.AddProdutWihtoutDate" />

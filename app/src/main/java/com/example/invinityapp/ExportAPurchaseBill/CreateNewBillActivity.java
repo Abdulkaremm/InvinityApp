@@ -3,6 +3,7 @@ package com.example.invinityapp.ExportAPurchaseBill;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.ContentValues;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -16,8 +17,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.example.invinityapp.R;
 import com.example.invinityapp.goods.SuppliersList;
-import com.example.invinityapp.goods.receiving_goods_main;
 import com.example.invinityapp.inventoryitems.InfinityDB;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 
 public class CreateNewBillActivity extends AppCompatActivity {
@@ -90,6 +94,14 @@ public class CreateNewBillActivity extends AppCompatActivity {
             Toast.makeText(this, "الرجاء ادخال إسم الزبون", Toast.LENGTH_SHORT).show();
         } else {
 
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+            String date = simpleDateFormat.format(new Date());
+
+            ContentValues values = new ContentValues();
+
+            values.put("ClientID_FK",id);
+            values.put("Client_Name",client.getText().toString());
+            values.put("CreateDate",date);
 
         }
     }
