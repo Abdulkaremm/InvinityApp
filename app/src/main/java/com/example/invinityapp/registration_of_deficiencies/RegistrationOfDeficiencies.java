@@ -4,12 +4,14 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -27,6 +29,20 @@ import com.example.invinityapp.inventoryitems.InfinityDB;
 import com.example.invinityapp.inventoryitems.IventoryAdabter;
 import com.example.invinityapp.inventoryitems.ProductData;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.ProtocolException;
+import java.net.URL;
 import java.util.ArrayList;
 
 public class RegistrationOfDeficiencies extends AppCompatActivity {
@@ -38,6 +54,8 @@ public class RegistrationOfDeficiencies extends AppCompatActivity {
     private ArrayList<ProductData> productData;
     public boolean ifHasData = false;
 
+    public ProgressDialog progressDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,6 +66,11 @@ public class RegistrationOfDeficiencies extends AppCompatActivity {
 
         DNF =  findViewById(R.id.dataNotFound);
         dataLists = findViewById(R.id.listData);
+        progressDialog = new ProgressDialog(RegistrationOfDeficiencies.this);
+        progressDialog.setTitle("مزامنة البيانات");
+        progressDialog.setMessage("يتم العمل على مزامنة البيانات...");
+        progressDialog.setCanceledOnTouchOutside(false);
+
 
 
         Cursor res = db.SelectPurchaseProducts();
@@ -200,6 +223,11 @@ public class RegistrationOfDeficiencies extends AppCompatActivity {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
 
+                                        progressDialog.show();
+                                        Cursor result = db.ExbordSetting();
+                                        result.moveToFirst();
+                                        new SyncData().execute(result.getString(7));
+
                                     }
                                 })
                                 .setNegativeButton("لا", null)
@@ -275,6 +303,110 @@ public class RegistrationOfDeficiencies extends AppCompatActivity {
         } else {
             Toast.makeText(this, "حدث خطأ ما الرجاء إعادة المحاولة", Toast.LENGTH_LONG).show();
 
+        }
+    }
+
+
+
+    private class SyncData extends AsyncTask<String, Void, String> {
+
+
+
+        @Override
+        protected String doInBackground(String... strings) {
+
+            HttpURLConnection urlConnection;
+
+            String url = "http://"+strings[0]+"/api/InfinityRetail";
+
+            String result = "false";
+
+
+            try { // connection
+
+                Cursor res = db.syncAllPurchaseData();
+
+                JSONArray jsonArray = new JSONArray();
+                JSONObject jsonObject;
+
+                int count = 0;
+                while (res.moveToNext()) {
+
+                    jsonObject = new JSONObject();
+                    jsonObject.put("ID", res.getString(0));
+                    jsonObject.put("Product_ID_PK", res.getString(1));
+                    jsonObject.put("ProductName", res.getString(2));
+                    jsonObject.put("UOMName", res.getString(3));
+                    jsonObject.put("UOMID_PK", res.getString(4));
+                    jsonObject.put("BaseUnitQ", res.getString(5));
+                    jsonObject.put("Barcode", res.getString(6));
+                    jsonObject.put("Quantity", res.getString(7));
+                    jsonObject.put("Description", res.getString(8));
+                    jsonObject.put("DateTime", res.getString(9));
+                    jsonObject.put("DeviceID", res.getString(10));
+                    jsonObject.put("userName", res.getString(11));
+                    jsonArray.put(count, jsonObject);
+                    count++;
+                }
+
+
+                urlConnection = (HttpURLConnection) ((new URL(url).openConnection()));
+                urlConnection.setDoOutput(true);
+                urlConnection.setRequestMethod("POST");
+                urlConnection.setRequestProperty("Content-Type", "application/json");
+                urlConnection.setRequestProperty("Accept", "application/json");
+                urlConnection.connect();
+                // write
+                OutputStream outputStream = urlConnection.getOutputStream();
+                BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
+                writer.write(jsonArray.toString());
+                writer.close();
+                outputStream.close();
+
+
+                //// read
+
+                InputStream inputStream = urlConnection.getInputStream();
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "utf-8"));
+                String line = bufferedReader.readLine();
+                return line;
+
+
+            } catch (ProtocolException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            return result;
+
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+
+            if(s.compareTo("true") == 0){
+
+                Toast.makeText(RegistrationOfDeficiencies.this, "تمت عملية المزامنة", Toast.LENGTH_SHORT).show();
+
+                InfinityDB db = new InfinityDB(RegistrationOfDeficiencies.this);
+                db.DropAllPurchaseData();
+
+                Intent intent = new Intent(RegistrationOfDeficiencies.this, RegistrationOfDeficiencies.class);
+                startActivity(intent);
+                RegistrationOfDeficiencies.this.finish();
+
+
+            }else{
+
+                Toast.makeText(RegistrationOfDeficiencies.this, "فشلت عملية المزامنة !", Toast.LENGTH_SHORT).show();
+
+            }
+
+            progressDialog.dismiss();
         }
     }
 

@@ -1288,8 +1288,27 @@ public class InfinityDB extends SQLiteOpenHelper {
     }
 
 
+    public Cursor syncAllPurchaseData(){
 
-        //****************************** purchase bills methods { ******************************************\\\\\\\\\
+        SQLiteDatabase db  = this.getWritableDatabase();
+
+        Cursor result = db.rawQuery("SELECT * FROM " + PURCHASE_ORDERS, null);
+
+
+        return result;
+    }
+
+    public void DropAllPurchaseData(){
+
+        SQLiteDatabase db  = this.getWritableDatabase();
+        db.delete(PURCHASE_ORDERS, null, null);
+    }
+
+
+
+
+
+    //****************************** purchase bills methods { ******************************************\\\\\\\\\
 
 
 
@@ -1341,6 +1360,11 @@ public class InfinityDB extends SQLiteOpenHelper {
          else
              return false;
     }
+
+
+
+
+
 
 
 
