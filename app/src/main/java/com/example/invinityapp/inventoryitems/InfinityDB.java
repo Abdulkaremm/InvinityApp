@@ -1289,6 +1289,36 @@ public class InfinityDB extends SQLiteOpenHelper {
 
 
 
+        //****************************** purchase bills methods { ******************************************\\\\\\\\\
+
+
+
+        public Cursor GetAllBills(){
+
+            SQLiteDatabase db  = this.getWritableDatabase();
+
+            String query = "SELECT * FROM "+PURCHASE_BILLS+" ORDER BY Purchase_PK  DESC";
+
+            return db.rawQuery(query,null);
+
+        }
+
+        public Cursor GetAllClients(){
+
+            SQLiteDatabase db  = this.getWritableDatabase();
+
+            String query = "SELECT * FROM "+CLIENTS_TABLE+" ORDER BY ClientID_PK  DESC";
+
+            return db.rawQuery(query,null);
+
+        }
+
+
+
+
+    //****************************** purchase bills methods } ******************************************\\\\\\\\\
+
+
 
     //#######################
 
