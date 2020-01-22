@@ -19,6 +19,22 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
+        <activity
+            android:name=".registration_of_deficiencies.AddProductToPurchase"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+
+
+        <activity
+            android:name=".registration_of_deficiencies.UpdatePurchaseProduct"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity
+            android:name=".registration_of_deficiencies.ScanPurchaseProduct"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+
         <activity android:name=".viewcategory.ProductPaymentDetails"></activity>
         <activity android:name=".ExportAPurchaseBill.PurchaseBillActivity" />
         <activity android:name=".Transport_of_goods.UpdateProductWihtDate" />
