@@ -1243,6 +1243,15 @@ public class InfinityDB extends SQLiteOpenHelper {
     }
 
 
+    public int updatePurchaseData(ContentValues values){
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+
+        return db.update(PURCHASE_ORDERS, values, "purchaseID = ?", new String[]{values.get("purchaseID").toString()});
+    }
+
+
 
 
 
