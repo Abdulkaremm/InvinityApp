@@ -229,7 +229,7 @@ public class InfinityDB extends SQLiteOpenHelper {
                 " Purchase_PK INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, " +
                 " ClientID_FK INTEGER NOT NULL, " +
                 " Client_Name VARCHAR(200) NOT NULL," +
-                " CreateDate DATE)");
+                " CreateDate DATETIME)");
 
         //********** جدول البضائع المستلمة ******
 
@@ -1312,6 +1312,9 @@ public class InfinityDB extends SQLiteOpenHelper {
             return db.rawQuery(query,null);
 
         }
+
+
+
 
 
 

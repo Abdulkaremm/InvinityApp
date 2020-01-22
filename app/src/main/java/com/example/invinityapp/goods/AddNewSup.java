@@ -117,6 +117,7 @@ public class AddNewSup extends AppCompatActivity {
         }else {
                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
                 date = simpleDateFormat.format(new Date());
+
                 ContentValues values = new ContentValues();
                 Supname = Supplier.getText().toString();
                 values.put("SupplierID_FK", Integer.parseInt(id));
