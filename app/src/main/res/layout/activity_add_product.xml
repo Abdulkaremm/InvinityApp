@@ -65,16 +65,13 @@
                 android:layout_weight="20"
                 />
 
-            <EditText
+            <TextView
                 android:id="@+id/ProductName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint=" الصنف"
-                android:singleLine="true"
                 android:textSize="14dp"
                 android:width="120dp"
-                android:layout_weight="50"
-                android:background="@drawable/edittext"
+                android:layout_weight="80"
                 android:padding="5dp"
                 />
 
@@ -107,7 +104,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="35dp"
                 android:layout_weight="40"
-                android:background="@color/colorMain"
                 android:textAlignment="center"/>
 
 
@@ -207,43 +203,6 @@
 
 
         <LinearLayout
-            android:id="@+id/ExDate"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="20dp"
-            android:padding="10dp"
-            android:textDirection="rtl"
-            android:layoutDirection="rtl"
-            android:weightSum="100">
-
-            <TextView
-
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="تاريخ الصلاحية"
-                android:textSize="18sp"
-                android:textColor="#03A9F4"
-                android:layout_weight="30"
-                />
-            <TextView
-                android:id="@+id/date"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/edittext"
-                android:hint="يوم/شهر/سنة"
-                android:paddingLeft="10dp"
-                android:paddingTop="5dp"
-                android:paddingRight="10dp"
-                android:paddingBottom="5dp"
-                android:textAlignment="center"
-                android:textColor="#726F6F"
-                android:textSize="18sp" />
-
-
-        </LinearLayout>
-
-        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="10dp"
@@ -286,14 +245,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:focusable="false"
-            android:text="قائمة بأخر الاصناف المضافة"
+            android:text="قائمة بأخر الأصناف المضافة"
             android:textAlignment="center"
             android:textSize="18dp"
             android:textColor="#000"/>
 
         <com.baoyz.swipemenulistview.SwipeMenuListView
             android:focusable="false"
-            android:id="@+id/GoodsList"
+            android:id="@+id/ProductsList"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:padding="10dp"

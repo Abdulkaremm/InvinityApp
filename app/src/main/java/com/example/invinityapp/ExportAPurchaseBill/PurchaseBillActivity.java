@@ -127,7 +127,7 @@ public class PurchaseBillActivity extends AppCompatActivity {
                 public boolean onMenuItemClick(final int position, SwipeMenu menu, int index) {
                     switch (index) {
                         case 0:
-                            Intent intent = new Intent(PurchaseBillActivity.this, CreateNewBillActivity.class);
+                            Intent intent = new Intent(PurchaseBillActivity.this, AddProductActivity.class);
                             intent.putExtra("ID",BillsData.get(position).id);
                             intent.putExtra("NAME",BillsData.get(position).name);
                             startActivity(intent);

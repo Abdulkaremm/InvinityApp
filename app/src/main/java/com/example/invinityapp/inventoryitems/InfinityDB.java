@@ -234,12 +234,14 @@ public class InfinityDB extends SQLiteOpenHelper {
         //********** جدول البضائع المستلمة ******
 
         db.execSQL("CREATE TABLE IF NOT EXISTS " + BILL_PRODUCTS + " ( " +
-                " ProductID_PK INTEGER NOT NULL PRIMARY KEY , " +
+                " ProductID_PK INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, " +
+                " ProductID INTEGER NOT NULL, " +
                 " Purchase_FK INTEGER NOT NULL, " +
                 " ProductUOMID_FK INTEGER NOT NULL,"+ // رقم الوحدة من وحدات الصنف او من جدول الوحدات اذا غير موجود
                 " Product_Name VARCHAR(200) NOT NULL," +
                 " Quantity INTEGER NOT NULL," +
                 " CountingDate DATETIME," +
+                " BaseUnitQ VARCHAR(200) NOT NULL ,"+
                 " ProductBarcode VARCHAR(200) NOT NULL," +
                 " FOREIGN KEY(Purchase_FK) REFERENCES "+ PURCHASE_BILLS+"(Purchase_PK) ON DELETE CASCADE ON UPDATE CASCADE )");
 
@@ -1355,18 +1357,79 @@ public class InfinityDB extends SQLiteOpenHelper {
 
          int state = db.delete(PURCHASE_BILLS, "Purchase_PK = ?", new String[] {id});
 
-         if(state > 0)
+         if(state > 0) {
+             db.delete(BILL_PRODUCTS, "Purchase_FK = ?", new String[] {id});
              return true;
-         else
+         }else
              return false;
     }
 
 
+    public boolean AddNewProduct(ContentValues values){
+
+        SQLiteDatabase db  = this.getWritableDatabase();
+
+        long result = db.insert(BILL_PRODUCTS,null, values);
+
+        if(result == -1){
+
+            return false;
+
+        }else{
+
+            return true;
+        }
+    }
+
+
+    public Cursor CheckIfProductExist(String barcode ,int ID){
+
+        SQLiteDatabase db  = this.getWritableDatabase();
+
+        String query = "SELECT * FROM "+ BILL_PRODUCTS +" WHERE Purchase_FK ="+ ID +" AND "+ "ProductBarcode = "+ barcode;
+        return db.rawQuery(query,null);
+
+    }
+
+    public Cursor SelectLastBill(){
+
+        SQLiteDatabase db  = this.getWritableDatabase();
+
+        String query = "SELECT * FROM "+ PURCHASE_BILLS +" ORDER BY Purchase_PK DESC LIMIT 1";
+        return db.rawQuery(query,null);
+    }
 
 
 
+    public  Cursor LastBillProducts(String ID){
+
+        SQLiteDatabase db  = this.getWritableDatabase();
+
+        String query = "SELECT ProductID_PK,Product_Name,Quantity,ProductBarcode,ProductUOMID_FK FROM "+BILL_PRODUCTS+" WHERE Purchase_FK = "+ID+" ORDER BY ProductID_PK DESC LIMIT 30";
+
+        return db.rawQuery(query,null);
+    }
+
+    public  Cursor SelectProductUOM(String UOMID){
+
+        SQLiteDatabase db  = this.getWritableDatabase();
+
+        String query = "SELECT UOM_NAME FROM "+DATA_PRODUCTS_UOMS +" WHERE ProductUOMID_PK = "+UOMID;
+        return db.rawQuery(query,null);
+    }
+
+    public boolean DeleteBillProduct(String id){
 
 
+        SQLiteDatabase db  = this.getWritableDatabase();
+        int state =  db.delete(BILL_PRODUCTS, "ProductID_PK = ?", new String[] {id});
+
+        if(state > 0 ) {
+
+            return true;
+        }else
+            return false;
+    }
 
 
     //****************************** purchase bills methods } ******************************************\\\\\\\\\

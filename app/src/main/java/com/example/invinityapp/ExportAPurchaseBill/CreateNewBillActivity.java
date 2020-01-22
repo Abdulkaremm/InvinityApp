@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.ContentValues;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -16,7 +17,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.example.invinityapp.R;
-import com.example.invinityapp.goods.SuppliersList;
 import com.example.invinityapp.inventoryitems.InfinityDB;
 
 import java.text.SimpleDateFormat;
@@ -104,6 +104,13 @@ public class CreateNewBillActivity extends AppCompatActivity {
             values.put("CreateDate",date);
             if(db.InsertNewBill(values)){
                 Toast.makeText(this, "تمت الاضافة", Toast.LENGTH_SHORT).show();
+                Cursor res = db.SelectLastBill();
+                res.moveToFirst();
+                Intent intent = new Intent(CreateNewBillActivity.this,AddProductActivity.class);
+                intent.putExtra("ID",res.getString(0));
+                intent.putExtra("NAME",res.getString(2));
+                startActivity(intent);
+                finish();
                 
             }else
                 Toast.makeText(this, "حدث خطأ", Toast.LENGTH_SHORT).show();
