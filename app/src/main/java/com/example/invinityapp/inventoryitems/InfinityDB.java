@@ -1432,6 +1432,17 @@ public class InfinityDB extends SQLiteOpenHelper {
     }
 
 
+
+    public  Cursor SelectBillProducts(String ID){
+
+        SQLiteDatabase db  = this.getWritableDatabase();
+
+        String query = "SELECT ProductID_PK,Product_Name,Quantity,ProductBarcode,ProductUOMID_FK FROM "+BILL_PRODUCTS+" WHERE Purchase_FK = "+ID+" ORDER BY ProductID_PK DESC";
+
+        return db.rawQuery(query,null);
+    }
+
+
     //****************************** purchase bills methods } ******************************************\\\\\\\\\
 
 

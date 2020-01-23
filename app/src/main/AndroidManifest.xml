@@ -19,7 +19,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ExportAPurchaseBill.AddProductActivity"></activity>
+        <activity android:name=".ExportAPurchaseBill.EditProduct"></activity>
+        <activity android:name=".ExportAPurchaseBill.AddProductActivity" />
         <activity
             android:name=".ExportAPurchaseBill.PurchaseBillActivity"
             android:screenOrientation="portrait"

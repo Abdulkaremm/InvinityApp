@@ -209,7 +209,7 @@ public class AddProductActivity extends AppCompatActivity {
                 switch (index) {
 
                     case 1:
-                        Intent intent = new Intent(AddProductActivity.this, UpdateProductActivity.class);
+                        Intent intent = new Intent(AddProductActivity.this, EditProduct.class);
                         intent.putExtra("ID",PurchaseID);
                         intent.putExtra("ProductID",productsModels.get(position).id);
                         intent.putExtra("ACTIVITY","ADD");

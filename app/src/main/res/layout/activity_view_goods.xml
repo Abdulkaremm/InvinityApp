@@ -38,7 +38,7 @@
             android:textSize="16dp"
             android:textColor="#000"
             android:padding="10dp"
-            android:text="عبد الحميد الواعر"/>
+            android:text=""/>
 
 
         <View
