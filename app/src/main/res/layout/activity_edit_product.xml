@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layoutDirection="rtl"
-    android:orientation="vertical"
-    tools:context=".goods.ReceiveGoods">
+    tools:context=".ExportAPurchaseBill.EditProduct"
+    android:orientation="vertical">
+
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -42,7 +44,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layoutDirection="rtl"
-        android:visibility="gone"
+        android:visibility="visible"
         >
 
 
@@ -212,7 +214,7 @@
             android:layout_marginTop="20dp">
 
             <Button
-                android:onClick="AddIntoDataBase"
+                android:onClick="UpdateBillProduct"
                 android:id="@+id/add"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -224,44 +226,5 @@
         </LinearLayout>
 
     </LinearLayout>
-
-
-
-
-
-    <LinearLayout
-        android:visibility="visible"
-        android:id="@+id/list"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_marginTop="20dp"
-        android:focusable="false"
-        android:textDirection="rtl"
-        android:layoutDirection="rtl"
-        android:weightSum="100">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:focusable="false"
-            android:text="قائمة بأخر الأصناف المضافة"
-            android:textAlignment="center"
-            android:textSize="18dp"
-            android:textColor="#000"/>
-
-        <com.baoyz.swipemenulistview.SwipeMenuListView
-            android:focusable="false"
-            android:id="@+id/ProductsList"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="10dp"
-            android:layout_marginTop="50dp"/>
-
-    </LinearLayout>
-
-
-
-
 
 </LinearLayout>
