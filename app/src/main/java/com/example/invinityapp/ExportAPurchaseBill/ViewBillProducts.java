@@ -138,7 +138,8 @@ public class ViewBillProducts extends AppCompatActivity {
                         Intent intent = new Intent(ViewBillProducts.this, EditProduct.class);
                         intent.putExtra("ID",PurchaseID);
                         intent.putExtra("ProductID",productsModels.get(position).id);
-                        intent.putExtra("ACTIVITY","ADD");
+                        intent.putExtra("ACTIVITY","View");
+                        intent.putExtra("NAME",client.getText().toString());
                         startActivity(intent);
                         finish();
                         break;

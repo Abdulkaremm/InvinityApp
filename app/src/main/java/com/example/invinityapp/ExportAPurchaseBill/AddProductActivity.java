@@ -109,10 +109,11 @@ public class AddProductActivity extends AppCompatActivity {
                                         if (result.getCount() == 1) {
 
                                             result.moveToFirst();
-                                            Intent intent = new Intent(AddProductActivity.this, UpdateProductActivity.class);
+                                            Intent intent = new Intent(AddProductActivity.this, EditProduct.class);
                                             intent.putExtra("ID", PurchaseID);
                                             intent.putExtra("ProductID", result.getString(0));
                                             intent.putExtra("ACTIVITY", "ADD");
+                                            intent.putExtra("NAME",ClientName);
                                             startActivity(intent);
                                             finish();
                                         }

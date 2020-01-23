@@ -1443,6 +1443,45 @@ public class InfinityDB extends SQLiteOpenHelper {
     }
 
 
+
+    public Cursor getDateToEdit(String id){
+
+
+        SQLiteDatabase db  = this.getWritableDatabase();
+
+        String query = "SELECT Product_Name,Quantity,ProductBarcode ,ProductUOMID_FK FROM "+BILL_PRODUCTS+" WHERE ProductID_PK ="+ id;
+
+        return db.rawQuery(query,null);
+
+    }
+
+
+    public boolean UpdateBillProduct(ContentValues data, String ID){
+
+        SQLiteDatabase db  = this.getWritableDatabase();
+
+        int res =  db.update(BILL_PRODUCTS, data, "ProductID_PK = ?", new String[]{ID});
+
+        if(res > 0)
+            return true;
+        else
+            return false;
+    }
+
+
+    public Cursor GetProductUnits(int ID){
+
+        SQLiteDatabase db  = this.getWritableDatabase();
+        String query = "SELECT ProductID_FK FROM "+DATA_PRODUCTS_UOMS+" WHERE ProductUOMID_PK ="+ ID ;
+
+        Cursor res = db.rawQuery(query,null);
+        res.moveToFirst();
+        query = "SELECT ProductUOMID_PK, UOM_NAME,BaseUnit FROM Data_Products_UOMS WHERE ProductID_FK ="+ res.getString(0) ;
+
+        return db.rawQuery(query,null);
+
+    }
+
     //****************************** purchase bills methods } ******************************************\\\\\\\\\
 
 
