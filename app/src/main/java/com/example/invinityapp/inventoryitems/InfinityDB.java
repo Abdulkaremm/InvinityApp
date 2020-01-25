@@ -1492,6 +1492,20 @@ public class InfinityDB extends SQLiteOpenHelper {
 
     }
 
+
+
+    public  boolean AddAllCustomers(ContentValues values){
+
+        SQLiteDatabase db  = this.getWritableDatabase();
+        long result = db.insert(CLIENTS_TABLE,null, values);
+
+        if(result == -1)
+            return false;
+        else
+            return true;
+
+    }
+
     //****************************** purchase bills methods } ******************************************\\\\\\\\\
 
 
