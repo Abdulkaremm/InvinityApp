@@ -98,6 +98,45 @@ public class CreateDocument extends AppCompatActivity {
         branchs.close();
 
 
+        Intent intent =getIntent();
+
+        if(intent.hasExtra("id")){
+
+            needUpdate = true;
+            idDocument = intent.getStringExtra("id");
+
+            Cursor res = db.SelectDocumentByID(idDocument);
+            res.moveToFirst();
+
+            if(res.getString(2).compareTo("1") == 0){
+
+                isExpridDate.setChecked(true);
+            }
+
+            discription.setText(res.getString(3));
+
+            for (int  i = 0; i < adapter.getCount() ; i++){
+
+                if(adapter.getItem(i).contact_id.compareTo(res.getString(5)) == 0){
+
+                    fromBranch.setSelection(i);
+
+                    break;
+                }
+            }
+
+            for (int  i = 0; i < adapter2.getCount() ; i++){
+
+                if(adapter2.getItem(i).contact_id.compareTo(res.getString(7)) == 0){
+
+                    toBranch.setSelection(i);
+
+                    break;
+                }
+            }
+        }
+
+
 
        fromBranch.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -154,26 +193,7 @@ public class CreateDocument extends AppCompatActivity {
 
 
 
-       Intent intent =getIntent();
 
-       if(intent.hasExtra("id")){
-
-           needUpdate = true;
-           idDocument = intent.getStringExtra("id");
-
-           Log.i("PLZ", "ss = " + idDocument);
-
-
-           Cursor res = db.SelectDocumentByID(idDocument);
-           res.moveToFirst();
-
-           if(res.getString(2).compareTo("1") == 0){
-
-               isExpridDate.setChecked(true);
-           }
-
-           discription.setText(res.getString(3));
-       }
 
     }
 
