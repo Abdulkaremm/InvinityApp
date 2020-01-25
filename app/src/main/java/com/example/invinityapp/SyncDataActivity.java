@@ -52,7 +52,8 @@ public class SyncDataActivity extends AppCompatActivity {
     LinearLayout SyncClients;
 
     public static ProgressDialog progressDialog;
-    String title,msg;
+    String title = "مزامنة البايانات",
+           msg = "الرجاء الانظار حتى تتم مزامنة البيانات";
     InfinityDB db;
     LinearLayout SyncInvetory;
 
