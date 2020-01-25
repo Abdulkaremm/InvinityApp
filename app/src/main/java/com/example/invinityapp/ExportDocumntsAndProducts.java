@@ -88,7 +88,7 @@ public class ExportDocumntsAndProducts extends AsyncTask<Context, Void, Boolean>
             urlConToBransh.disconnect();
 
 
-            Cursor res = db.SelectDocumentByToBransh(idBranch);
+            Cursor res = db.SelectDocumentByFromBransh(idBranch);
 
             if(res.getCount() == 0){
 
