@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -44,7 +45,7 @@ public class DataOrder extends AppCompatActivity implements LoaderManager.Loader
     int unitName = 1, pages = 0;
     static  int unites = 0;
     static String Code;
-    TextView title,
+    TextView
     name,
     IfStorage,
     dep,
@@ -66,6 +67,7 @@ public class DataOrder extends AppCompatActivity implements LoaderManager.Loader
     AlertDialog dialog;
     ScrollView scrollView;
     EditText Barcode;
+    LinearLayout title;
 
     public static String api_ip;
 
@@ -191,7 +193,11 @@ public class DataOrder extends AppCompatActivity implements LoaderManager.Loader
     }
 
 
+    public void paymentDet(View v){
 
+        Intent intent = new Intent(this,ProductPaymentDetails.class);
+        startActivity(intent);
+    }
 
 
                /////// option menu start here
@@ -204,10 +210,8 @@ public class DataOrder extends AppCompatActivity implements LoaderManager.Loader
         menuInflater.inflate(R.menu.inventorymenu, menu);
         MenuItem camera = menu.findItem(R.id.openCam);
         MenuItem bReader = menu.findItem(R.id.QR);
-        MenuItem view = menu.findItem(R.id.viewAllData);
 
         camera.setVisible(true);
-        view.setVisible(true);
         bReader.setVisible(true);
 
 
@@ -238,12 +242,6 @@ public class DataOrder extends AppCompatActivity implements LoaderManager.Loader
 
                 OPenCAM();
 
-                return true;
-
-            case R.id.viewAllData:
-
-                Intent intent = new Intent(this,ProductPaymentDetails.class);
-                startActivity(intent);
                 return true;
 
             default:

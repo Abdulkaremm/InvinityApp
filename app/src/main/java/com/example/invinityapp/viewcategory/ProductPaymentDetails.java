@@ -10,7 +10,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
-import com.example.invinityapp.MainActivity;
+import android.widget.TextView;
+
 import com.example.invinityapp.R;
 
 
@@ -22,7 +23,6 @@ public class ProductPaymentDetails extends AppCompatActivity {
             viewDetails3,
             viewDetails4,
             viewDetails5;
-
 
 
 
@@ -96,61 +96,86 @@ public class ProductPaymentDetails extends AppCompatActivity {
     private void pricedetails1FN(){
 
         LinearLayout pricedetails;
+        TextView arrow = findViewById(R.id.arrow1);
         pricedetails = findViewById(R.id.pricedetails1);
 
         if (pricedetails.getVisibility() == View.VISIBLE) {
             pricedetails.setVisibility(View.GONE);
+            arrow.animate().rotationX(0);
+
         } else {
             pricedetails.setVisibility(View.VISIBLE);
+            arrow.animate().rotationX(180);
+
         }
 
     }
 
     private void pricedetails2FN(){
 
+        TextView arrow = findViewById(R.id.arrow2);
         LinearLayout pricedetails;
         pricedetails = findViewById(R.id.pricedetails2);
 
         if (pricedetails.getVisibility() == View.VISIBLE) {
             pricedetails.setVisibility(View.GONE);
+            arrow.animate().rotationX(0);
+
         } else {
             pricedetails.setVisibility(View.VISIBLE);
+            arrow.animate().rotationX(180);
+
         }
     }
 
     private void pricedetails3FN(){
 
+        TextView arrow = findViewById(R.id.arrow3);
         LinearLayout pricedetails;
         pricedetails = findViewById(R.id.pricedetails3);
 
         if (pricedetails.getVisibility() == View.VISIBLE) {
             pricedetails.setVisibility(View.GONE);
+            arrow.animate().rotationX(0);
+
         } else {
             pricedetails.setVisibility(View.VISIBLE);
+            arrow.animate().rotationX(180);
+
         }
     }
 
     private void pricedetails4FN(){
 
+        TextView arrow = findViewById(R.id.arrow4);
         LinearLayout pricedetails;
         pricedetails = findViewById(R.id.pricedetails4);
 
         if (pricedetails.getVisibility() == View.VISIBLE) {
             pricedetails.setVisibility(View.GONE);
+            arrow.animate().rotationX(0);
+
         } else {
             pricedetails.setVisibility(View.VISIBLE);
+            arrow.animate().rotationX(180);
+
         }
     }
 
     private void pricedetails5FN(){
 
+        TextView arrow = findViewById(R.id.arrow5);
         LinearLayout pricedetails;
         pricedetails = findViewById(R.id.pricedetails5);
 
         if (pricedetails.getVisibility() == View.VISIBLE) {
             pricedetails.setVisibility(View.GONE);
+            arrow.animate().rotationX(0);
+
         } else {
             pricedetails.setVisibility(View.VISIBLE);
+            arrow.animate().rotationX(180);
+
         }
     }
 
