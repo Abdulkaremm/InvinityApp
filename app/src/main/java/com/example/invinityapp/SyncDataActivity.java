@@ -49,6 +49,7 @@ public class SyncDataActivity extends AppCompatActivity {
             invetoryCount,
             suppliers,
             units;
+    LinearLayout SyncClients;
 
     public static ProgressDialog progressDialog;
     String title,msg;
@@ -69,7 +70,7 @@ public class SyncDataActivity extends AppCompatActivity {
         progressDialog.setMessage(msg);
         progressDialog.setCanceledOnTouchOutside(false);
 
-
+        SyncClients = findViewById(R.id.SyncClients);
 
         setting = findViewById(R.id.Setting);
         settingDate = findViewById(R.id.settingDate);
@@ -170,6 +171,31 @@ public class SyncDataActivity extends AppCompatActivity {
                             }
                         })
                         .setNegativeButton("لا", null)
+                        .show();
+            }
+        });
+
+
+
+        SyncClients.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                title = "مزامنة الزبائن";
+                msg = "الرجاء الانتظار حتى يتم استراد الزبائن..";
+
+                AlertDialog dialog = new AlertDialog.Builder(SyncDataActivity.this)
+                        .setTitle("مزامنة الزبائن !")
+                        .setMessage("هل انت متأكد من عملية المزامنة ؟")
+                        .setPositiveButton("نعم", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                                progressDialog.show();
+                                new ImportCustomers().execute(SyncDataActivity.this);
+                            }
+                        })
+                        .setNegativeButton("إلغاء", null)
                         .show();
             }
         });

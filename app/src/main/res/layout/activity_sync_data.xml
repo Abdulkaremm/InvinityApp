@@ -237,6 +237,40 @@
 
             </LinearLayout>
 
+            <LinearLayout
+                android:id="@+id/SyncClients"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:textDirection="rtl"
+                android:padding="5dp"
+                android:layoutDirection="rtl"
+                android:weightSum="100"
+                >
+
+                <TextView
+                    android:id="@+id/SyncClientsTxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" بيانات الزبائن"
+                    android:textSize="16sp"
+                    android:textColor="#FF3E3E46"
+                    android:layout_weight="70"
+                    />
+
+                <TextView
+                    android:id="@+id/ClientsDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:clickable="false"
+                    android:layout_weight="20"
+
+                    />
+
+
+            </LinearLayout>
+
             <TextView
                 android:visibility="gone"
                 android:id="@+id/supgDate"
