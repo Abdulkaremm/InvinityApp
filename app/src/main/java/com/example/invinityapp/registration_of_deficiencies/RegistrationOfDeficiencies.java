@@ -318,7 +318,7 @@ public class RegistrationOfDeficiencies extends AppCompatActivity {
 
             HttpURLConnection urlConnection;
 
-            String url = "http://"+strings[0]+"/api/InfinityRetail";
+            String url = "http://"+strings[0]+"/api/InfinityRetail/StockOrders";
 
             String result = "false";
 
