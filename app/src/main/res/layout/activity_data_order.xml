@@ -29,7 +29,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/edittext"
             android:ems="10"
-            android:inputType="number"
+            android:inputType="text"
             android:screenReaderFocusable="true"
             android:textAlignment="center"/>
 

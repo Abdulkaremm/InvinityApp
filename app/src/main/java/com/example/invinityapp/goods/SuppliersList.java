@@ -34,7 +34,7 @@ public class SuppliersList extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_suppliers_list);
 
-        supList = findViewById(R.id.clientsList);
+        supList = findViewById(R.id.SupList);
         title = findViewById(R.id.Title);
         container = findViewById(R.id.container);
 

@@ -81,10 +81,12 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".goods.ReceiveGoods"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
             android:name=".goods.AddNewSup"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden"/>
         <activity
             android:name=".goods.receiving_goods_main"
             android:screenOrientation="portrait" />
