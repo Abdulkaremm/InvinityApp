@@ -36,21 +36,33 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingRight="10dp"
         android:orientation="horizontal"
         android:layoutDirection="rtl"
-        android:layout_marginTop="15dp">
+        android:layout_marginTop="15dp"
+        android:weightSum="100"
+        android:visibility="invisible">
 
         <TextView
-            android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="معلومات الصنف"
             android:textColor="#03A9F4"
             android:textSize="30sp"
-            android:visibility="invisible" />
+            android:layout_weight="70"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:background="@drawable/button"
+            android:textColor="@color/colorWhite"
+            android:padding="5dp"
+            android:onClick="paymentDet"
+            android:text="بيانات الشراء"/>
 
     </LinearLayout>
 

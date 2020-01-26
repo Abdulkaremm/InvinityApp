@@ -25,7 +25,7 @@ public class GetStorage extends AsyncTask<String,Void,String> {
         HttpURLConnection urlConnection;
         InputStream stream;
         BufferedReader reader;
-        String  url = "http://192.168.0.28/api/InfinityRetail?Barcode="+ barcode[0],
+        String  url = "http://"+barcode[1]+"/api/InfinityRetail?Barcode="+ barcode[0],
                 storage = "";
 
         try {
