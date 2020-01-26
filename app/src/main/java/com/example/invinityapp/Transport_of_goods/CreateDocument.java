@@ -140,7 +140,7 @@ public class CreateDocument extends AppCompatActivity {
 
             for (int  i = 0; i < adapter2.getCount() ; i++){
 
-                if(adapter2.getItem(i).contact_id.compareTo(res.getString(7)) == 0){
+                if(adapter2.getItem(i).contact_id.compareTo(res.getString(9)) == 0){
 
                     toBranch.setSelection(i);
 
@@ -169,6 +169,25 @@ public class CreateDocument extends AppCompatActivity {
 
                 fromLocation.setAdapter(adapter1);
 
+                Intent intent =getIntent();
+
+                if(intent.hasExtra("id")){
+
+                    Cursor res = db.SelectDocumentByID(idDocument);
+                    res.moveToFirst();
+
+
+                    for (int  i = 0; i < adapter1.getCount() ; i++){
+
+                        if(adapter1.getItem(i).contact_id.compareTo(res.getString(7)) == 0){
+
+                            fromLocation.setSelection(i);
+
+                            break;
+                        }
+                    }
+                }
+
             }
 
             @Override
@@ -187,15 +206,33 @@ public class CreateDocument extends AppCompatActivity {
                 Cursor location = db.SelectLocationByBranch(contact.contact_id);
                 contactstoLocation.clear();
 
-                while (location.moveToNext()){
+                while (location.moveToNext()) {
 
                     contactstoLocation.add(new Contact(location.getString(1), location.getString(0)));
+                }
 
-                    ArrayAdapter<Contact> adapter3 = new ArrayAdapter<Contact>(getApplicationContext(),  android.R.layout.simple_spinner_dropdown_item, contactstoLocation);
-                    adapter3.setDropDownViewResource( android.R.layout.simple_spinner_dropdown_item);
+                ArrayAdapter<Contact> adapter3 = new ArrayAdapter<Contact>(getApplicationContext(),  android.R.layout.simple_spinner_dropdown_item, contactstoLocation);
+                adapter3.setDropDownViewResource( android.R.layout.simple_spinner_dropdown_item);
 
-                    toLocation.setAdapter(adapter3);
+                toLocation.setAdapter(adapter3);
 
+                Intent intent =getIntent();
+
+                if(intent.hasExtra("id")){
+
+                    Cursor res = db.SelectDocumentByID(idDocument);
+                    res.moveToFirst();
+
+
+                    for (int  i = 0; i < adapter3.getCount() ; i++){
+
+                        if(adapter3.getItem(i).contact_id.compareTo(res.getString(11)) == 0){
+
+                            toLocation.setSelection(i);
+
+                            break;
+                        }
+                    }
                 }
 
             }

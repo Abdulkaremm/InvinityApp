@@ -1052,15 +1052,6 @@ public class InfinityDB extends SQLiteOpenHelper {
         return res ;
     }
 
-    public Cursor SelectDocumentByToBransh(String id){
-
-        SQLiteDatabase db  = this.getWritableDatabase();
-
-        String query = "SELECT * FROM "+ TRANSFER_DOCUMENT + " WHERE ToBranchID = ?";
-        Cursor res = db.rawQuery(query,new String[] {id});
-
-        return res ;
-    }
 
     public Cursor SelectDocumentByFromBransh(String id){
 
