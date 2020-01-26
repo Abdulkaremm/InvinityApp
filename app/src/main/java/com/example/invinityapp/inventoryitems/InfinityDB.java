@@ -1517,6 +1517,37 @@ public class InfinityDB extends SQLiteOpenHelper {
     //****************************** purchase bills methods } ******************************************\\\\\\\\\
 
 
+    public boolean AddPurchaseHistory(ContentValues values){
+
+
+        SQLiteDatabase db  = this.getWritableDatabase();
+
+        long result = db.insert(PRODUCT_PURCHASE_HISTORY,null, values);
+
+        if(result == -1){
+
+            return false;
+
+        }else{
+
+            return true;
+        }
+    }
+
+    public boolean CheckIfProductExist(String ProductID){
+
+        SQLiteDatabase db  = this.getWritableDatabase();
+        String query = "SELECT * FROM "+DATA_PRODUCTS+" WHERE Product_ID_PK ="+ ProductID ;
+
+        Cursor res = db.rawQuery(query,null);
+
+        if(res.getCount() > 0)
+            return true;
+         else
+             return false;
+
+    }
+
 
     //#######################
 
