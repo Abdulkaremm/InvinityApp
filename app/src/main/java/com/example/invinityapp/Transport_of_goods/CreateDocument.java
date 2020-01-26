@@ -18,6 +18,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -55,6 +56,8 @@ public class CreateDocument extends AppCompatActivity {
 
     private String idDocument;
 
+    private LinearLayout expiredDAte;
+
 
 
     @Override
@@ -72,6 +75,16 @@ public class CreateDocument extends AppCompatActivity {
         isExpridDate = findViewById(R.id.checkBox);
 
         discription = findViewById(R.id.discription);
+        expiredDAte = findViewById(R.id.viewOrno);
+
+        Cursor ex = db.ExbordSetting();
+
+        ex.moveToFirst();
+        if(ex.getString(1).compareTo("\"TRUE\"") != 0){
+
+            expiredDAte.setVisibility(View.GONE);
+        }
+        ex.close();
 
 
 
@@ -303,57 +316,68 @@ public class CreateDocument extends AppCompatActivity {
 
     private void add(){
 
-        Calendar c = Calendar.getInstance();
-        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS");
-        String thisTime = df.format(c.getTime());
-        int isExpiredDataValue;
-
-        if (isExpridDate.isChecked()){
-
-            isExpiredDataValue = 1;
-
-        }else {
-
-            isExpiredDataValue = 0;
-        }
-
         Contact branch = (Contact) fromBranch.getSelectedItem();
         Contact location = (Contact) fromLocation.getSelectedItem();
         Contact toBranches = (Contact) toBranch.getSelectedItem();
         Contact toLocations = (Contact) toLocation.getSelectedItem();
 
+        if(location.contact_id.compareTo(toLocations.contact_id) == 0){
+
+            Toast.makeText(this, "لا يمكن النقل الي نفس المخزن", Toast.LENGTH_SHORT).show();
+
+        }else{
+
+            Calendar c = Calendar.getInstance();
+            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS");
+            String thisTime = df.format(c.getTime());
+            int isExpiredDataValue;
+
+            if (isExpridDate.isChecked()){
+
+                isExpiredDataValue = 1;
+
+            }else {
+
+                isExpiredDataValue = 0;
+            }
 
 
 
-        ContentValues data = new ContentValues();
 
-        data.put("CreatDate", thisTime);
-        data.put("IsExpiredDate", isExpiredDataValue);
-        data.put("Discription", discription.getText().toString());
-        data.put("FromBranchName", branch.contact_name);
-        data.put("FromBranchID", branch.contact_id);
-        data.put("FromLocationName", location.contact_name);
-        data.put("FromLocationID", location.contact_id);
-        data.put("ToBranchName", toBranches.contact_name);
-        data.put("ToBranchID", toBranches.contact_id);
-        data.put("ToLocationName", toLocations.contact_name);
-        data.put("ToLocationID", toLocations.contact_id);
 
-        boolean res = db.insertDocument(data);
 
-        if(res){
+            ContentValues data = new ContentValues();
 
-            Toast.makeText(this, "تمت عملية الحفظ", Toast.LENGTH_SHORT).show();
+            data.put("CreatDate", thisTime);
+            data.put("IsExpiredDate", isExpiredDataValue);
+            data.put("Discription", discription.getText().toString());
+            data.put("FromBranchName", branch.contact_name);
+            data.put("FromBranchID", branch.contact_id);
+            data.put("FromLocationName", location.contact_name);
+            data.put("FromLocationID", location.contact_id);
+            data.put("ToBranchName", toBranches.contact_name);
+            data.put("ToBranchID", toBranches.contact_id);
+            data.put("ToLocationName", toLocations.contact_name);
+            data.put("ToLocationID", toLocations.contact_id);
 
-            Intent intent = new Intent(CreateDocument.this, TransportGoods.class);
-            startActivity(intent);
-            CreateDocument.this.finish();
+            boolean res = db.insertDocument(data);
 
-        }else {
+            if(res){
 
-            Toast.makeText(this, "فشلت عملية الحفظ", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "تمت عملية الحفظ", Toast.LENGTH_SHORT).show();
+
+                Intent intent = new Intent(CreateDocument.this, TransportGoods.class);
+                startActivity(intent);
+                CreateDocument.this.finish();
+
+            }else {
+
+                Toast.makeText(this, "فشلت عملية الحفظ", Toast.LENGTH_SHORT).show();
+
+            }
 
         }
+
     }
 
 

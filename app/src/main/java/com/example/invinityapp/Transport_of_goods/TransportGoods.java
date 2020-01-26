@@ -89,7 +89,7 @@ public class TransportGoods extends AppCompatActivity {
                 // set item width
                 view.setWidth(170);
                 // set item title
-                view.setIcon(R.drawable.ic_add);
+                view.setIcon(R.drawable.ic_open_document);
 
                 // add to menu
                 menu.addMenuItem(view);
