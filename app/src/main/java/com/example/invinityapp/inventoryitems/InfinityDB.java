@@ -26,6 +26,7 @@ public class InfinityDB extends SQLiteOpenHelper {
     private final String CLIENTS_TABLE = "clients";
     private final String PURCHASE_BILLS = "bills";
     private final String BILL_PRODUCTS = "bill_products";
+    private final String PRODUCT_PURCHASE_HISTORY = "product_purchase_history";
 
     public InfinityDB(Context context) {
         super(context, DATABASE_NAME, null, 1);
@@ -249,7 +250,14 @@ public class InfinityDB extends SQLiteOpenHelper {
         //*************************************************************\\\\
 
 
-
+        db.execSQL("CREATE TABLE IF NOT EXISTS " + PRODUCT_PURCHASE_HISTORY + " ( " +
+                " ProductID_PK INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, " +
+                " Supplier VARCHAR(200) NOT NULL, " +
+                " Unit VARCHAR(200) NOT NULL," +
+                " QYN VARCHAR(200) NOT NULL," +
+                " Price VARCHAR(200) NOT NULL," +
+                " Date VARCHAR(200) NOT NULL," +
+                " CreateDate DATETIME)");
 
 
         ContentValues values = new ContentValues();

@@ -196,6 +196,8 @@ public class DataOrder extends AppCompatActivity implements LoaderManager.Loader
     public void paymentDet(View v){
 
         Intent intent = new Intent(this,ProductPaymentDetails.class);
+        intent.putExtra("ProductName",name.getText().toString());
+        intent.putExtra("ProductID",info.get(2));
         startActivity(intent);
     }
 
@@ -331,6 +333,7 @@ public class DataOrder extends AppCompatActivity implements LoaderManager.Loader
                 UOMID = Integer.parseInt(res.getString(0));
                 info.add(res.getString(1));
                 info.add(res.getString(2));
+                info.add(res.getString(0));
             }
 
             res.close();

@@ -23,8 +23,9 @@ public class ProductPaymentDetails extends AppCompatActivity {
             viewDetails3,
             viewDetails4,
             viewDetails5;
+    TextView name;
 
-
+    String ProductName,ProductID;
 
 
 
@@ -38,7 +39,7 @@ public class ProductPaymentDetails extends AppCompatActivity {
         viewDetails3 = findViewById(R.id.viewDetails3);
         viewDetails4 = findViewById(R.id.viewDetails4);
         viewDetails5 = findViewById(R.id.viewDetails5);
-
+        name = findViewById(R.id.name);
 
         viewDetails1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -49,7 +50,11 @@ public class ProductPaymentDetails extends AppCompatActivity {
 
         Listeners();
 
+        Intent intent = getIntent();
+        ProductName = intent.getStringExtra("ProductName");
+        ProductID = intent.getStringExtra("ProductID");
 
+        name.setText(ProductName);
     }
 
 
