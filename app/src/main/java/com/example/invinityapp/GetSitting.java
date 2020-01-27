@@ -145,6 +145,6 @@ public class GetSitting extends AsyncTask<List<String>,Void,List<String>> {
     protected void onPostExecute(List<String> strings) {
         super.onPostExecute(strings);
 
-        MainActivity.getSetting((ArrayList<String>) strings);
+        SyncDataActivity.getSetting((ArrayList<String>) strings);
     }
 }

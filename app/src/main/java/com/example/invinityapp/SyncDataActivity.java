@@ -2,6 +2,8 @@ package com.example.invinityapp;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.ContentValues;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
@@ -32,6 +34,7 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.ProtocolException;
 import java.net.URL;
+import java.util.ArrayList;
 
 
 public class SyncDataActivity extends AppCompatActivity {
@@ -39,23 +42,16 @@ public class SyncDataActivity extends AppCompatActivity {
 
     Switch  setting,
             prudects,
-            goods,
-            Shortfalls;
+            purchase;
 
-    TextView    settingDate,
-            productsDate,
-            unitsDate,
-            supDate,
-            invetoryCount,
-            suppliers,
-            units;
-    LinearLayout SyncClients;
+    TextView invetoryCount;
+    private static Context activity;
 
     public static ProgressDialog progressDialog;
     String title = "مزامنة البايانات",
            msg = "الرجاء الانظار حتى تتم مزامنة البيانات";
     InfinityDB db;
-    LinearLayout SyncInvetory;
+    LinearLayout SyncInvetory,ImportSetting,ImportProducts,ImportPurchase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,38 +60,36 @@ public class SyncDataActivity extends AppCompatActivity {
 
         db = new InfinityDB(this);
 
-        SyncInvetory = findViewById(R.id.SyncInvetory);
+        activity = this;
 
         progressDialog = new ProgressDialog(SyncDataActivity.this);
         progressDialog.setTitle(title);
         progressDialog.setMessage(msg);
         progressDialog.setCanceledOnTouchOutside(false);
 
-        SyncClients = findViewById(R.id.SyncClients);
 
-        setting = findViewById(R.id.Setting);
-        settingDate = findViewById(R.id.settingDate);
+        // switchs
+        setting = findViewById(R.id.SettingData);
+        prudects = findViewById(R.id.ProductsData);
+        purchase = findViewById(R.id.PurchaseData);
 
-        prudects = findViewById(R.id.productsData);
-        productsDate = findViewById(R.id.productsDate);
+       // LinerLayout
+        ImportSetting = findViewById(R.id.ImportSetting);
+        ImportProducts = findViewById(R.id.ImportProducts);
+        ImportPurchase = findViewById(R.id.ImportPurchase);
+        SyncInvetory = findViewById(R.id.SyncInvetory);
 
-        units = findViewById(R.id.SyncUnits);
-        unitsDate= findViewById(R.id.unitsDate);
 
-        suppliers = findViewById(R.id.SyncSuppliers);
-        supDate = findViewById(R.id.SuppliersDate);
-
-        goods = findViewById(R.id.GoodsData);
-        Shortfalls = findViewById(R.id.Shortfalls);
-
+        // textView
         invetoryCount = findViewById(R.id.invetoryCount);
+
         int count = db.getInvetory();
         if(count > 0){
             invetoryCount.setText(" تم جرد "+Integer.toString(count)+" صنف/أصناف ");
             invetoryCount.setVisibility(View.VISIBLE);
         }
 
-        CheckSyncedData();
+        //CheckSyncedData();
 
         SyncInvetory.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -121,90 +115,71 @@ public class SyncDataActivity extends AppCompatActivity {
             }
         });
 
+    }
 
 
 
+    public void ImportData(View v){
 
-        suppliers.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        if(setting.isChecked()){
+            progressDialog.show();
+            new GetSitting().execute();
+            new ImportAllUnits().execute(this);
 
-                title = "مزامنة الموردين";
-                msg = "الرجاء الانتظار حتى يتم استراد الموردين..";
+            //new ImportCustomers().execute(this);
+        }
+        if(prudects.isChecked()){
+            progressDialog.show();
+            new ImportProducts().execute(this);
+        }
+        if(purchase.isChecked()){
+            progressDialog.show();
+           new ImportProductPurchaseHistory().execute(this);
+        }
+    }
 
-                AlertDialog dialog = new AlertDialog.Builder(SyncDataActivity.this)
-                        .setTitle("مزامنة الموردين !")
-                        .setMessage("هل انت متأكد من عملية المزامنة ؟")
-                        .setPositiveButton("نعم", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
 
-                                progressDialog.show();
-                                Cursor result = db.ExbordSetting();
-                                result.moveToFirst();
-                                new ImportAllSuppliers().execute(SyncDataActivity.this);
-                            }
-                        })
-                        .setNegativeButton("إلغاء", null)
-                        .show();
+
+    public static void getSetting(ArrayList<String> result){
+
+        InfinityDB myDB = new InfinityDB(activity);
+
+        if(result.size() == 0 ){
+
+            Toast.makeText(activity, "حدث خطأ اتناء عملية الاستراد", Toast.LENGTH_LONG).show();
+
+        }else{
+
+            ContentValues data = new ContentValues();
+            data.put("ifHasDate", result.get(0));
+            data.put("Price1", result.get(1));
+            data.put("Price2", result.get(2));
+            data.put("Price3", result.get(3));
+            data.put("Price4", result.get(4));
+
+            int res = myDB.updateSetting(data);
+
+            if(res > 0){
+
+                Toast.makeText(activity, "تمت عملية الاستراد بنجاح", Toast.LENGTH_LONG).show();
+
+            }else{
+
+                Toast.makeText(activity, "حدث خطأ اتناء عملية الاستراد", Toast.LENGTH_LONG).show();
+
             }
-        });
+
+        }
 
 
-        units.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                title = "مزامنة الوحدات";
-                msg = "الرجاء الانتظار حتى يتم استراد الوحدات..";
-
-                AlertDialog dialog = new AlertDialog.Builder(SyncDataActivity.this)
-                        .setTitle("مزامنة |لوحدات !")
-                        .setMessage("هل انت متأكد من عملية المزامنة ؟")
-                        .setPositiveButton("نعم", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-
-                                progressDialog.show();
-                                Cursor result = db.ExbordSetting();
-                                result.moveToFirst();
-                                new ImportAllUnits().execute(SyncDataActivity.this);
-                            }
-                        })
-                        .setNegativeButton("لا", null)
-                        .show();
-            }
-        });
-
-
-
-        SyncClients.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                title = "مزامنة الزبائن";
-                msg = "الرجاء الانتظار حتى يتم استراد الزبائن..";
-
-                AlertDialog dialog = new AlertDialog.Builder(SyncDataActivity.this)
-                        .setTitle("مزامنة الزبائن !")
-                        .setMessage("هل انت متأكد من عملية المزامنة ؟")
-                        .setPositiveButton("نعم", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-
-                                progressDialog.show();
-                                new ImportCustomers().execute(SyncDataActivity.this);
-                            }
-                        })
-                        .setNegativeButton("إلغاء", null)
-                        .show();
-            }
-        });
 
     }
 
 
-    private void CheckSyncedData(){
+
+
+
+    /*private void CheckSyncedData(){
         InfinityDB db = new InfinityDB(this);
 
         Cursor res;
@@ -215,7 +190,7 @@ public class SyncDataActivity extends AppCompatActivity {
             prudects.setChecked(true);
         }else
             prudects.setChecked(false);
-    }
+    }*/
 
 
 
@@ -248,12 +223,22 @@ public class SyncDataActivity extends AppCompatActivity {
     }
 
     public void bacToMain(View view){
+        Intent intent;
+        Intent intent1 = getIntent();
+        if(intent1.hasExtra("activity")){
 
-        MainActivity.This.finish();
-        Intent intent = new Intent(this, SettingActivity.class);
-        startActivity(intent);
-        finish();
+            MainActivity.This.finish();
+            intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+            finish();
+        }else{
+
+            intent = new Intent(this, SettingActivity.class);
+            startActivity(intent);
+            finish();
+        }
     }
+
 
     private class SyncData extends AsyncTask<String, Void, String> {
 

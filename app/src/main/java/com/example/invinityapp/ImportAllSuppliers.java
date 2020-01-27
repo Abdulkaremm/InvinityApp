@@ -57,6 +57,7 @@ public class ImportAllSuppliers extends AsyncTask<Context,Void,Boolean> {
                 data.append(reader.readLine());
             }
 
+            db.DeleteAllSuppliers();
             JSONArray array = new JSONArray(data.toString());
             ContentValues values = new ContentValues();
             for(int loop = 0; loop < array.length(); loop++){

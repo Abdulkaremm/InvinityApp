@@ -88,16 +88,18 @@ public class MainActivity extends AppCompatActivity {
 
         switch (item.getItemId()){
 
-            case R.id.SyncData:
+            case R.id.Setting:
 
                 Intent intent = new Intent(this,SettingActivity.class);
                 startActivity(intent);
 
                 return true;
 
-            case R.id.importSetting:
+            case R.id.SyncData:
 
-                new GetSitting().execute();
+               Intent intent1 = new Intent(this,SyncDataActivity.class);
+                intent1.putExtra("activity","main");
+                startActivity(intent1);
 
                 return true;
 
@@ -132,40 +134,6 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-    public static void getSetting(ArrayList<String> result){
-
-        InfinityDB myDB = new InfinityDB(activity);
-
-        if(result.size() == 0 ){
-
-            Toast.makeText(activity, "حدث خطأ اتناء عملية الاستراد", Toast.LENGTH_LONG).show();
-
-        }else{
-
-            ContentValues data = new ContentValues();
-            data.put("ifHasDate", result.get(0));
-            data.put("Price1", result.get(1));
-            data.put("Price2", result.get(2));
-            data.put("Price3", result.get(3));
-            data.put("Price4", result.get(4));
-
-            int res = myDB.updateSetting(data);
-
-            if(res > 0){
-
-                Toast.makeText(activity, "تمت عملية الاستراد بنجاح", Toast.LENGTH_LONG).show();
-
-            }else{
-
-                Toast.makeText(activity, "حدث خطأ اتناء عملية الاستراد", Toast.LENGTH_LONG).show();
-
-            }
-
-        }
-
-
-
-    }
 
     public  void  QuickInventory(View view){
 

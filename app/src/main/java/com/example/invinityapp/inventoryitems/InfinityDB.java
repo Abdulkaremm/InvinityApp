@@ -220,7 +220,7 @@ public class InfinityDB extends SQLiteOpenHelper {
 
 
         db.execSQL("CREATE TABLE IF NOT EXISTS " + CLIENTS_TABLE + " ( " +
-                " ClientID_PK INTEGER NOT NULL PRIMARY KEY, " +
+                " ClientID_PK INTEGER NOT NULL, " +
                 " Client_Name VARCHAR(200) NOT NULL," +
                 " Last_Sync_Date DATE)");
 
@@ -251,7 +251,7 @@ public class InfinityDB extends SQLiteOpenHelper {
 
 
         db.execSQL("CREATE TABLE IF NOT EXISTS " + PRODUCT_PURCHASE_HISTORY + " ( " +
-                " ProductID_PK INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, " +
+                " ProductID_PK INTEGER NOT NULL, " +
                 " Supplier VARCHAR(200) NOT NULL, " +
                 " Unit VARCHAR(200) NOT NULL," +
                 " QYN VARCHAR(200) NOT NULL," +
@@ -1537,6 +1537,34 @@ public class InfinityDB extends SQLiteOpenHelper {
          else
              return false;
 
+    }
+
+    public void DeleteAllHistory(){
+
+        SQLiteDatabase db  = this.getWritableDatabase();
+        db.delete(PRODUCT_PURCHASE_HISTORY, null, null);
+
+    }
+
+    public void DeleteAllUnits(){
+
+        SQLiteDatabase db  = this.getWritableDatabase();
+        db.delete(ALL_UNITS, null, null);
+    }
+
+    public void DeleteAllSuppliers(){
+
+        SQLiteDatabase db  = this.getWritableDatabase();
+        db.delete(SUPPLIERS_TABLE, null, null);
+    }
+
+    public Cursor SelectProductPurchase(String id){
+
+        SQLiteDatabase db  = this.getWritableDatabase();
+
+        String query = "SELECT * FROM "+PRODUCT_PURCHASE_HISTORY+" WHERE ProductID_PK ="+ id;
+
+        return db.rawQuery(query,null);
     }
 
 

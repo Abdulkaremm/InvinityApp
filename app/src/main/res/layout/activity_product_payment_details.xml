@@ -17,7 +17,6 @@
         android:layout_marginTop="15dp">
 
         <TextView
-            android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="بيانات الشراء "
@@ -73,6 +72,7 @@
         android:layout_marginTop="20dp">
 
         <TextView
+            android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="أخر 5 عمليات شراء للصنف "
@@ -102,6 +102,7 @@
 
 
             <LinearLayout
+                android:visibility="gone"
                 android:id="@+id/viewDetails1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -149,6 +150,32 @@
                         android:background="@drawable/edittext" />
 
                     <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorWhite"
+                    android:layoutDirection="rtl"
+                    android:orientation="horizontal"
+                    android:padding="10dp">
+
+                    <TextView
+
+                        android:layout_width="120dp"
+                        android:layout_height="wrap_content"
+                        android:text="المورد"
+                        android:textAlignment="textStart"
+                        android:textColor="#03A9F4"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/supplier"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="center" />
+
+                </LinearLayout>
+
+
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@color/colorWhite"
@@ -160,13 +187,13 @@
 
                             android:layout_width="120dp"
                             android:layout_height="wrap_content"
-                            android:text="المورد"
+                            android:text="الوحدة"
                             android:textAlignment="textStart"
                             android:textColor="#03A9F4"
                             android:textSize="20sp" />
 
                         <TextView
-                            android:id="@+id/supplier4"
+                            android:id="@+id/untit"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textAlignment="center" />
@@ -216,7 +243,7 @@
                             android:textSize="20sp" />
 
                         <TextView
-                            android:id="@+id/qun4"
+                            android:id="@+id/qun"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textAlignment="center" />
@@ -241,7 +268,7 @@
                             android:textSize="20sp" />
 
                         <TextView
-                            android:id="@+id/date3"
+                            android:id="@+id/date"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textAlignment="center" />
@@ -260,6 +287,7 @@
 
 
             <LinearLayout
+                android:visibility="gone"
                 android:id="@+id/viewDetails2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -325,6 +353,31 @@
 
                         <TextView
                             android:id="@+id/supplier2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAlignment="center" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/colorWhite"
+                        android:layoutDirection="rtl"
+                        android:orientation="horizontal"
+                        android:padding="10dp">
+
+                        <TextView
+
+                            android:layout_width="120dp"
+                            android:layout_height="wrap_content"
+                            android:text="الوحدة"
+                            android:textAlignment="textStart"
+                            android:textColor="#03A9F4"
+                            android:textSize="20sp" />
+
+                        <TextView
+                            android:id="@+id/untit2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textAlignment="center" />
@@ -417,6 +470,7 @@
                 android:background="@drawable/edittext" />
 
             <LinearLayout
+                android:visibility="gone"
                 android:id="@+id/viewDetails3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -500,6 +554,31 @@
 
                             android:layout_width="120dp"
                             android:layout_height="wrap_content"
+                            android:text="الوحدة"
+                            android:textAlignment="textStart"
+                            android:textColor="#03A9F4"
+                            android:textSize="20sp" />
+
+                        <TextView
+                            android:id="@+id/untit3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAlignment="center" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/colorWhite"
+                        android:layoutDirection="rtl"
+                        android:orientation="horizontal"
+                        android:padding="10dp">
+
+                        <TextView
+
+                            android:layout_width="120dp"
+                            android:layout_height="wrap_content"
                             android:text="السعر"
                             android:textAlignment="textStart"
                             android:textColor="#03A9F4"
@@ -556,7 +635,7 @@
                             android:textSize="20sp" />
 
                         <TextView
-                            android:id="@+id/date4"
+                            android:id="@+id/date3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textAlignment="center" />
@@ -573,6 +652,7 @@
                 android:background="@drawable/edittext" />
 
             <LinearLayout
+                android:visibility="gone"
                 android:id="@+id/viewDetails4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -637,7 +717,33 @@
                             android:textSize="20sp" />
 
                         <TextView
-                            android:id="@+id/supplier"
+                            android:id="@+id/supplier4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAlignment="center" />
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/colorWhite"
+                        android:layoutDirection="rtl"
+                        android:orientation="horizontal"
+                        android:padding="10dp">
+
+                        <TextView
+
+                            android:layout_width="120dp"
+                            android:layout_height="wrap_content"
+                            android:text="الوحدة"
+                            android:textAlignment="textStart"
+                            android:textColor="#03A9F4"
+                            android:textSize="20sp" />
+
+                        <TextView
+                            android:id="@+id/untit4"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textAlignment="center" />
@@ -687,7 +793,7 @@
                             android:textSize="20sp" />
 
                         <TextView
-                            android:id="@+id/qun"
+                            android:id="@+id/qun4"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textAlignment="center" />
@@ -712,7 +818,7 @@
                             android:textSize="20sp" />
 
                         <TextView
-                            android:id="@+id/date"
+                            android:id="@+id/date4"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textAlignment="center" />
@@ -730,6 +836,7 @@
                 android:background="@drawable/edittext" />
 
             <LinearLayout
+                android:visibility="gone"
                 android:id="@+id/viewDetails5"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -795,6 +902,31 @@
 
                         <TextView
                             android:id="@+id/supplier5"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAlignment="center" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/colorWhite"
+                        android:layoutDirection="rtl"
+                        android:orientation="horizontal"
+                        android:padding="10dp">
+
+                        <TextView
+
+                            android:layout_width="120dp"
+                            android:layout_height="wrap_content"
+                            android:text="الوحدة"
+                            android:textAlignment="textStart"
+                            android:textColor="#03A9F4"
+                            android:textSize="20sp" />
+
+                        <TextView
+                            android:id="@+id/untit5"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textAlignment="center" />

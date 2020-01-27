@@ -175,7 +175,7 @@ public class ImportProducts extends AsyncTask<Context,Void,Integer> {
         Log.i("End Date", edate);
 
 
-        MainActivity.progressDialog.dismiss();
+        SyncDataActivity.progressDialog.dismiss();
 
 
         if(response == -1){

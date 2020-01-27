@@ -56,6 +56,7 @@ public class ImportAllUnits extends AsyncTask<Context,Void,Boolean> {
                 data.append(reader.readLine());
             }
 
+            db.DeleteAllUnits();
             JSONArray array = new JSONArray(data.toString());
             ContentValues values = new ContentValues();
             for(int loop = 0; loop < array.length(); loop++){
@@ -83,10 +84,12 @@ public class ImportAllUnits extends AsyncTask<Context,Void,Boolean> {
     protected void onPostExecute(Boolean state) {
         super.onPostExecute(state);
 
-        SyncDataActivity.progressDialog.dismiss();
-        if(state)
-             Toast.makeText(context,"تمت عملية الاستراد بنجاح",Toast.LENGTH_SHORT).show();
-        else
-            Toast.makeText(context,"فشلت عملية الاستراد",Toast.LENGTH_SHORT).show();
+
+        if (state)
+            new ImportAllSuppliers().execute(context);
+        else {
+            Toast.makeText(context, "فشلت عملية استراد الوحدات", Toast.LENGTH_SHORT).show();
+            SyncDataActivity.progressDialog.dismiss();
+        }
     }
 }
