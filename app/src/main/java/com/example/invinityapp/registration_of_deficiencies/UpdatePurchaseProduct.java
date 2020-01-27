@@ -107,6 +107,21 @@ public class UpdatePurchaseProduct extends AppCompatActivity {
         adapter.setDropDownViewResource( android.R.layout.simple_spinner_dropdown_item);
 
         spinner.setAdapter(adapter);
+
+        Cursor uomResult = db.getPurchaseProductById(id_data);
+
+        uomResult.moveToFirst();
+
+        for(int i = 0; i < adapter.getCount() ;i++){
+
+            if(uomResult.getString(6).compareTo(adapter.getItem(i).contact_id) == 0){
+
+                spinner.setSelection(i);
+                break;
+            }
+        }
+
+        uomResult.close();
     }
 
 
