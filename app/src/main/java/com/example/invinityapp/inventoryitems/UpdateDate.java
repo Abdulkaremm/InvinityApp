@@ -90,12 +90,28 @@ public class UpdateDate extends AppCompatActivity {
             contacts.add(new Contact(res.getString(0), res.getString(1)));
 
         }
+        res.close();
 
         ArrayAdapter<Contact> adapter =
                 new ArrayAdapter<Contact>(getApplicationContext(),  android.R.layout.simple_spinner_dropdown_item, contacts);
         adapter.setDropDownViewResource( android.R.layout.simple_spinner_dropdown_item);
 
         spinner.setAdapter(adapter);
+        res = mydp.selectDataByID(id_data);
+        res.moveToFirst();
+
+        for(int i = 0; i < adapter.getCount() ;i++){
+
+            if(res.getString(4).compareTo(adapter.getItem(i).contact_id) == 0){
+
+                spinner.setSelection(i);
+                break;
+            }
+        }
+
+        res.close();
+
+
 
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {

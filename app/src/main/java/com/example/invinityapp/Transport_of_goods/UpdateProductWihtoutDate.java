@@ -1,5 +1,6 @@
 package com.example.invinityapp.Transport_of_goods;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.ContentValues;
@@ -7,6 +8,9 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -83,6 +87,53 @@ public class UpdateProductWihtoutDate extends AppCompatActivity {
         spinner.setAdapter(adapter);
 
 
+        Cursor uomResult = db.getDocumentProductByID(id_data, Integer.toString(ScanProduct.DocumentID_PK));
+
+        uomResult.moveToFirst();
+
+        for(int i = 0; i < adapter.getCount() ;i++){
+
+            if(uomResult.getString(6).compareTo(adapter.getItem(i).contact_id) == 0){
+
+                spinner.setSelection(i);
+                break;
+            }
+        }
+
+        uomResult.close();
+
+
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        MenuInflater menuInflater = getMenuInflater();
+
+        menuInflater.inflate(R.menu.inventorymenu, menu);
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        switch (item.getItemId()) {
+
+            case R.id.back:
+
+                Intent intent = new Intent(UpdateProductWihtoutDate.this, ScanProduct.class);
+                startActivity(intent);
+                UpdateProductWihtoutDate.this.finish();
+
+
+                return true;
+
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
 
