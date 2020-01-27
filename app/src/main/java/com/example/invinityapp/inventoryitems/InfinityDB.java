@@ -580,7 +580,7 @@ public class InfinityDB extends SQLiteOpenHelper {
         SQLiteDatabase db  = this.getWritableDatabase();
 
 
-        Cursor res = db.rawQuery("SELECT cat_id, Product_ID_PK, ProductName ,barcode, quantity, endDate  FROM " + TABLE_NAME + " WHERE Product_ID_PK = ?", new String[]{Product_ID_PK});
+        Cursor res = db.rawQuery("SELECT cat_id, Product_ID_PK, ProductName ,barcode, quantity, endDate, UOMID_PK  FROM " + TABLE_NAME + " WHERE Product_ID_PK = ?", new String[]{Product_ID_PK});
 
         return res;
     }
@@ -1182,7 +1182,7 @@ public class InfinityDB extends SQLiteOpenHelper {
         SQLiteDatabase db  = this.getWritableDatabase();
 
 
-        Cursor res = db.rawQuery("SELECT DocProductID, Product_ID_PK, ProductName ,barcode, quantity, endDate  FROM " + DOCUMENT_PRODUCT + " WHERE DocProductID = ? AND DocumentID_FK = ?", new String[]{id, DocumentID});
+        Cursor res = db.rawQuery("SELECT DocProductID, Product_ID_PK, ProductName ,barcode, quantity, endDate, UOMID_PK  FROM " + DOCUMENT_PRODUCT + " WHERE DocProductID = ? AND DocumentID_FK = ?", new String[]{id, DocumentID});
 
         return res;
     }
@@ -1192,7 +1192,7 @@ public class InfinityDB extends SQLiteOpenHelper {
         SQLiteDatabase db  = this.getWritableDatabase();
 
 
-        Cursor res = db.rawQuery("SELECT DocProductID, Product_ID_PK, ProductName ,barcode, quantity, endDate  FROM " + DOCUMENT_PRODUCT + " WHERE Product_ID_PK = ? AND DocumentID_FK = ?", new String[]{id, DocumentID});
+        Cursor res = db.rawQuery("SELECT DocProductID, Product_ID_PK, ProductName ,barcode, quantity, endDate, UOMID_PK  FROM " + DOCUMENT_PRODUCT + " WHERE Product_ID_PK = ? AND DocumentID_FK = ?", new String[]{id, DocumentID});
 
         return res;
     }
@@ -1224,7 +1224,7 @@ public class InfinityDB extends SQLiteOpenHelper {
         SQLiteDatabase db  = this.getWritableDatabase();
 
 
-        Cursor res = db.rawQuery("SELECT purchaseID, Product_ID_PK, ProductName ,barcode, quantity, discription FROM " + PURCHASE_ORDERS + " WHERE purchaseID = ? ORDER BY dateTime DESC", new String[]{id});
+        Cursor res = db.rawQuery("SELECT purchaseID, Product_ID_PK, ProductName ,barcode, quantity, discription, UOMID_PK FROM " + PURCHASE_ORDERS + " WHERE purchaseID = ? ORDER BY dateTime DESC", new String[]{id});
 
         return res;
     }

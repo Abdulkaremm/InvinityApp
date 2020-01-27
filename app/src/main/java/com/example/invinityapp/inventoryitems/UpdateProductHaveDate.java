@@ -103,6 +103,28 @@ public class UpdateProductHaveDate extends AppCompatActivity {
 
         spinner.setAdapter(adapter);
 
+        Cursor uomResult = mydata.getByProductID(Product_ID);
+
+        if(uomResult.getCount() != 0){
+
+            uomResult.moveToFirst();
+
+            for(int i = 0; i < adapter.getCount() ;i++){
+
+                if(uomResult.getString(6).compareTo(adapter.getItem(i).contact_id) == 0){
+
+                    spinner.setSelection(i);
+                    break;
+                }
+            }
+        }
+
+        uomResult.close();
+
+
+
+
+
         Cursor res2 = mydata.getByProductID(Product_ID);
         int sum = 0;
         while (res2.moveToNext()) {

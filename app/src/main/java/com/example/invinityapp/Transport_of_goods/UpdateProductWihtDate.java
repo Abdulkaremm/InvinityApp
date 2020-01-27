@@ -1,5 +1,6 @@
 package com.example.invinityapp.Transport_of_goods;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.ItemTouchHelper;
@@ -12,6 +13,9 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -93,6 +97,25 @@ public class UpdateProductWihtDate extends AppCompatActivity {
         adapter.setDropDownViewResource( android.R.layout.simple_spinner_dropdown_item);
 
         spinner.setAdapter(adapter);
+
+        Cursor uomResult = db.getDocumentProductByProductID(Product_ID, Integer.toString(ScanProduct.DocumentID_PK));
+
+        if(uomResult.getCount() != 0){
+
+            uomResult.moveToFirst();
+
+            for(int i = 0; i < adapter.getCount() ;i++){
+
+                if(uomResult.getString(6).compareTo(adapter.getItem(i).contact_id) == 0){
+
+                    spinner.setSelection(i);
+                    break;
+                }
+            }
+        }
+
+        uomResult.close();
+
 
         Cursor res2 = db.getDocumentProductByProductID(Product_ID, Integer.toString(ScanProduct.DocumentID_PK));
         int sum = 0;
@@ -373,6 +396,37 @@ public class UpdateProductWihtDate extends AppCompatActivity {
         });
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        MenuInflater menuInflater = getMenuInflater();
+
+        menuInflater.inflate(R.menu.inventorymenu, menu);
+
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        switch (item.getItemId()) {
+
+            case R.id.back:
+
+                Intent intent = new Intent(UpdateProductWihtDate.this, ScanProduct.class);
+                startActivity(intent);
+                UpdateProductWihtDate.this.finish();
+
+                return true;
+
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+
 
 
     public void update(View view){
@@ -400,6 +454,11 @@ public class UpdateProductWihtDate extends AppCompatActivity {
             db.DeleteDocumentProductByProductID(Product_ID, Integer.toString(ScanProduct.DocumentID_PK));
 
             boolean ifInsert = false;
+
+            Contact contact = (Contact) spinner.getSelectedItem();
+
+            UOMNAME = contact.contact_name;
+            idUOMS = contact.contact_id;
 
             for (int i = 0; i < data.size() ;i++) {
 
