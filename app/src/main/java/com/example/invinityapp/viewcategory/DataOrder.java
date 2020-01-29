@@ -57,7 +57,8 @@ public class DataOrder extends AppCompatActivity implements LoaderManager.Loader
     dataprice1,
     dataprice2,
     dataprice3,
-    dataprice4;
+    dataprice4,
+    Payment;
 
     ProgressBar bar;
     Button next, prev;
@@ -102,7 +103,7 @@ public class DataOrder extends AppCompatActivity implements LoaderManager.Loader
         list.clear();
         bar =  findViewById(R.id.progressBar);
 
-
+        Payment = findViewById(R.id.Payment);
         title = findViewById(R.id.title);
         scrollView = findViewById(R.id.scrollData);
         Barcode = findViewById(R.id.Barcode);
@@ -432,7 +433,7 @@ public class DataOrder extends AppCompatActivity implements LoaderManager.Loader
 
             next.setVisibility(View.VISIBLE);
         }
-
+        Payment.setVisibility(View.INVISIBLE);
         title.setVisibility(View.VISIBLE);
         scrollView.setVisibility(View.VISIBLE);
     }
