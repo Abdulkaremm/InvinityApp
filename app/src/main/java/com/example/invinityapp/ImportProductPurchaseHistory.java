@@ -45,7 +45,7 @@ public class ImportProductPurchaseHistory extends AsyncTask<Context,Void,Boolean
         InputStream stream;
         BufferedReader reader;
         String[] url = new String[]{"http://" + result.getString(7) + "/api/InfinityRetail/ProductPurchaseHistory",
-                                    "http://" + result.getString(7) + "/api/InfinityRetail/ProductPurchaseHistory"};
+                                    "http://" + result.getString(7) + "/api/InfinityRetail/GetMissingProducts"};
 
         OutputStream outputStream;
         BufferedWriter writer;
@@ -80,20 +80,29 @@ public class ImportProductPurchaseHistory extends AsyncTask<Context,Void,Boolean
                 values.put("Date",jsonObject.getString("PurchaseDate"));
 
                 if(!db.CheckIfProductExist( jsonObject.getString("ProductID_PK") )) {
-                    JSONObject id = new JSONObject();
 
-                    for(int j = 0; j < ProID.length(); j++){
 
-                        JSONObject proIDJSONObject =  ProID.getJSONObject(j);
-                        if(proIDJSONObject.getInt("ProductID_PK") == id.getInt("ProductID_PK")){
-                            addIn = false;
-                        }else
-                            addIn = true;
-                    }
+                    if(ProID.length() == 0){
+
+                        JSONObject id = new JSONObject();
+                        id.put("ProductID_PK", jsonObject.getString("ProductID_PK"));
+                        ProID.put(id);
+                    }else
+                        for(int j = 0; j < ProID.length(); j++){
+
+                            JSONObject proIDJSONObject =  ProID.getJSONObject(j);
+                            if(proIDJSONObject.getString("ProductID_PK").compareTo(jsonObject.getString("ProductID_PK")) == 0){
+                                addIn = false;
+                            }else{
+                                addIn = true;
+                            }
+                        }
 
                     if(addIn) {
-                        id.put("ID", jsonObject.getString("ProductID_PK"));
+                        JSONObject id = new JSONObject();
+                        id.put("ProductID_PK", jsonObject.getString("ProductID_PK"));
                         ProID.put(id);
+
                     }
                 }
                 if(!db.AddPurchaseHistory(values)) {
@@ -127,13 +136,6 @@ public class ImportProductPurchaseHistory extends AsyncTask<Context,Void,Boolean
 
                 /// read
 
-
-                urlConnection = (HttpURLConnection) (new URL(url[0])).openConnection();
-                urlConnection.setRequestMethod("GET");
-                urlConnection.setRequestProperty("Content-Type", "application/json");
-                urlConnection.setRequestProperty("Accept", "application/json");
-                urlConnection.connect();
-
                 /// reading the response from the ulr
                 stream = urlConnection.getInputStream();
                 reader = new BufferedReader(new InputStreamReader(stream, StandardCharsets.UTF_8));
@@ -146,8 +148,7 @@ public class ImportProductPurchaseHistory extends AsyncTask<Context,Void,Boolean
 
                 /// fetch json data and insert it into database
 
-
-                JSONArray mainArray = new JSONArray(data);
+                JSONArray mainArray = new JSONArray(Products.toString());
 
                 ContentValues tabel1 = new ContentValues();
                 ContentValues tabel2 = new ContentValues();
@@ -191,7 +192,6 @@ public class ImportProductPurchaseHistory extends AsyncTask<Context,Void,Boolean
                         /// insert to database below
 
                         db.InsertDATA_PRODUCTS_UOMS(tabel2);
-                        Log.i("Count OF UOMS", Integer.toString(u));
 
 
                         JSONArray barcodes = uitejson.getJSONArray("Barcode"); // get barcodes array
@@ -214,11 +214,6 @@ public class ImportProductPurchaseHistory extends AsyncTask<Context,Void,Boolean
                     }
 
                     tabel1.clear();
-
-
-
-                    Log.i("Count OF PRODUCTS", Integer.toString(i));
-
 
                 }
             } // end of if-1
