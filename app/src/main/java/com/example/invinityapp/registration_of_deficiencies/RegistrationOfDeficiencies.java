@@ -9,6 +9,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
@@ -181,6 +182,17 @@ public class RegistrationOfDeficiencies extends AppCompatActivity {
         MenuItem addNew = menu.findItem(R.id.addnew);
         MenuItem sync = menu.findItem(R.id.sync);
 
+        MenuItem type = menu.findItem(R.id.inventoryType);
+        TextView txt = (TextView) type.getActionView();
+        txt.setTextColor(Color.WHITE);
+
+        txt.setText("تسجيل النواقص");
+
+
+
+        //#######################################
+
+        type.setVisible(true);
         addNew.setVisible(true);
         sync.setVisible(true);
 

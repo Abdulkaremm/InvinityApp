@@ -48,7 +48,7 @@
             >
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="30dp"
                 android:layout_height="wrap_content"
                 android:text="API IP"
                 android:textSize="16sp"
@@ -93,13 +93,13 @@
             >
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="30dp"
                 android:layout_height="wrap_content"
                 android:text="DeviceID"
                 android:textSize="16sp"
                 android:textDirection="rtl"
                 android:textColor="#FF3E3E46"
-                android:layout_weight="25"
+                android:layout_weight="30"
                 />
 
             <TextView
@@ -122,6 +122,50 @@
                 android:layout_marginStart="10dp"
                 android:drawableEnd="@drawable/ic_device"
                 android:onClick="GetDeviceID" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:weightSum="100"
+            android:background="@color/colorWhite"
+            android:layout_marginTop="20dp"
+            >
+
+            <TextView
+                android:layout_width="30dp"
+                android:layout_height="wrap_content"
+                android:text="رقم الزبون"
+                android:textSize="16sp"
+                android:textDirection="rtl"
+                android:textColor="#FF3E3E46"
+                android:layout_weight="30"
+                />
+
+            <EditText
+                android:id="@+id/customerid"
+                android:layout_width="30dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="55"
+                android:textAlignment="center"
+                android:layout_marginTop="5dp"
+                android:singleLine="true"
+                android:inputType="text"
+                android:focusableInTouchMode="true"
+                android:focusable="true"
+                android:background="@drawable/edittext"
+                android:padding="5dp"
+                android:hint="12345678"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="28dp"
+                android:layout_marginStart="10dp"
+                android:drawableEnd="@drawable/ic_check"
+                android:onClick="updateCustomer" />
         </LinearLayout>
 
 

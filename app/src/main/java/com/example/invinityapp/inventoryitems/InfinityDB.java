@@ -62,7 +62,8 @@ public class InfinityDB extends SQLiteOpenHelper {
                 " QuickInvetory INTEGER NOT NULL,"+
                 " API_IP VARCHAR(50) NOT NULL,"+
                 " deviceID VARCHAR(20),"+
-                " PIN VARCHAR(100))");
+                " PIN VARCHAR(100),"+
+                " CustomerID VARCHAR(50))");
 
 
         //جدول كل الاصناف التي سيتم مزامنتها مع المنضومة الرائيسية ####################
@@ -272,6 +273,7 @@ public class InfinityDB extends SQLiteOpenHelper {
         values.put("API_IP", "000.000.0.0");
         values.put("deviceID", "");
         values.put("PIN", "asarya");
+        values.put("CustomerID", "00000000");
 
         db.insert(TABLE_SETTING,null, values);
 
