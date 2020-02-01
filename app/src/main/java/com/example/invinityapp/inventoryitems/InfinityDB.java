@@ -221,7 +221,7 @@ public class InfinityDB extends SQLiteOpenHelper {
 
 
         db.execSQL("CREATE TABLE IF NOT EXISTS " + CLIENTS_TABLE + " ( " +
-                " ClientID_PK INTEGER NOT NULL, " +
+                " ClientID_PK INTEGER NOT NULL," +
                 " Client_Name VARCHAR(200) NOT NULL," +
                 " Last_Sync_Date DATE)");
 
@@ -1578,6 +1578,14 @@ public class InfinityDB extends SQLiteOpenHelper {
         return db.rawQuery(query,null);
     }
 
+    public Cursor FilterClients(String filter){
+
+        SQLiteDatabase db  = this.getWritableDatabase();
+
+        String query = "SELECT ClientID_PK ,Client_Name FROM "+ CLIENTS_TABLE + " WHERE Client_Name LIKE '%"+filter+"%'";
+
+        return  db.rawQuery(query,null);
+    }
 
     //#######################
 
