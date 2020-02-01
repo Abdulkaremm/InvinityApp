@@ -219,11 +219,13 @@ public class DataOrder extends AppCompatActivity implements LoaderManager.Loader
         menuInflater.inflate(R.menu.inventorymenu, menu);
         MenuItem camera = menu.findItem(R.id.openCam);
         MenuItem bReader = menu.findItem(R.id.QR);
-        MenuItem searcher = menu.findItem(R.id.searcher);
+        MenuItem serch = menu.findItem(R.id.searcher);
+        MenuItem stock = menu.findItem(R.id.getStock);
 
-        searcher.setVisible(true);
         camera.setVisible(true);
         bReader.setVisible(true);
+        serch.setVisible(true);
+        stock.setVisible(true);
 
 
         return true;
@@ -255,13 +257,22 @@ public class DataOrder extends AppCompatActivity implements LoaderManager.Loader
 
                 return true;
 
-            case R.id.searcher:
+            case R.id.getStock:
 
-                Intent intent = new Intent(this,SearchByNameActivity.class);
-                startActivity(intent);
-                finish();
+                    Intent intent = new Intent(DataOrder.this, ViewDataOfStock.class);
+                    startActivity(intent);
+                    DataOrder.this.finish();
 
                 return true;
+
+            case R.id.searcher:
+
+                Intent intent2 = new Intent(DataOrder.this, SearchByNameActivity.class);
+                startActivity(intent2);
+                DataOrder.this.finish();
+
+                return true;
+
             default:
                 return super.onOptionsItemSelected(item);
         }

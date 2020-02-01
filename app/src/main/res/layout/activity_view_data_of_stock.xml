@@ -56,6 +56,7 @@
         />
 
     <ListView
+        android:layout_marginTop="15dp"
         android:visibility="gone"
         android:layout_below="@+id/lName"
         android:id="@+id/stockList"
