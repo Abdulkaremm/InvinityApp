@@ -1587,6 +1587,19 @@ public class InfinityDB extends SQLiteOpenHelper {
         return  db.rawQuery(query,null);
     }
 
+
+
+
+
+    public Cursor FilterByName(String filter){
+
+        SQLiteDatabase db  = this.getWritableDatabase();
+
+        String query = "SELECT t2.ProductBarcode , t3.Product_Name FROM Data_Products_UOMS AS t1 INNER JOIN  Data_Products AS t3 ON t1.ProductID_FK = t3.Product_ID_PK INNER JOIN Data_Product_Barcodes AS t2 ON t1.ProductUOMID_PK = t2.ProductUOMID_FK  WHERE t3.Product_Name LIKE '%"+filter+"%' LIMIT 30 ";
+
+        return db.rawQuery(query,null);
+    }
+
     //#######################
 
 }

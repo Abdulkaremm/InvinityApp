@@ -19,7 +19,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".viewcategory.ViewDataOfStock"></activity>
+        <activity android:name=".viewcategory.SearchByNameActivity"></activity>
+        <activity android:name=".viewcategory.ViewDataOfStock" />
         <activity android:name=".ExportAPurchaseBill.EditProduct" />
         <activity android:name=".ExportAPurchaseBill.AddProductActivity" />
         <activity
