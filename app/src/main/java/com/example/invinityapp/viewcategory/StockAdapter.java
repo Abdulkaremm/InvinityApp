@@ -9,7 +9,11 @@ import android.widget.TextView;
 
 import com.example.invinityapp.R;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 public class StockAdapter extends ArrayAdapter<StockModel> {
 
@@ -46,13 +50,29 @@ public class StockAdapter extends ArrayAdapter<StockModel> {
             t5.setVisibility(View.GONE);
         }else{
 
-            String str = t5.getText().toString() + product.exDate;
-            t5.setText(str);
+            t5.setText(product.exDate);
         }
 
-        String str2 = t6.getText().toString() + product.lastSync;
+        String time = "";
+        try {
 
-        t6.setText(str2);
+            Calendar c = Calendar.getInstance();
+            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+
+            Date date = df.parse(product.lastSync);
+
+            c.setTime(date);
+
+            time = df.format(c.getTime());
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+
+        //thisTime = df.format(c.getTime());
+
+        t6.setText(time);
         // Return the completed view to render on screen
         return convertView;
     }
