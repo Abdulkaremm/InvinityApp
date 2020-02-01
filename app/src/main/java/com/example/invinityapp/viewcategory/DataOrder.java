@@ -157,12 +157,7 @@ public class DataOrder extends AppCompatActivity implements LoaderManager.Loader
             }
         });
 
-        Intent intent = getIntent();
-        if(intent.hasExtra("barcode")) {
-            CheckBarcode(intent.getStringExtra("barcode"));
-            Barcode.setText(intent.getStringExtra("barcode"));
-            Barcode.setEnabled(false);
-        }
+
     } // onCreate End
 
 
@@ -218,9 +213,7 @@ public class DataOrder extends AppCompatActivity implements LoaderManager.Loader
         menuInflater.inflate(R.menu.inventorymenu, menu);
         MenuItem camera = menu.findItem(R.id.openCam);
         MenuItem bReader = menu.findItem(R.id.QR);
-        MenuItem searcher = menu.findItem(R.id.searcher);
 
-        searcher.setVisible(true);
         camera.setVisible(true);
         bReader.setVisible(true);
 
@@ -254,13 +247,6 @@ public class DataOrder extends AppCompatActivity implements LoaderManager.Loader
 
                 return true;
 
-            case R.id.searcher:
-
-                Intent intent = new Intent(this,SearchByNameActivity.class);
-                startActivity(intent);
-                finish();
-
-                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }

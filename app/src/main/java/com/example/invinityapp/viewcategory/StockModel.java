@@ -10,7 +10,7 @@ public class StockModel {
             lastSync;
 
 
-    public void StockModel(String branch, String location, String uom, String stock, String exDate, String lastSync){
+    public StockModel(String branch, String location, String uom, String stock, String exDate, String lastSync){
 
         this.branch   = branch;
         this.location = location;
