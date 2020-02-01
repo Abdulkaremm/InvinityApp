@@ -73,7 +73,6 @@ public class DataOrder extends AppCompatActivity implements LoaderManager.Loader
 
     public static String api_ip;
 
-    private MenuItem item;
 
 
 
@@ -223,12 +222,13 @@ public class DataOrder extends AppCompatActivity implements LoaderManager.Loader
         MenuItem camera = menu.findItem(R.id.openCam);
         MenuItem bReader = menu.findItem(R.id.QR);
         MenuItem serch = menu.findItem(R.id.searcher);
+        MenuItem stock = menu.findItem(R.id.getStock);
 
-        item = menu.findItem(R.id.getStock);
 
         camera.setVisible(true);
         bReader.setVisible(true);
         serch.setVisible(true);
+        stock.setVisible(true);
 
 
         return true;
@@ -262,10 +262,28 @@ public class DataOrder extends AppCompatActivity implements LoaderManager.Loader
 
             case R.id.getStock:
 
+                    if(checkConnect()){
 
-                    Intent intent = new Intent(DataOrder.this, ViewDataOfStock.class);
-                    startActivity(intent);
-                    DataOrder.this.finish();
+
+
+                        if(Barcode.getText().toString().compareTo("") != 0){
+
+                            Intent intent = new Intent(DataOrder.this, ViewDataOfStock.class);
+
+                            intent.putExtra("productID", Barcode.getText().toString());
+                            startActivity(intent);
+                            DataOrder.this.finish();
+
+                        }else{
+
+                            Toast.makeText(this, "الرجاء التقاط صنف", Toast.LENGTH_SHORT).show();
+
+                        }
+
+                    }else{
+
+                        Toast.makeText(this, "الرجاء التحقق من اتصالك بالشبكة", Toast.LENGTH_SHORT).show();
+                    }
 
                 return true;
 
@@ -409,7 +427,6 @@ public class DataOrder extends AppCompatActivity implements LoaderManager.Loader
                 next.setVisibility(View.VISIBLE);
             }
 
-            item.setVisible(true);
             title.setVisibility(View.VISIBLE);
             scrollView.setVisibility(View.VISIBLE);
 

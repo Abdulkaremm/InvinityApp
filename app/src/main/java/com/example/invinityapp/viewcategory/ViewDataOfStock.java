@@ -35,12 +35,13 @@ public class ViewDataOfStock extends AppCompatActivity {
 
 
     private ProgressBar progressBar;
-    private String ProductName;
+    private TextView ProductName;
     private ListView StockList;
     private ArrayList<StockModel> models;
     private InfinityDB db;
     private TextView errmsg;
     private StockAdapter stockAdapter;
+    private String barcode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,10 +53,21 @@ public class ViewDataOfStock extends AppCompatActivity {
         errmsg = findViewById(R.id.ErrorMsg);
         progressBar = findViewById(R.id.ProgressBar);
         StockList = findViewById(R.id.stockList);
+        ProductName = findViewById(R.id.name);
 
         models = new ArrayList<>();
 
         stockAdapter = new StockAdapter(this, models);
+
+        Intent intent = getIntent();
+        barcode = intent.getStringExtra("productID");
+        Cursor re = db.isExistBar(barcode);
+
+        re.moveToFirst();
+
+        ProductName.setText(re.getString(1));
+
+
 
         new fetchDate().execute();
 
@@ -81,6 +93,8 @@ public class ViewDataOfStock extends AppCompatActivity {
             case R.id.back:
 
                 Intent intent = new Intent(ViewDataOfStock.this, DataOrder.class);
+
+                intent.putExtra("barcode", barcode);
                 startActivity(intent);
                 ViewDataOfStock.this.finish();
 
