@@ -25,6 +25,14 @@
         app:actionViewClass="android.widget.SearchView"/>
 
     <item
+        android:id="@+id/searcher"
+        android:icon="@drawable/ic_search_item"
+        android:title="بحث"
+        android:visible="false"
+        app:showAsAction="always"
+        />
+
+    <item
         android:id="@+id/viewAllData"
         android:icon="@drawable/ic_eye"
         android:title="عرض كل البينات"
