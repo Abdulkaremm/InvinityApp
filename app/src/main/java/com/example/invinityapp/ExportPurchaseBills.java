@@ -37,7 +37,7 @@ public class ExportPurchaseBills extends AsyncTask<Context,Void,Boolean> {
         Cursor result = db.ExbordSetting();
         result.moveToFirst();
 
-        String url = "http://"+result.getString(7)+"/api/InfinityRetail/ReceiveData";
+        String url = "http://"+result.getString(7)+"/api/InfinityRetail/PurchaseBills";
         OutputStream outputStream;
         BufferedWriter writer;
         HttpURLConnection urlConnection;
@@ -61,7 +61,7 @@ public class ExportPurchaseBills extends AsyncTask<Context,Void,Boolean> {
                     object.put("ClientID_FK",Integer.parseInt(res.getString(1)));
                     object.put("Client_Name",res.getString(2));
                     object.put("CreateDate",Integer.parseInt(res.getString(3)));
-
+                    object.put("DeviceID",result.getString(8));
 
                     Cursor pro = db.SelrctBillProducts(res.getString(0));
                     int Count1 = 0;
