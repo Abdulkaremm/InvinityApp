@@ -42,7 +42,7 @@ public class ClientsList extends AppCompatActivity {
         title = findViewById(R.id.Title);
         container = findViewById(R.id.container);
 
-        GetAllClients(null);
+        GetAllClients("null");
     }
 
     private void GetAllClients(String filter){
@@ -150,7 +150,7 @@ public class ClientsList extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-               // GetSupplires(newText);
+                GetAllClients(newText);
                 return false;
             }
         });
