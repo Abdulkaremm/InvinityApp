@@ -26,7 +26,7 @@ import com.example.invinityapp.inventoryitems.InfinityDB;
 
 public class DeviceConfigActivity extends AppCompatActivity {
 
-    EditText ApiIP;
+    EditText ApiIP, customerID;
     InfinityDB db;
     TextView DeviceID,getID;
 
@@ -40,11 +40,13 @@ public class DeviceConfigActivity extends AppCompatActivity {
         DeviceID = findViewById(R.id.DeviceID);
         getID = findViewById(R.id.getID);
         ApiIP = findViewById(R.id.ApiIP);
+        customerID = findViewById(R.id.customerid);
         Cursor res = db.ExbordSetting();
 
         res.moveToFirst();
 
         ApiIP.setText(res.getString(7));
+        customerID.setText(res.getString(10));
         if(!res.getString(8).isEmpty()) {
             getID.setVisibility(View.INVISIBLE);
             DeviceID.setText(res.getString(8));
@@ -66,12 +68,32 @@ public class DeviceConfigActivity extends AppCompatActivity {
 
             data.put("API_IP", ApiIP.getText().toString());
             db.updateSetting(data);
-            Toast.makeText(this, "Done", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "تم الحفظ", Toast.LENGTH_SHORT).show();
 
 
         }
 
     }
+
+    public void updateCustomer(View v) {
+
+        if (ApiIP.toString().isEmpty()) {
+
+            Toast.makeText(this, "الرجاء ادخال رقم الزبون", Toast.LENGTH_SHORT).show();
+
+        } else {
+
+            ContentValues data = new ContentValues();
+
+            data.put("CustomerID", customerID.getText().toString());
+            db.updateSetting(data);
+            Toast.makeText(this, "تم الحفظ", Toast.LENGTH_SHORT).show();
+
+
+        }
+
+    }
+
 
 
     @RequiresApi(api = Build.VERSION_CODES.M)
