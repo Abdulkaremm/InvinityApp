@@ -1419,6 +1419,15 @@ public class InfinityDB extends SQLiteOpenHelper {
         return db.rawQuery(query,null);
     }
 
+    public  Cursor SelrctBillProducts(String ID){
+
+        SQLiteDatabase db  = this.getWritableDatabase();
+
+        String query = "SELECT * FROM "+BILL_PRODUCTS+" WHERE Purchase_FK = "+ID;
+
+        return db.rawQuery(query,null);
+    }
+
     public  Cursor SelectProductUOM(String UOMID){
 
         SQLiteDatabase db  = this.getWritableDatabase();
