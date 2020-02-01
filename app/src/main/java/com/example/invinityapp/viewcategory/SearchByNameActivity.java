@@ -15,6 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.invinityapp.ExportAPurchaseBill.ClientAdapatare;
 import com.example.invinityapp.ExportAPurchaseBill.ClientModale;
@@ -54,7 +55,7 @@ public class SearchByNameActivity extends AppCompatActivity {
         arrayList = new ArrayList<>();
         Cursor res = db.FilterByName(filter);
 
-         ClientAdapatare adapatare = new ClientAdapatare(this,arrayList);
+         ByNameAdapatare adapatare = new ByNameAdapatare(this,arrayList);
 
         if(res.getCount() > 0){
 
@@ -65,8 +66,10 @@ public class SearchByNameActivity extends AppCompatActivity {
             }
 
             list.setAdapter(adapatare);
+            container.setVisibility(View.VISIBLE);
 
-        }
+        }else
+            Toast.makeText(this,"لم يتم العثور على الصنف !",Toast.LENGTH_SHORT).show();
 
 
          list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
