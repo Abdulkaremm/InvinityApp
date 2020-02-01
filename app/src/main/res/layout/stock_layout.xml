@@ -9,31 +9,35 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal"
-        android:weightSum="150">
+        android:orientation="horizontal">
 
 
         <LinearLayout
-            android:layout_weight="50"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <TextView
                 android:id="@+id/branchName"
-                android:layout_width="match_parent"
+                android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:text="sssss"
+                android:textColor="#000"
+
                 android:paddingRight="5dp"
+                android:padding="5dp"
                 android:textSize="14sp"
                 android:textAlignment="viewStart"/>
 
 
             <TextView
-                android:layout_width="match_parent"
+                android:id="@+id/locationName"
+                android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:text="sssss"
+                android:textColor="#000"
                 android:paddingRight="5dp"
+                android:padding="5dp"
                 android:textSize="14sp"
                 android:textAlignment="viewStart"/>
 
@@ -42,42 +46,68 @@
 
         <LinearLayout
 
-            android:layout_weight="50"
+            android:layout_weight="25"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:id="@+id/uomsname"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="sssss"/>
+                android:text="sssss"
+                android:paddingRight="5dp"
+                android:textColor="#000"
+                android:padding="5dp"
+                android:textSize="14sp"
+                android:textAlignment="center"/>
 
 
             <TextView
-                android:layout_width="wrap_content"
+                android:id="@+id/stock"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="sssss"/>
+                android:text="sssss"
+                android:paddingRight="5dp"
+                android:textColor="#000"
+                android:padding="5dp"
+                android:textSize="14sp"
+                android:textAlignment="center"/>
 
         </LinearLayout>
 
 
         <LinearLayout
 
-            android:layout_weight="50"
+            android:layout_weight="25"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="sssss"/>
+                android:id="@+id/expiredDate"
+                android:layout_width="match_parent"
+                android:layout_height="29dp"
+                android:text="انتهاء الصلاحية : "
+                android:paddingRight="5dp"
+                android:textColor="@color/colorMain"
+                android:padding="5dp"
+                android:textSize="10sp"
+                android:gravity="center"/>
 
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="sssss"/>
+                android:id="@+id/lastSync"
+                android:layout_width="match_parent"
+                android:layout_height="29dp"
+                android:text="اخر مزامنه : "
+                android:paddingRight="5dp"
+                android:padding="5dp"
+                android:textColor="@color/colorMain"
+                android:textSize="10sp"
+                android:gravity="center"/>
+
+
 
         </LinearLayout>
 
