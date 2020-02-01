@@ -18,6 +18,7 @@ package com.example.invinityapp.ExportAPurchaseBill;
         import com.baoyz.swipemenulistview.SwipeMenuCreator;
         import com.baoyz.swipemenulistview.SwipeMenuItem;
         import com.baoyz.swipemenulistview.SwipeMenuListView;
+        import com.example.invinityapp.ExportPurchaseBills;
         import com.example.invinityapp.MainActivity;
         import com.example.invinityapp.R;
         import com.example.invinityapp.inventoryitems.InfinityDB;
@@ -177,26 +178,6 @@ public class PurchaseBillActivity extends AppCompatActivity {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
@@ -233,8 +214,8 @@ public class PurchaseBillActivity extends AppCompatActivity {
 
             case R.id.sync:
 
-                //Cursor res = db.IfOpenReceiving();
-                //if(res.getCount() > 0){
+                Cursor res = db.GetAllBills();
+                if(res.getCount() > 0){
 
                     AlertDialog dialog = new AlertDialog.Builder(this)
                             .setTitle("مزامنة  الفواتير !")
@@ -242,14 +223,14 @@ public class PurchaseBillActivity extends AppCompatActivity {
                             .setPositiveButton("نعم", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
-                                    Toast.makeText(PurchaseBillActivity.this,"لم يتم إنشاء فواتير لتصديرها",Toast.LENGTH_SHORT).show();
+                                   new ExportPurchaseBills().execute(PurchaseBillActivity.this);
                                 }
                             })
                             .setNegativeButton("إلغاء", null)
                             .show();
 
-                //}else
-
+                }else
+                    Toast.makeText(PurchaseBillActivity.this,"لم يتم إنشاء فواتير لتصديرها",Toast.LENGTH_SHORT).show();
 
 
                 return true;
