@@ -157,6 +157,7 @@ public class DataOrder extends AppCompatActivity implements LoaderManager.Loader
             }
         });
 
+         // check intent
         Intent intent = getIntent();
         if(intent.hasExtra("barcode")) {
             CheckBarcode(intent.getStringExtra("barcode"));
