@@ -77,29 +77,30 @@
             android:orientation="horizontal">
 
             <LinearLayout
-                android:onClick="recievingGoodsDep"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:orientation="vertical"
                 android:padding="20dp"
+                android:onClick="PURCHASE_ORDERS"
                 android:background="@drawable/bordermain">
 
                 <ImageView
                     android:layout_width="60dp"
                     android:layout_height="60dp"
                     android:layout_gravity="center"
-                    app:srcCompat="@mipmap/ic_getbox_foreground" />
+                    app:srcCompat="@mipmap/ic_pin_foreground" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="استلام البضائع"
+                    android:text="تسجيل النواقص"
                     android:textSize="18sp"
                     android:paddingTop="10dp"
                     android:textAlignment="center" />
 
             </LinearLayout>
+
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -139,27 +140,26 @@
                 android:layout_weight="1"
                 android:orientation="vertical"
                 android:padding="20dp"
-                android:onClick="PURCHASE_ORDERS"
                 android:background="@drawable/bordermain">
 
                 <ImageView
                     android:layout_width="60dp"
                     android:layout_height="60dp"
                     android:layout_gravity="center"
-                    app:srcCompat="@mipmap/ic_pin_foreground" />
+                    app:srcCompat="@mipmap/ic_getbox_foreground" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="تسجيل النواقص"
+                    android:text="استلام البضائع"
                     android:textSize="18sp"
                     android:paddingTop="10dp"
                     android:textAlignment="center" />
 
             </LinearLayout>
 
+
             <LinearLayout
-                android:onClick="PurchaseBillsDep"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
