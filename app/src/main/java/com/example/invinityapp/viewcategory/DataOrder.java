@@ -1,6 +1,7 @@
 package com.example.invinityapp.viewcategory;
 
 import android.app.AlertDialog;
+import android.content.ClipData;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -71,6 +72,8 @@ public class DataOrder extends AppCompatActivity implements LoaderManager.Loader
     LinearLayout title;
 
     public static String api_ip;
+
+    private MenuItem item;
 
 
 
@@ -220,12 +223,12 @@ public class DataOrder extends AppCompatActivity implements LoaderManager.Loader
         MenuItem camera = menu.findItem(R.id.openCam);
         MenuItem bReader = menu.findItem(R.id.QR);
         MenuItem serch = menu.findItem(R.id.searcher);
-        MenuItem stock = menu.findItem(R.id.getStock);
+
+        item = menu.findItem(R.id.getStock);
 
         camera.setVisible(true);
         bReader.setVisible(true);
         serch.setVisible(true);
-        stock.setVisible(true);
 
 
         return true;
@@ -258,6 +261,7 @@ public class DataOrder extends AppCompatActivity implements LoaderManager.Loader
                 return true;
 
             case R.id.getStock:
+
 
                     Intent intent = new Intent(DataOrder.this, ViewDataOfStock.class);
                     startActivity(intent);
@@ -405,6 +409,7 @@ public class DataOrder extends AppCompatActivity implements LoaderManager.Loader
                 next.setVisibility(View.VISIBLE);
             }
 
+            item.setVisible(true);
             title.setVisibility(View.VISIBLE);
             scrollView.setVisibility(View.VISIBLE);
 
