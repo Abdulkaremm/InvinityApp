@@ -127,9 +127,6 @@ public class SuppliersList extends AppCompatActivity {
                 }else
                     Toast.makeText(SuppliersList.this,"هذا المورد غير موجود !",Toast.LENGTH_SHORT).show();
 
-
-
-
             }
 
     }

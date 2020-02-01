@@ -15,6 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.invinityapp.R;
 import com.example.invinityapp.goods.AddNewSup;
@@ -41,36 +42,66 @@ public class ClientsList extends AppCompatActivity {
         title = findViewById(R.id.Title);
         container = findViewById(R.id.container);
 
-        GetAllClients();
+        GetAllClients("null");
     }
 
-    private void GetAllClients(){
+    private void GetAllClients(String filter){
 
         db = new InfinityDB(this);
         clientModales = new ArrayList<>();
-
+        Cursor res;
         ClientAdapatare clientAdapatare = new ClientAdapatare(this,clientModales);
 
-        Cursor res =  db.GetAllClients();
+        if(filter.compareTo("null") == 0){
 
-        if(res.getCount() > 0){
+             res =  db.GetAllClients();
 
-            while (res.moveToNext()){
+            if(res.getCount() > 0){
 
-                clientAdapatare.add(new ClientModale(res.getString(0),res.getString(1)));
+                while (res.moveToNext()){
 
+                    clientAdapatare.add(new ClientModale(res.getString(0),res.getString(1)));
+
+                }
+
+                clientsList.setAdapter(clientAdapatare);
+
+                title.setText("قائمة الموردين");
+
+                container.setVisibility(View.VISIBLE);
+                res.close();
+            }else{
+
+                title.setText("لا يوجد زبائن لعرضهم ");
             }
 
-            clientsList.setAdapter(clientAdapatare);
-
-            title.setText("قائمة الموردين");
-
-            container.setVisibility(View.VISIBLE);
 
         }else{
 
-            title.setText("لا يوجد زبائن لعرضهم ");
+
+             res =  db.FilterClients(filter);
+
+            if(res.getCount() > 0){
+
+                while (res.moveToNext()){
+
+                    clientAdapatare.add(new ClientModale(res.getString(0),res.getString(1)));
+
+                }
+
+                clientsList.setAdapter(clientAdapatare);
+
+                title.setText("قائمة الموردين");
+
+                container.setVisibility(View.VISIBLE);
+                res.close();
+            }else{
+
+                title.setText("لا يوجد زبائن لعرضهم ");
+                Toast.makeText(this,"هذا الزبون غير موجود !",Toast.LENGTH_SHORT).show();
+            }
         }
+
 
 
         clientsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -91,6 +122,9 @@ public class ClientsList extends AppCompatActivity {
 
 
     }
+
+
+
 
 
 
@@ -116,7 +150,7 @@ public class ClientsList extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-              //  GetSupplires(newText);
+                GetAllClients(newText);
                 return false;
             }
         });
