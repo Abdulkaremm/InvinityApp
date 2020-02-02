@@ -136,8 +136,9 @@ public class ViewDataOfStock extends AppCompatActivity {
 
             String Response = "";
 
-            String url = "http://"+result.getString(11)+"//InfinityRetailAPI/v1.0/InfinityRetail/GetProductInventory?CustomerCode="+result.getString(10)+"&ProductID=232&CurrentBranchID="+ProductID_PK;
+            String url = "http://"+result.getString(11)+"//InfinityRetailAPI/v1.0/InfinityRetail/GetProductInventory?CustomerCode="+result.getString(10)+"&ProductID="+ProductID_PK+"&CurrentBranchID=0";
            // String url = "https://api.myjson.com/bins/aipaq";
+
 
 
             try {  // set connection to url
