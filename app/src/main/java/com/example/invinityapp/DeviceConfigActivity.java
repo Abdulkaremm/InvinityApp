@@ -26,7 +26,7 @@ import com.example.invinityapp.inventoryitems.InfinityDB;
 
 public class DeviceConfigActivity extends AppCompatActivity {
 
-    EditText ApiIP, customerID;
+    EditText ApiIP, customerID,OnlineAPI;
     InfinityDB db;
     TextView DeviceID,getID;
 
@@ -41,17 +41,25 @@ public class DeviceConfigActivity extends AppCompatActivity {
         getID = findViewById(R.id.getID);
         ApiIP = findViewById(R.id.ApiIP);
         customerID = findViewById(R.id.customerid);
+        OnlineAPI = findViewById(R.id.OnlineAPI);
+
         Cursor res = db.ExbordSetting();
 
         res.moveToFirst();
 
         ApiIP.setText(res.getString(7));
         customerID.setText(res.getString(10));
+       // if(!res.getString(11).isEmpty())
+            OnlineAPI.setText(res.getString(11));
+
         if(!res.getString(8).isEmpty()) {
             getID.setVisibility(View.INVISIBLE);
             DeviceID.setText(res.getString(8));
 
         }
+
+        if (OnlineAPI.getText().toString().compareTo("") == 0)
+            OnlineAPI.setHint("URL");
         res.close();
     }
 
@@ -75,9 +83,29 @@ public class DeviceConfigActivity extends AppCompatActivity {
 
     }
 
+    public void UpdateOnlineAPI(View v){
+
+
+        if (OnlineAPI.getText().toString().isEmpty()) {
+
+            Toast.makeText(this, "الرجاء ادخال الرابط", Toast.LENGTH_SHORT).show();
+
+        } else {
+
+            ContentValues data = new ContentValues();
+
+            data.put("OnlineAPI", OnlineAPI.getText().toString());
+            db.updateSetting(data);
+            Toast.makeText(this, "تم الحفظ", Toast.LENGTH_SHORT).show();
+
+
+        }
+
+    }
+
     public void updateCustomer(View v) {
 
-        if (ApiIP.toString().isEmpty()) {
+        if (customerID.getText().toString().isEmpty()) {
 
             Toast.makeText(this, "الرجاء ادخال رقم الزبون", Toast.LENGTH_SHORT).show();
 
