@@ -63,7 +63,8 @@ public class InfinityDB extends SQLiteOpenHelper {
                 " API_IP VARCHAR(50) NOT NULL,"+
                 " deviceID VARCHAR(20),"+
                 " PIN VARCHAR(100),"+
-                " CustomerID VARCHAR(50))");
+                " CustomerID VARCHAR(50),"+
+                " OnlineAPI VARCHAR(250))");
 
 
         //جدول كل الاصناف التي سيتم مزامنتها مع المنضومة الرائيسية ####################
