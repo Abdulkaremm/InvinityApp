@@ -262,6 +262,15 @@ public class DataOrder extends AppCompatActivity implements LoaderManager.Loader
 
             case R.id.getStock:
 
+                Cursor result = setting.ExbordSetting();
+                result.moveToFirst();
+
+                if(result.getString(10).compareTo("0") == 0){
+
+                    Toast.makeText(this, "عذراً . انت غير مشترك في الخدمة", Toast.LENGTH_SHORT).show();
+
+                }else{
+
                     if(checkConnect()){
 
 
@@ -284,6 +293,8 @@ public class DataOrder extends AppCompatActivity implements LoaderManager.Loader
 
                         Toast.makeText(this, "الرجاء التحقق من اتصالك بالشبكة", Toast.LENGTH_SHORT).show();
                     }
+
+                }
 
                 return true;
 

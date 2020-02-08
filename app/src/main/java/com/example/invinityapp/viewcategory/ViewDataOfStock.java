@@ -137,11 +137,14 @@ public class ViewDataOfStock extends AppCompatActivity {
             String Response = "";
 
             String url = "http://"+result.getString(11)+"//InfinityRetailAPI/v1.0/InfinityRetail/GetProductInventory?CustomerCode="+result.getString(10)+"&ProductID="+ProductID_PK+"&CurrentBranchID=0";
+
            // String url = "https://api.myjson.com/bins/aipaq";
 
 
 
             try {  // set connection to url
+
+
                 urlConnection = (HttpURLConnection) (new URL(url)).openConnection();
                 urlConnection.setRequestMethod("GET");
                 urlConnection.setRequestProperty("Content-Type", "application/json");
@@ -160,7 +163,6 @@ public class ViewDataOfStock extends AppCompatActivity {
 
                 JSONObject mainObj = new JSONObject(data);
 
-                Response = mainObj.getString("ResponseCode");
 
                 if(mainObj.getString("ResponseCode").compareTo("500") == 0){
 
@@ -179,6 +181,9 @@ public class ViewDataOfStock extends AppCompatActivity {
 
                     }
 
+                }else{
+
+                    Response = mainObj.getString("ResponseMsg");
                 }
 
 
@@ -198,8 +203,6 @@ public class ViewDataOfStock extends AppCompatActivity {
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
 
-            Log.i("data", "sad = " +s);
-
             progressBar.setVisibility(View.GONE);
 
             if(s.compareTo("500") == 0){
@@ -207,32 +210,12 @@ public class ViewDataOfStock extends AppCompatActivity {
                 StockList.setAdapter(stockAdapter);
                 StockList.setVisibility(View.VISIBLE);
 
-            }else if(s.compareTo("10") == 0){
+            }else if(s.compareTo("") == 0){
 
-                errmsg.setText("عذراً، لا يوجد بيانات لمعالجتها");
+                errmsg.setText("عذراً، لقد فشلت عملية الاتصال بالخادم");
                 errmsg.setVisibility(View.VISIBLE);
 
-            }else if(s.compareTo("11") == 0){
-
-                errmsg.setText("عذراً، يرجى تفعيل الخدمة");
-                errmsg.setVisibility(View.VISIBLE);
-
-            }else if(s.compareTo("13") == 0){
-
-                errmsg.setText("يوجد خطأ غير معروف");
-                errmsg.setVisibility(View.VISIBLE);
-
-            }else if(s.compareTo("203") == 0){
-
-                errmsg.setText("لقد انتهت الصلاحية");
-                errmsg.setVisibility(View.VISIBLE);
-
-            }else if(s.compareTo("300") == 0){
-
-                errmsg.setText("انتهت صلاحية النسخة التجريبة");
-                errmsg.setVisibility(View.VISIBLE);
-
-            }else{
+            }else {
 
                 errmsg.setText("عذراً، لقد فشلت عملية الاتصال بالخادم");
                 errmsg.setVisibility(View.VISIBLE);

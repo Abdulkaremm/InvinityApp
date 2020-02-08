@@ -274,7 +274,7 @@ public class InfinityDB extends SQLiteOpenHelper {
         values.put("API_IP", "000.000.0.0");
         values.put("deviceID", "");
         values.put("PIN", "asarya");
-        values.put("CustomerID", "00000000");
+        values.put("CustomerID", "0");
         values.put("OnlineAPI", "000.000.0.0:00");
 
         db.insert(TABLE_SETTING,null, values);
