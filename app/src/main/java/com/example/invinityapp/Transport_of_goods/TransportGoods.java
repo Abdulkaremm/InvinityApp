@@ -138,7 +138,6 @@ public class TransportGoods extends AppCompatActivity {
                         break;
 
                     case 1:
-                        Log.i("PLZ", "yes bataea = " + Integer.parseInt(DataDocument.get(position).DocumentID_PK));
 
                         Intent intent1 = new Intent(TransportGoods.this, CreateDocument.class);
 
@@ -214,9 +213,20 @@ public class TransportGoods extends AppCompatActivity {
 
             case R.id.addnew:
 
-                Intent intent2 = new Intent(TransportGoods.this, CreateDocument.class);
-                startActivity(intent2);
-                TransportGoods.this.finish();
+                Cursor resData = db.SelectAllBranchs();
+
+                if(resData.getCount() == 0){
+
+                    Toast.makeText(TransportGoods.this, "الرجاء مزامنة بيانات المنضومة", Toast.LENGTH_SHORT).show();
+
+                }else {
+
+                    Intent intent2 = new Intent(TransportGoods.this, CreateDocument.class);
+                    startActivity(intent2);
+                    TransportGoods.this.finish();
+
+                }
+
 
                 return true;
 
