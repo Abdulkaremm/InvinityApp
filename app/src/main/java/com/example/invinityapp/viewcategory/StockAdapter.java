@@ -48,6 +48,7 @@ public class StockAdapter extends ArrayAdapter<StockModel> {
         if(product.exDate.compareTo("") == 0){
 
             t5.setVisibility(View.GONE);
+
         }else{
 
             t5.setText(product.exDate);

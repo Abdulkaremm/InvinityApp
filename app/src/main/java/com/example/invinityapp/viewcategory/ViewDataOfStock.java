@@ -135,10 +135,9 @@ public class ViewDataOfStock extends AppCompatActivity {
             result.moveToFirst();
 
             String Response = "";
-
             String url = "http://"+result.getString(11)+"//InfinityRetailAPI/v1.0/InfinityRetail/GetProductInventory?CustomerCode="+result.getString(10)+"&ProductID="+ProductID_PK+"&CurrentBranchID=0";
 
-           // String url = "https://api.myjson.com/bins/aipaq";
+           //String url = "http://41.208.71.100:5252//InfinityRetailAPI/v1.0/InfinityRetail/GetProductInventory?CustomerCode=926405120&ProductID=177793&CurrentBranchID=0";
 
 
 
@@ -161,25 +160,39 @@ public class ViewDataOfStock extends AppCompatActivity {
                     data += reader.readLine();
                 }
 
+
                 JSONObject mainObj = new JSONObject(data);
 
 
                 if(mainObj.getString("ResponseCode").compareTo("500") == 0){
 
+                    Response = mainObj.getString("ResponseCode");
+
 
                     JSONArray array = mainObj.getJSONArray("Products");
 
 
+
                     for (int i = 0; i < array.length() ;i++){
-
-                        Log.i("hhh", "data = " + i);
-
 
                         JSONObject sucndObj = array.getJSONObject(i);
 
-                        stockAdapter.add(new StockModel(sucndObj.getString("BranchName"), sucndObj.getString("LocationName"), sucndObj.getString("UOMName"), sucndObj.getString("StockOnHand"), sucndObj.getString("ExpiryDate"), sucndObj.getString("SyncExpiryDate")));
+                        String ex = "لايدعم تاريخ الصلاحية";
+
+                        if(sucndObj.getString("ExpiryDate").compareTo("null") != 0){
+
+                            ex = sucndObj.getString("ExpiryDate");
+
+                        }
+                        stockAdapter.add(new StockModel(sucndObj.getString("BranchName"), sucndObj.getString("LocationName"), sucndObj.getString("UOMName"), sucndObj.getString("StockOnHand"), ex, sucndObj.getString("LastSync")));
 
                     }
+
+
+
+
+
+
 
                 }else{
 
@@ -217,7 +230,7 @@ public class ViewDataOfStock extends AppCompatActivity {
 
             }else {
 
-                errmsg.setText("عذراً، لقد فشلت عملية الاتصال بالخادم");
+                errmsg.setText(s);
                 errmsg.setVisibility(View.VISIBLE);
             }
 
