@@ -67,9 +67,8 @@ public class AddProdutWihtoutDate extends AppCompatActivity {
             barcode.setText(GetData.getStringExtra("Barcode"));
             name.setText(res.getString(1));
             Product_ID = res.getString(0);
-            BaseUnit = res.getString(4);
 
-            contacts.add(new Contact(res.getString(2), res.getString(3)));
+            contacts.add(new Contact(res.getString(2), res.getString(3), res.getString(4)));
         }
 
 
@@ -91,6 +90,7 @@ public class AddProdutWihtoutDate extends AppCompatActivity {
 
         UOMNAME = contact.contact_name;
         idUOMS = contact.contact_id;
+        BaseUnit = contact.BaseUnit;
 
         Calendar c = Calendar.getInstance();
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS");
@@ -185,13 +185,15 @@ public class AddProdutWihtoutDate extends AppCompatActivity {
     public static class Contact {
         private String contact_name;
         private String contact_id;
+        private String BaseUnit;
 
         public Contact() {
         }
 
-        public Contact(String contact_name, String contact_id) {
+        public Contact(String contact_name, String contact_id, String BaseUnit) {
             this.contact_name = contact_name;
             this.contact_id = contact_id;
+            this.BaseUnit = BaseUnit;
         }
 
         public String getContact_name() {

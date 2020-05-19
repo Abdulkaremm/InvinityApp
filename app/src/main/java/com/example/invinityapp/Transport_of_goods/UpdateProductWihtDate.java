@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.ContentValues;
 import android.content.DialogInterface;
@@ -87,9 +88,7 @@ public class UpdateProductWihtDate extends AppCompatActivity {
             barcode.setText(GetData.getStringExtra("Barcode"));
             name.setText(res.getString(1));
             Product_ID = res.getString(0);
-            BaseUnit = res.getString(4);
-
-            contacts.add(new Contact(res.getString(2), res.getString(3)));
+            contacts.add(new Contact(res.getString(2), res.getString(3), res.getString(4)));
         }
 
 
@@ -459,11 +458,12 @@ public class UpdateProductWihtDate extends AppCompatActivity {
 
             UOMNAME = contact.contact_name;
             idUOMS = contact.contact_id;
+            BaseUnit = contact.contact_id;
 
             for (int i = 0; i < data.size() ;i++) {
 
                 Calendar c = Calendar.getInstance();
-                SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS");
+                @SuppressLint("SimpleDateFormat") SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS");
                 thisTime = df.format(c.getTime());
 
                 ContentValues values = new ContentValues();
@@ -510,13 +510,15 @@ public class UpdateProductWihtDate extends AppCompatActivity {
     public static class Contact {
         private String contact_name;
         private String contact_id;
+        private String BaseUnit;
 
         public Contact() {
         }
 
-        public Contact(String contact_name, String contact_id) {
+        public Contact(String contact_name, String contact_id, String BaseUnit) {
             this.contact_name = contact_name;
             this.contact_id = contact_id;
+            this.BaseUnit = BaseUnit;
         }
 
         public String getContact_name() {

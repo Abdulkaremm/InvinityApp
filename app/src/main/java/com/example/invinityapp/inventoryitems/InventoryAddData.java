@@ -71,9 +71,8 @@ public class InventoryAddData extends AppCompatActivity {
             barcode.setText(GetData.getStringExtra("Barcode"));
             name.setText(res.getString(1));
             Product_ID = res.getString(0);
-            BaseUnit = res.getString(4);
 
-            contacts.add(new Contact(res.getString(2), res.getString(3)));
+            contacts.add(new Contact(res.getString(2), res.getString(3), res.getString(4)));
         }
 
 
@@ -82,37 +81,9 @@ public class InventoryAddData extends AppCompatActivity {
 
         spinner.setAdapter(adapter);
 
-
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
-                Contact contact = (Contact) parent.getSelectedItem();
-
-                OnSelectUOM(contact);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-                Contact contact = (Contact) parent.getSelectedItem();
-
-                OnSelectUOM(contact);
-
-            }
-        });
-
-
-
     }
 
 
-    public void OnSelectUOM(Contact v){
-
-        Contact contact = (Contact) spinner.getSelectedItem();
-        idUOMS = contact.contact_id;
-        UOMNAME = contact.contact_name;
-    }
 
 
     @Override
@@ -130,15 +101,11 @@ public class InventoryAddData extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
-        switch (item.getItemId()){
-
-            case R.id.back:
-
-                backToScan(null);
-                return true;
-
-            default: return super.onOptionsItemSelected(item);
+        if (item.getItemId() == R.id.back) {
+            backToScan(null);
+            return true;
         }
+        return super.onOptionsItemSelected(item);
 
 
     }
@@ -184,6 +151,11 @@ public class InventoryAddData extends AppCompatActivity {
 
                 } else {
 
+                    Contact contact = (Contact) spinner.getSelectedItem();
+                    idUOMS = contact.contact_id;
+                    UOMNAME = contact.contact_name;
+                    BaseUnit = contact.BaseUnit;
+
 
                     ContentValues values = new ContentValues();
                     values.put("Product_ID_PK", Product_ID);
@@ -224,13 +196,15 @@ public class InventoryAddData extends AppCompatActivity {
     public static class Contact {
         private String contact_name;
         private String contact_id;
+        private String BaseUnit;
 
         public Contact() {
         }
 
-        public Contact(String contact_name, String contact_id) {
+        public Contact(String contact_name, String contact_id, String BaseUnit) {
             this.contact_name = contact_name;
             this.contact_id = contact_id;
+            this.BaseUnit = BaseUnit;
         }
 
         public String getContact_name() {

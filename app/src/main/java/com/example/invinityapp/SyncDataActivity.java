@@ -151,11 +151,20 @@ public class SyncDataActivity extends AppCompatActivity {
         }else{
 
             ContentValues data = new ContentValues();
-            data.put("ifHasDate", result.get(0));
-            data.put("Price1", result.get(1));
-            data.put("Price2", result.get(2));
-            data.put("Price3", result.get(3));
-            data.put("Price4", result.get(4));
+            for(int i = 0 ; i < result.size() ;i++){
+
+                switch (i){
+
+                    case 0: data.put("ifHasDate", result.get(0)); break;
+                    case 1: data.put("Price1", result.get(1)); break;
+                    case 2: data.put("Price2", result.get(2)); break;
+                    case 3: data.put("Price3", result.get(3)); break;
+                    case 4: data.put("Price4", result.get(4)); break;
+
+                }
+
+            }
+
 
             int res = myDB.updateSetting(data);
 

@@ -36,7 +36,7 @@ import java.util.Date;
 
 public class UpdateDate extends AppCompatActivity {
 
-    public static String id_data, productID, idUOMS, UOMNAME;
+    public static String id_data, productID, idUOMS, UOMNAME, BaseUnit;
     public EditText quntity;
     public TextView  barcode, name, beforeUpdate;
     public Spinner spinner;
@@ -87,7 +87,7 @@ public class UpdateDate extends AppCompatActivity {
 
         while (res.moveToNext()){
 
-            contacts.add(new Contact(res.getString(0), res.getString(1)));
+            contacts.add(new Contact(res.getString(0), res.getString(1), res.getString(2)));
 
         }
         res.close();
@@ -110,29 +110,6 @@ public class UpdateDate extends AppCompatActivity {
         }
 
         res.close();
-
-
-
-
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
-                Contact contact = (Contact) parent.getSelectedItem();
-
-                OnSelectUOM(contact);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-                Contact contact = (Contact) parent.getSelectedItem();
-
-                OnSelectUOM(contact);
-
-            }
-        });
-
 
 
     }
@@ -257,10 +234,15 @@ public class UpdateDate extends AppCompatActivity {
                 qunt += qunt_before_update;
             }
 
+            UpdateDate.Contact contact = (UpdateDate.Contact) spinner.getSelectedItem();
+            idUOMS = contact.contact_id;
+            UOMNAME = contact.contact_name;
+            BaseUnit = contact.BaseUnit;
 
             values.put("cat_id", id_data);
             values.put("UOMName", UOMNAME);
             values.put("UOMID_PK", idUOMS);
+            values.put("BaseUnitQ", BaseUnit);
             values.put("quantity", Integer.toString(qunt));
             values.put("endDate", "");
             values.put("dateTime", thisTime);
@@ -305,23 +287,18 @@ public class UpdateDate extends AppCompatActivity {
 
     }
 
-    public void OnSelectUOM(Contact v){
-
-        UpdateDate.Contact contact = (UpdateDate.Contact) spinner.getSelectedItem();
-        idUOMS = contact.contact_id;
-        UOMNAME = contact.contact_name;
-    }
-
     private class Contact {
         private String contact_name;
         private String contact_id;
+        private String BaseUnit;
 
         public Contact() {
         }
 
-        public Contact(String contact_name, String contact_id) {
+        public Contact(String contact_name, String contact_id, String BaseUnit) {
             this.contact_name = contact_name;
             this.contact_id = contact_id;
+            this.BaseUnit = BaseUnit;
         }
 
         public String getContact_name() {

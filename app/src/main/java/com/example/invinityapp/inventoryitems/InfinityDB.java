@@ -637,7 +637,7 @@ public class InfinityDB extends SQLiteOpenHelper {
         SQLiteDatabase db  = this.getWritableDatabase();
 
 
-        String sqlq = "SELECT t2.UOM_NAME, t2.UOMID_PK FROM "+
+        String sqlq = "SELECT t2.UOM_NAME, t2.UOMID_PK, BaseUnit FROM "+
                 " Data_Products AS t1 INNER JOIN Data_Products_UOMS AS t2 ON t1.Product_ID_PK = t2.ProductID_FK WHERE t1.Product_ID_PK = ?";
 
         Cursor res  = db.rawQuery(sqlq, new String[]{id});

@@ -89,36 +89,14 @@ public class ProductHaveDate extends AppCompatActivity {
             barcode.setText(GetData.getStringExtra("Barcode"));
             name.setText(res.getString(1));
             Product_ID = res.getString(0);
-            BaseUnit = res.getString(4);
 
-            contacts.add(new Contact(res.getString(2), res.getString(3)));
+            contacts.add(new Contact(res.getString(2), res.getString(3), res.getString(4)));
         }
 
         ArrayAdapter<Contact> adapter = new ArrayAdapter<Contact>(getApplicationContext(),  android.R.layout.simple_spinner_dropdown_item, contacts);
         adapter.setDropDownViewResource( android.R.layout.simple_spinner_dropdown_item);
 
         spinner.setAdapter(adapter);
-
-
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
-               Contact contact = (Contact) parent.getSelectedItem();
-
-                OnSelectUOM(contact);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-                Contact contact = (Contact) parent.getSelectedItem();
-
-                OnSelectUOM(contact);
-
-            }
-        });
-
 
         layoutManager = new LinearLayoutManager(this);
         RecyclerViewAdapter = new DateAdabter(data);
@@ -391,15 +369,11 @@ public class ProductHaveDate extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
-        switch (item.getItemId()){
-
-            case R.id.back:
-
-                backToScan(null);
-                return true;
-
-            default: return super.onOptionsItemSelected(item);
+        if (item.getItemId() == R.id.back) {
+            backToScan(null);
+            return true;
         }
+        return super.onOptionsItemSelected(item);
 
 
     }
@@ -413,12 +387,6 @@ public class ProductHaveDate extends AppCompatActivity {
         this.finish();
     }
 
-    public void OnSelectUOM(Contact v){
-
-        Contact contact = (Contact) spinner.getSelectedItem();
-        idUOMS = contact.contact_id;
-        UOMNAME = contact.contact_name;
-    }
 
     public void addItem(View view){
 
@@ -450,6 +418,11 @@ public class ProductHaveDate extends AppCompatActivity {
                     Calendar c = Calendar.getInstance();
                     SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS");
                     thisTime = df.format(c.getTime());
+                    Contact contact = (Contact) spinner.getSelectedItem();
+                    idUOMS = contact.contact_id;
+                    UOMNAME = contact.contact_name;
+                    BaseUnit = contact.BaseUnit;
+
 
 
                     ContentValues values = new ContentValues();
@@ -490,15 +463,16 @@ public class ProductHaveDate extends AppCompatActivity {
     public static class Contact {
         private String contact_name;
         private String contact_id;
+        private String BaseUnit;
 
         public Contact() {
         }
 
-        public Contact(String contact_name, String contact_id) {
+        public Contact(String contact_name, String contact_id, String BaseUnit) {
             this.contact_name = contact_name;
             this.contact_id = contact_id;
+            this.BaseUnit = BaseUnit;
         }
-
         public String getContact_name() {
             return contact_name;
         }

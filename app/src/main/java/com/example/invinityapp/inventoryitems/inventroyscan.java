@@ -49,6 +49,7 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.ProtocolException;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -443,7 +444,7 @@ public class inventroyscan extends AppCompatActivity {
                 urlConnection.connect();
                 // write
                 OutputStream outputStream = urlConnection.getOutputStream();
-                BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
+                BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(outputStream, StandardCharsets.UTF_8));
                 writer.write(jsonArray.toString());
                 writer.close();
                 outputStream.close();
@@ -452,16 +453,11 @@ public class inventroyscan extends AppCompatActivity {
                 //// read
 
                 InputStream inputStream = urlConnection.getInputStream();
-                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "utf-8"));
-                String line = bufferedReader.readLine();
-                return line;
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8));
+                return bufferedReader.readLine();
 
 
-            } catch (ProtocolException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (JSONException e) {
+            } catch (IOException | JSONException e) {
                 e.printStackTrace();
             }
 

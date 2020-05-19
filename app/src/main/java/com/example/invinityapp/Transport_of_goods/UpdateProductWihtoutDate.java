@@ -3,6 +3,7 @@ package com.example.invinityapp.Transport_of_goods;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
@@ -28,7 +29,7 @@ import java.util.Calendar;
 public class UpdateProductWihtoutDate extends AppCompatActivity {
 
 
-    private static String id_data, productID, idUOMS, UOMNAME;
+    private static String id_data, productID, idUOMS, UOMNAME, BaseUnit;
     private EditText quntity;
     private TextView barcode, name, beforeUpdate;
     private Spinner spinner;
@@ -62,7 +63,6 @@ public class UpdateProductWihtoutDate extends AppCompatActivity {
             hasExtra = false;
         }
 
-        Log.i("SSDA", "data = " + hasExtra);
 
 
         beforeUpdate.setText(intent.getStringExtra("qun"));
@@ -76,7 +76,7 @@ public class UpdateProductWihtoutDate extends AppCompatActivity {
 
         while (res.moveToNext()){
 
-            contacts.add(new Contact(res.getString(0), res.getString(1)));
+            contacts.add(new Contact(res.getString(0), res.getString(1), res.getString(2)));
 
         }
 
@@ -187,7 +187,7 @@ public class UpdateProductWihtoutDate extends AppCompatActivity {
 
             ContentValues values = new ContentValues();
             Calendar c = Calendar.getInstance();
-            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS");
+            @SuppressLint("SimpleDateFormat") SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS");
 
 
             String thisTime = df.format(c.getTime());
@@ -203,11 +203,14 @@ public class UpdateProductWihtoutDate extends AppCompatActivity {
             Contact contact = (Contact) spinner.getSelectedItem();
             UOMNAME = contact.contact_name;
             idUOMS = contact.contact_id;
+            BaseUnit = contact.BaseUnit;
+
 
 
             values.put("DocProductID", id_data);
             values.put("UOMName", UOMNAME);
             values.put("UOMID_PK", idUOMS);
+            values.put("BaseUnitQ", BaseUnit);
             values.put("quantity", Integer.toString(qunt));
             values.put("endDate", "");
             values.put("dateTime", thisTime);
@@ -238,13 +241,15 @@ public class UpdateProductWihtoutDate extends AppCompatActivity {
     private class Contact {
         private String contact_name;
         private String contact_id;
+        private String BaseUnit;
 
         public Contact() {
         }
 
-        public Contact(String contact_name, String contact_id) {
+        public Contact(String contact_name, String contact_id, String BaseUnit) {
             this.contact_name = contact_name;
             this.contact_id = contact_id;
+            this.BaseUnit = BaseUnit;
         }
 
         public String getContact_name() {

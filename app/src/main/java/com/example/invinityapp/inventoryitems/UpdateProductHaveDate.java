@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.ContentValues;
@@ -92,9 +93,8 @@ public class UpdateProductHaveDate extends AppCompatActivity {
             barcode.setText(GetData.getStringExtra("Barcode"));
             name.setText(res.getString(1));
             Product_ID = res.getString(0);
-            BaseUnit = res.getString(4);
 
-            contacts.add(new Contact(res.getString(2), res.getString(3)));
+            contacts.add(new Contact(res.getString(2), res.getString(3), res.getString(4)));
         }
 
 
@@ -136,25 +136,6 @@ public class UpdateProductHaveDate extends AppCompatActivity {
 
         SumQun.setText(Integer.toString(sum));
         layout.setVisibility(View.VISIBLE);
-
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
-                Contact contact = (Contact) parent.getSelectedItem();
-
-                OnSelectUOM(contact);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-                Contact contact = (Contact) parent.getSelectedItem();
-
-                OnSelectUOM(contact);
-
-            }
-        });
 
 
         layoutManager = new LinearLayoutManager(this);
@@ -468,12 +449,6 @@ public class UpdateProductHaveDate extends AppCompatActivity {
         }
     }
 
-    public void OnSelectUOM(Contact v){
-
-        Contact contact = (Contact) spinner.getSelectedItem();
-        idUOMS = contact.contact_id;
-        UOMNAME = contact.contact_name;
-    }
 
     public void update(View view){
 
@@ -504,8 +479,13 @@ public class UpdateProductHaveDate extends AppCompatActivity {
             for (int i = 0; i < data.size() ;i++) {
 
                 Calendar c = Calendar.getInstance();
-                SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS");
+                @SuppressLint("SimpleDateFormat") SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS");
                 thisTime = df.format(c.getTime());
+
+                Contact contact = (Contact) spinner.getSelectedItem();
+                idUOMS = contact.contact_id;
+                UOMNAME = contact.contact_name;
+                BaseUnit = contact.BaseUnit;
 
                 ContentValues values = new ContentValues();
                 values.put("Product_ID_PK", Product_ID);
@@ -545,13 +525,15 @@ public class UpdateProductHaveDate extends AppCompatActivity {
     public static class Contact {
         private String contact_name;
         private String contact_id;
+        private String BaseUnit;
 
         public Contact() {
         }
 
-        public Contact(String contact_name, String contact_id) {
+        public Contact(String contact_name, String contact_id, String BaseUnit) {
             this.contact_name = contact_name;
             this.contact_id = contact_id;
+            this.BaseUnit = BaseUnit;
         }
 
         public String getContact_name() {
