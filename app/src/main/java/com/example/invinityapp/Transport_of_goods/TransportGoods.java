@@ -214,7 +214,6 @@ public class TransportGoods extends AppCompatActivity {
             case R.id.addnew:
 
                 Cursor resData = db.SelectAllBranchs();
-
                 if(resData.getCount() == 0){
 
                     Toast.makeText(TransportGoods.this, "الرجاء مزامنة بيانات المنضومة", Toast.LENGTH_SHORT).show();

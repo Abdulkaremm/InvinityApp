@@ -1003,9 +1003,8 @@ public class InfinityDB extends SQLiteOpenHelper {
         SQLiteDatabase db  = this.getWritableDatabase();
 
         String query = "SELECT BranchID_PK,  BranchName FROM "+BRANCH;
-        Cursor res = db.rawQuery(query,null);
 
-        return res ;
+        return db.rawQuery(query,null);
     }
 
 
