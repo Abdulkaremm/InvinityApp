@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.invinityapp">
 
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
@@ -7,6 +8,8 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.READ_PRIVILEGED_PHONE_STATE"
+        tools:ignore="ProtectedPermissions" />
 
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
@@ -17,8 +20,10 @@
         android:label="@string/app_name"
         android:largeHeap="true"
         android:roundIcon="@mipmap/ic_launcher_round"
+        android:usesCleartextTraffic="true"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        tools:targetApi="m">
         <activity android:name=".viewcategory.SearchByNameActivity"></activity>
         <activity android:name=".viewcategory.ViewDataOfStock" />
         <activity android:name=".ExportAPurchaseBill.EditProduct" />

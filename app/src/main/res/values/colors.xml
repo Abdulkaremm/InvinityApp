@@ -8,4 +8,5 @@
     <color name="colorGray">#DDDDDD</color>
     <color name="colorDanger">#dc3545</color>
     <color name="colorSuccess">#28A745</color>
+    <color name="colorSuc2">#009688</color>
 </resources>

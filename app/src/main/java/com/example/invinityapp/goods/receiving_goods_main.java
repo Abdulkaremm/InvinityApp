@@ -66,7 +66,7 @@ public class receiving_goods_main extends AppCompatActivity {
 
                 Add.setBackground(R.color.colorMain);
                 // set item width
-                Add.setWidth(100);
+                Add.setWidth(170);
                 // set item title
                 Add.setIcon(R.drawable.ic_add_new);
 
@@ -83,12 +83,25 @@ public class receiving_goods_main extends AppCompatActivity {
 
                 view.setBackground(R.color.colorSuccess);
                 // set item width
-                view.setWidth(100);
+                view.setWidth(170);
                 // set item title
                 view.setIcon(R.drawable.ic_view);
 
                 // add to menu
                 menu.addMenuItem(view);
+
+                SwipeMenuItem sync = new SwipeMenuItem(getApplicationContext());
+
+                // set item background
+
+                sync.setBackground(R.color.colorSuc2);
+                // set item width
+                sync.setWidth(170);
+                // set item title
+                sync.setIcon(R.drawable.ic_sync_black_24dp);
+
+                // add to menu
+                menu.addMenuItem(sync);
 
                 // create "open" item
 
@@ -98,7 +111,7 @@ public class receiving_goods_main extends AppCompatActivity {
 
                 delete.setBackground(R.color.colorDanger);
                 // set item width
-                delete.setWidth(100);
+                delete.setWidth(170);
                 // set item title
                 delete.setIcon(R.drawable.ic_delete);
 
@@ -119,7 +132,7 @@ public class receiving_goods_main extends AppCompatActivity {
     private void IfOpenReceiving(){
 
 
-        Cursor res = db.IfOpenReceiving();
+        Cursor res = db.IfOpenReceiving("all");
 
 
 
@@ -160,6 +173,38 @@ public class receiving_goods_main extends AppCompatActivity {
                             break;
 
                         case 2:
+
+                            Cursor res = db.IfOpenReceiving("all");
+                            if(res.getCount() > 0){
+
+                                AlertDialog dialog = new AlertDialog.Builder(receiving_goods_main.this)
+                                        .setTitle("مزامنة البضائع المستلمة !")
+                                        .setMessage("هل انت متأكد من عملية المزامنة ؟")
+                                        .setPositiveButton("نعم", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialog, int which) {
+
+                                                progressDialog.show();
+                                                new ExportReceivedGoods(IDs.get(position)).execute(receiving_goods_main.this);
+                                                progressDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                                                    @Override
+                                                    public void onDismiss(DialogInterface dialog) {
+                                                        Intent intent = new Intent(receiving_goods_main.this, receiving_goods_main.class);
+                                                        startActivity(intent);
+                                                        finish();
+                                                    }
+                                                });
+
+                                            }
+                                        })
+                                        .setNegativeButton("إلغاء", null)
+                                        .show();
+
+                            }else
+                                Toast.makeText(receiving_goods_main.this,"لم يتم استلام بضائع لتصديرها",Toast.LENGTH_SHORT).show();
+                            break;
+
+                        case 3:
 
                             AlertDialog dialog = new AlertDialog.Builder(receiving_goods_main.this)
                                     .setTitle("مسح صنف !")
@@ -233,7 +278,7 @@ public class receiving_goods_main extends AppCompatActivity {
 
             case R.id.sync:
 
-                Cursor res = db.IfOpenReceiving();
+                Cursor res = db.IfOpenReceiving("all");
                 if(res.getCount() > 0){
 
                     AlertDialog dialog = new AlertDialog.Builder(receiving_goods_main.this)
@@ -244,7 +289,7 @@ public class receiving_goods_main extends AppCompatActivity {
                                 public void onClick(DialogInterface dialog, int which) {
 
                                     progressDialog.show();
-                                    new ExportReceivedGoods().execute(receiving_goods_main.this);
+                                    new ExportReceivedGoods("all").execute(receiving_goods_main.this);
                                     progressDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
                                         @Override
                                         public void onDismiss(DialogInterface dialog) {

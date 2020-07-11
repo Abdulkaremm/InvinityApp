@@ -91,17 +91,17 @@ public class ReceiveGoods extends AppCompatActivity {
 
 
         dialog = new AlertDialog.Builder(this)
-                .setTitle("هذا الصنف غير موجود!")
-                .setMessage("هل تود أضافته كصنف جديد ؟")
-                .setPositiveButton("نعم", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        AddNewProduct();
-
-                        dialog.dismiss();
-                    }
-                })
-                .setNegativeButton("الغاء", new DialogInterface.OnClickListener() {
+                .setTitle("خطأ !")
+                .setMessage("هذا الصنف غير موجد.")
+//                .setPositiveButton("نعم", new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//                        AddNewProduct();
+//
+//                        dialog.dismiss();
+//                    }
+//                })
+                .setNegativeButton("موافق", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         linearLayout.setVisibility(View.VISIBLE);
@@ -154,7 +154,7 @@ public class ReceiveGoods extends AppCompatActivity {
 
                 delete.setBackground(R.color.colorDanger);
                 // set item width
-                delete.setWidth(100);
+                delete.setWidth(170);
                 // set item title
                 delete.setIcon(R.drawable.ic_delete);
 
@@ -169,7 +169,7 @@ public class ReceiveGoods extends AppCompatActivity {
 
                 Edit.setBackground(R.color.colorSuccess);
                 // set item width
-                Edit.setWidth(100);
+                Edit.setWidth(170);
                 // set item title
                 Edit.setIcon(R.drawable.ic_update);
 

@@ -696,13 +696,25 @@ public class InfinityDB extends SQLiteOpenHelper {
     }
 
 
-    public Cursor IfOpenReceiving(){
+    public Cursor IfOpenReceiving(String id){
 
         SQLiteDatabase db  = this.getWritableDatabase();
 
-        String query = "SELECT Supplier_PK ,Supplier_Name ,Receive_Date ,Bill_Number, SupplierID_FK FROM "+ RECEIVE_FROM_SUPPLIERS + " ORDER BY Supplier_PK DESC";
+        if(id.compareTo("all") == 0){
 
-        return db.rawQuery(query,null);
+            String query = "SELECT Supplier_PK ,Supplier_Name ,Receive_Date ,Bill_Number, SupplierID_FK FROM "+ RECEIVE_FROM_SUPPLIERS + " ORDER BY Supplier_PK DESC";
+
+            return db.rawQuery(query,null);
+
+        }else{
+
+            String query = "SELECT Supplier_PK ,Supplier_Name ,Receive_Date ,Bill_Number, SupplierID_FK FROM "+ RECEIVE_FROM_SUPPLIERS + " WHERE  Supplier_PK = ?" + " ORDER BY Supplier_PK DESC";
+            return db.rawQuery(query,new String[]{id});
+
+        }
+
+
+
     }
 
     public Cursor GetGoodsBySupllier(int ID){

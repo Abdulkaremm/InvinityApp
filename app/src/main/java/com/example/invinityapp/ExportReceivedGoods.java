@@ -24,11 +24,19 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
+import java.util.Objects;
 
 public class ExportReceivedGoods extends AsyncTask<Context,Void,Boolean> {
 
     @SuppressLint("StaticFieldLeak")
     Context context;
+    String id;
+    public ExportReceivedGoods(String ID){
+
+        this.id = ID;
+    }
+
     @Override
     protected Boolean doInBackground(Context... contexts) {
 
@@ -46,7 +54,11 @@ public class ExportReceivedGoods extends AsyncTask<Context,Void,Boolean> {
 
         try {
 
-            Cursor res =  db.IfOpenReceiving();
+
+
+            Cursor res =  db.IfOpenReceiving(id);
+
+
             if(res.getCount() > 0){
 
 
@@ -100,6 +112,8 @@ public class ExportReceivedGoods extends AsyncTask<Context,Void,Boolean> {
                 } // while-1 end here
 
 
+                Log.i("OBJ",  Receive.toString());
+
                 urlConnection = (HttpURLConnection) ((new URL(url).openConnection()));
                 urlConnection.setDoOutput(true);
                 urlConnection.setRequestMethod("POST");
@@ -109,7 +123,7 @@ public class ExportReceivedGoods extends AsyncTask<Context,Void,Boolean> {
                 // write
 
                 outputStream = urlConnection.getOutputStream();
-                writer = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
+                writer = new BufferedWriter(new OutputStreamWriter(outputStream, StandardCharsets.UTF_8));
                 writer.write(Receive.toString());
                 writer.close();
                 outputStream.close();
@@ -118,8 +132,10 @@ public class ExportReceivedGoods extends AsyncTask<Context,Void,Boolean> {
                 //// read
 
                 InputStream inputStream = urlConnection.getInputStream();
-                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "utf-8"));
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8));
                 line = bufferedReader.readLine();
+
+
 
                 if(line.compareTo("true") == 0){
 
@@ -148,7 +164,7 @@ public class ExportReceivedGoods extends AsyncTask<Context,Void,Boolean> {
         if(state)
             Toast.makeText(context,"تمت عملية التصدير بنجاح",Toast.LENGTH_SHORT).show();
         else
-            Toast.makeText(context,"فشلت عملية التصدير",Toast.LENGTH_SHORT).show();
+        Toast.makeText(context,"فشلت عملية التصدير",Toast.LENGTH_SHORT).show();
 
     }
 }

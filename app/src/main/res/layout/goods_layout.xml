@@ -7,6 +7,8 @@
     android:padding="5dp">
 
     <LinearLayout
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -16,9 +18,9 @@
         <TextView
             android:id="@+id/productName"
             android:text="Name here"
-            android:textSize="18dp"
+            android:textSize="14sp"
             android:textColor="#000"
-            android:textDirection="rtl"
+            android:textAlignment="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="50"/>
@@ -26,8 +28,8 @@
         <TextView
             android:id="@+id/ProductQun"
             android:text="Quantity"
-            android:textSize="14dp"
-            android:textColor="#000"
+            android:textSize="14sp"
+            android:textColor="@color/colorPrimary"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAlignment="center"
@@ -37,6 +39,8 @@
     </LinearLayout>
 
     <LinearLayout
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -46,7 +50,7 @@
         <TextView
             android:id="@+id/ProductBar"
             android:text="Barcode"
-            android:textSize="16dp"
+            android:textSize="16sp"
             android:textAlignment="center"
             android:textColor="#000"
             android:textDirection="rtl"
@@ -57,7 +61,7 @@
         <TextView
             android:id="@+id/productUN"
             android:text="Unite"
-            android:textSize="16dp"
+            android:textSize="16sp"
             android:textColor="#000"
             android:textAlignment="center"
             android:layout_width="wrap_content"

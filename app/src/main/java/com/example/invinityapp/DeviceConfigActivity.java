@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
@@ -138,7 +139,8 @@ public class DeviceConfigActivity extends AppCompatActivity {
         }
         else {
 
-            String Id = telephonyManager.getDeviceId();
+            assert telephonyManager != null;
+            @SuppressLint("HardwareIds") String Id = telephonyManager.getDeviceId();
             DeviceID.setText(Id);
             ContentValues data = new ContentValues();
             data.put("deviceID", DeviceID.getText().toString());

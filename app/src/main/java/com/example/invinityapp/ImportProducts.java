@@ -23,6 +23,7 @@ import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+import java.util.Objects;
 
 public class ImportProducts extends AsyncTask<Context,Void,Integer> {
 
@@ -153,10 +154,9 @@ public class ImportProducts extends AsyncTask<Context,Void,Integer> {
 
             return i; // if the response is ok
 
-        } catch (IOException e) {
+        } catch (IOException | JSONException e) {
             e.printStackTrace();
-        } catch (JSONException e) {
-            e.printStackTrace();
+            Log.i("ERROR MSG", Objects.requireNonNull(e.getMessage()));
         }
 
 
