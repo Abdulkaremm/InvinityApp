@@ -9,6 +9,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -82,6 +83,9 @@ public class ReceiveGoods extends AppCompatActivity {
         linearLayout = findViewById(R.id.list);
         ExDate = findViewById(R.id.ExDate);
         mines = findViewById(R.id.mines);
+
+        packageing.setEnabled(false);
+
 
         Intent intent = getIntent();
 
@@ -246,19 +250,18 @@ public class ReceiveGoods extends AppCompatActivity {
         Cursor result;
 
         result = db.LastAddedGoods(SuppllierID);
-
         productsModels = new ArrayList<>();
 
         GoodsListAdaptare productAdabter =new GoodsListAdaptare(this, productsModels);
 
-        if(result.getCount() > 0){
+        if(result.getCount() >= 1){
             while (result.moveToNext()){
 
                 Cursor res1 = db.LastGoodUnit(result.getString(4),result.getString(5));
                 if(res1.getCount() > 0){
                     res1.moveToFirst();
                 }
-                productAdabter.add(new ProductsModel(result.getString(0), result.getString(3),result.getString(1), result.getString(2), res1.getString(0)));
+                productAdabter.add(new ProductsModel(result.getString(0), result.getString(3),result.getString(1), result.getString(2), res1.getString(0), result.getString(6)));
             }
 
 
@@ -318,71 +321,11 @@ public class ReceiveGoods extends AppCompatActivity {
 
      linearLayout.setVisibility(View.GONE);
       Barcode.setEnabled(false);
-     Cursor res;
-      res = db.isbarcodeExist(barcode);
-     ArrayList<Contact> contacts = new ArrayList<>();
-
+     final Cursor res = db.isbarcodeExist(barcode);
+     
       if(res.getCount() > 0){
-          res.moveToFirst();
-          productID = res.getString(0);
-          Productname.setText(res.getString(1));
-          Productname.setEnabled(false);
-          if(res.getString(2).compareTo("6") != 0)
-              ExDate.setVisibility(View.GONE);
 
-          Isnew = false;
-           res.close();
-           res = db.GetBarUnits(Integer.parseInt(productID));
-           if(res.getCount() > 0)
-              while (res.moveToNext())
-                  contacts.add(new Contact(res.getString(0), res.getString(1),res.getString(2)));
-
-
-          ArrayAdapter<Contact> adapter =
-                  new ArrayAdapter<>(getApplicationContext(),  android.R.layout.simple_spinner_dropdown_item, contacts);
-          adapter.setDropDownViewResource( android.R.layout.simple_spinner_dropdown_item);
-
-          units.setAdapter(adapter);
-
-
-          units.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-              @Override
-              public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
-                  Contact contact = (Contact) parent.getSelectedItem();
-                  UnitName = contact.contact_name;
-                  UnitID = contact.contact_id;
-                  baseunit =contact.BaseUnit;
-                  if(baseunit.compareTo("new") != 0){
-                      packageing.setText(baseunit);
-                      packageing.setEnabled(false);
-                  }else
-                      packageing.setEnabled(true);
-
-              }
-
-              @Override
-              public void onNothingSelected(AdapterView<?> parent) {
-
-                  Contact contact = (Contact) parent.getSelectedItem();
-                  UnitName = contact.contact_name;
-                  UnitID = contact.contact_id;
-                  baseunit =contact.BaseUnit;
-                  if(baseunit.compareTo("new") != 0){
-                      packageing.setText(baseunit);
-                      packageing.setEnabled(false);
-                  }else
-                      packageing.setEnabled(true);
-              }
-          });
-
-
-
-          container.setVisibility(View.VISIBLE);
-      }else{
-
-
-          final Cursor result = db.GetProductIfExist(Barcode.getText().toString(),Integer.parseInt(SuppllierID));
+          final Cursor result = db.GetProductIfExist(Barcode.getText().toString(),SuppllierID);
           if(result.getCount() > 0){
 
               AlertDialog dialog = new AlertDialog.Builder(ReceiveGoods.this)
@@ -391,7 +334,7 @@ public class ReceiveGoods extends AppCompatActivity {
                       .setPositiveButton("إضافة", new DialogInterface.OnClickListener() {
                           @Override
                           public void onClick(DialogInterface dialog, int which) {
-                              AddNewProduct();
+                              AddNewProduct(res);
                           }
                       })
                       .setNegativeButton("تعديل", new DialogInterface.OnClickListener() {
@@ -407,76 +350,158 @@ public class ReceiveGoods extends AppCompatActivity {
                                   intent.putExtra("ACTIVITY","Receive");
                                   startActivity(intent);
                                   finish();
+                              }else{
+                                  Intent intent = new Intent(ReceiveGoods.this, RepetedProduct.class);
+                                  intent.putExtra("SupplierID",SuppllierID);
+                                  intent.putExtra("barcode",Barcode.getText().toString());
+                                  startActivity(intent);
+                                  ReceiveGoods.this.finish();
                               }
                           }
                       })
                       .setNeutralButton("إلغاء", null)
                       .show();
 
-          }else
-            dialog.show();
+          }else {
 
-      }
+                AddNewProduct(res);
+
+          }
+      }else   dialog.show();
+
 
 
 
  }
 
+    public  void  AddNewProduct(Cursor res){
 
 
+        ArrayList<Contact> contacts = new ArrayList<>();
+        res.moveToFirst();
+        productID = res.getString(0);
+        Productname.setText(res.getString(1));
+        Productname.setEnabled(false);
+        if (res.getString(2).compareTo("6") != 0)
+            ExDate.setVisibility(View.GONE);
 
- public  void  AddNewProduct(){
+        Isnew = false;
+        res.close();
+        res = db.GetBarUnits(Integer.parseInt(productID));
+
+        if (res.getCount() > 1) {
+
+            contacts.add(new Contact("none", "اختر واحدة", "0"));
+
+        }
+        if (res.getCount() > 0)
+            while (res.moveToNext())
+                contacts.add(new Contact(res.getString(0), res.getString(1), res.getString(2)));
 
 
+        ArrayAdapter<Contact> adapter =
+                new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, contacts);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-        Cursor res;
-        res =db.GetAllUnits();
-     ArrayList<Contact> contacts = new ArrayList<>();
-     Isnew = true;
-     productID = "-1";
-     if(res.getCount() > 0)
-         while (res.moveToNext())
-             contacts.add(new Contact(res.getString(0), res.getString(1),"new"));
-
-     ArrayAdapter<Contact> adapter =
-             new ArrayAdapter<>(getApplicationContext(),android.R.layout.simple_spinner_dropdown_item, contacts);
-     adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-     units.setAdapter(adapter);
+        units.setAdapter(adapter);
 
 
-     units.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-         @Override
-         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        units.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-             Contact contact = (Contact) parent.getSelectedItem();
-             UnitName = contact.contact_name;
-             UnitID = contact.contact_id;
+                Contact contact = (Contact) parent.getSelectedItem();
+                UnitName = contact.contact_name;
+                UnitID = contact.contact_id;
+                baseunit = contact.BaseUnit;
+                if (baseunit.compareTo("new") != 0) {
+                    packageing.setText(baseunit);
+                    packageing.setEnabled(false);
+                } else
+                    packageing.setEnabled(true);
 
-         }
+            }
 
-         @Override
-         public void onNothingSelected(AdapterView<?> parent) {
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
 
-             Contact contact = (Contact) parent.getSelectedItem();
-             UnitName = contact.contact_name;
-             UnitID = contact.contact_id;
-         }
-     });
+                Contact contact = (Contact) parent.getSelectedItem();
+                UnitName = contact.contact_name;
+                UnitID = contact.contact_id;
+                baseunit = contact.BaseUnit;
+                if (baseunit.compareTo("new") != 0) {
+                    packageing.setText(baseunit);
+                    packageing.setEnabled(false);
+                } else
+                    packageing.setEnabled(true);
+            }
+        });
 
-     container.setVisibility(View.VISIBLE);
-}
+
+        container.setVisibility(View.VISIBLE);
+    }
+
+
+// public  void  AddNewProduct(){
+//
+//
+//
+//        Cursor res;
+//        res =db.GetAllUnits();
+//     ArrayList<Contact> contacts = new ArrayList<>();
+//     Isnew = true;
+//     productID = "-1";
+//     if(res.getCount() > 0)
+//         while (res.moveToNext())
+//             contacts.add(new Contact(res.getString(0), res.getString(1),"new"));
+//
+//     ArrayAdapter<Contact> adapter =
+//             new ArrayAdapter<>(getApplicationContext(),android.R.layout.simple_spinner_dropdown_item, contacts);
+//     adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//
+//     units.setAdapter(adapter);
+//
+//
+//     units.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//         @Override
+//         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+//
+//             Contact contact = (Contact) parent.getSelectedItem();
+//             UnitName = contact.contact_name;
+//             UnitID = contact.contact_id;
+//
+//         }
+//
+//         @Override
+//         public void onNothingSelected(AdapterView<?> parent) {
+//
+//             Contact contact = (Contact) parent.getSelectedItem();
+//             UnitName = contact.contact_name;
+//             UnitID = contact.contact_id;
+//         }
+//     });
+//
+//     container.setVisibility(View.VISIBLE);
+//}
 
 
    public void AddIntoDataBase(View view){
 
+       Contact contact = (Contact) units.getSelectedItem();
+      Cursor res = db.ExbordSetting();
+        res.moveToFirst();
+        String useExDate = res.getString(12);
+        res.close();
         if(Productname.getText().toString().isEmpty())
             Toast.makeText(this,"الرجاء تعبة اسم الصنف",Toast.LENGTH_SHORT).show();
-        else if(quantity.getText().toString().isEmpty())
-                Toast.makeText(this,"الرجاء تعبة الكمية",Toast.LENGTH_SHORT).show();
-             else if(packageing.getText().toString().isEmpty())
-                   Toast.makeText(this,"الرجاء تعبة العبوة",Toast.LENGTH_SHORT).show();
-
+        else if(quantity.getText().toString().isEmpty() || quantity.getText().toString().compareTo("0") == 0)
+                Toast.makeText(this,"الرجاء ادخال كمية صالحة الكمية",Toast.LENGTH_SHORT).show();
+        else if(packageing.getText().toString().isEmpty())
+            Toast.makeText(this,"الرجاء تعبة العبوة",Toast.LENGTH_SHORT).show();
+                else if(contact.contact_id.compareTo("none") == 0)
+                    Toast.makeText(this,"الرجاء  اختيار الوحدة",Toast.LENGTH_SHORT).show();
+                        else if(useExDate.compareTo("1") == 0)
+                            Toast.makeText(this,"الرجاء  اختيار تاريخ الصلاحية",Toast.LENGTH_SHORT).show();
                    else{
 
                         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
@@ -495,7 +520,8 @@ public class ReceiveGoods extends AppCompatActivity {
                         values.put("CountingDate",datetime);
                         if(!date.getText().toString().isEmpty())
                             values.put("EndDate",date.getText().toString());
-
+                            else
+                            values.put("EndDate","");
 
                         if(db.AddGoods(values)) {
                             Toast.makeText(this, "تمت عملية الاضافة", Toast.LENGTH_SHORT).show();

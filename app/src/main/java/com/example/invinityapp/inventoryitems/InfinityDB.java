@@ -64,7 +64,8 @@ public class InfinityDB extends SQLiteOpenHelper {
                 " deviceID VARCHAR(20),"+
                 " PIN VARCHAR(100),"+
                 " CustomerID VARCHAR(50),"+
-                " OnlineAPI VARCHAR(250))");
+                " OnlineAPI VARCHAR(250)," +
+                " requiredExDateInGoods INTEGER)");
 
 
         //جدول كل الاصناف التي سيتم مزامنتها مع المنضومة الرائيسية ####################
@@ -276,6 +277,7 @@ public class InfinityDB extends SQLiteOpenHelper {
         values.put("PIN", "asarya");
         values.put("CustomerID", "0");
         values.put("OnlineAPI", "000.000.0.0:00");
+        values.put("requiredExDateInGoods", 1);
 
         db.insert(TABLE_SETTING,null, values);
 
@@ -503,10 +505,7 @@ public class InfinityDB extends SQLiteOpenHelper {
 
         SQLiteDatabase db  = this.getWritableDatabase();
 
-        Cursor data = db.rawQuery("SELECT * FROM " + TABLE_SETTING + " WHERE mainSetting = ?", new String[]{"mainSetting"});
-
-
-        return data;
+        return  db.rawQuery("SELECT * FROM " + TABLE_SETTING + " WHERE mainSetting = ?", new String[]{"mainSetting"});
     }
 
 
@@ -728,13 +727,13 @@ public class InfinityDB extends SQLiteOpenHelper {
     }
 
 
-    public Cursor GetProductIfExist(String barcode, int ID){
+    public Cursor GetProductIfExist(String barcode, String ID){
 
         SQLiteDatabase db  = this.getWritableDatabase();
 
-        String query = "SELECT * FROM "+ RECEIVED_GOODS +" WHERE Supplier_FK ="+ ID +" AND "+ "ProductBarcode = "+ barcode;
+        String query = "SELECT * FROM "+ RECEIVED_GOODS +" WHERE Supplier_FK = ? AND ProductBarcode = ?";
 
-        return db.rawQuery(query,null);
+        return db.rawQuery(query,new String[]{ID, barcode});
     }
 
     public boolean Openreceiving(ContentValues values){
@@ -854,7 +853,16 @@ public class InfinityDB extends SQLiteOpenHelper {
 
         SQLiteDatabase db  = this.getWritableDatabase();
 
-        String query = "SELECT Product_PK,Product_Name,Quantity,ProductBarcode,IsNew,ProductUOMID_FK FROM receives_goods WHERE Supplier_FK = "+SupID+" ORDER BY Product_PK DESC";
+        String query = "SELECT Product_PK,Product_Name,Quantity,ProductBarcode,IsNew,ProductUOMID_FK, EndDate FROM receives_goods WHERE Supplier_FK = "+SupID+" ORDER BY Product_PK DESC";
+
+        return db.rawQuery(query,null);
+    }
+
+    public  Cursor getListOfGoods(String SupID, String Barcode){
+
+        SQLiteDatabase db  = this.getWritableDatabase();
+
+        String query = "SELECT Product_PK,Product_Name,Quantity,ProductBarcode,IsNew,ProductUOMID_FK, EndDate FROM receives_goods WHERE Supplier_FK = "+SupID+" AND ProductBarcode = "+ Barcode+"  ORDER BY Product_PK DESC";
 
         return db.rawQuery(query,null);
     }

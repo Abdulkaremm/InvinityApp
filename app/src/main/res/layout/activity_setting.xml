@@ -82,6 +82,32 @@
                   android:text="في حالة عدم تفعيل هذه الخدمة فإن قرأة الباركود تتم افتراضياً عن طريق قارئ الباركود, في حالة جهازك لا يدعم قارئ الباركود قم بتفعيلها"
                   />
 
+            <LinearLayout
+                android:layout_marginTop="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:background="@color/colorWhite"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="ادخال تاريخ الصلاحية اجباري في نقل البضائع"
+                    android:textSize="16sp"
+                    android:textColor="#FF3E3E46"
+                    android:layout_weight="70"
+                    />
+
+                <Switch
+                    android:id="@+id/useDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_weight="20"
+                    />
+            </LinearLayout>
+
         </LinearLayout>
 
 

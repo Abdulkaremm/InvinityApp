@@ -295,7 +295,7 @@ public class ProductHaveDate extends AppCompatActivity {
 
         int res = cal.getActualMaximum(Calendar.DATE);
         day.setValue(res);
-        day.setEnabled(false);
+//        day.setEnabled(false);
 
         if(type != -1){
 

@@ -120,7 +120,7 @@ public class ViewBillProducts extends AppCompatActivity {
 
                 Cursor res1 = db.SelectProductUOM(result.getString(4));
                 res1.moveToFirst();
-                productAdabter.add(new ProductsModel(result.getString(0), result.getString(3),result.getString(1), result.getString(2), res1.getString(0)));
+                productAdabter.add(new ProductsModel(result.getString(0), result.getString(3),result.getString(1), result.getString(2), res1.getString(0), ""));
             }
 
 

@@ -8,16 +8,18 @@ public class ProductsModel {
             name,
             qun,
             unit,
-            id;
+            id,
+            Edate;
 
 
-    public ProductsModel(String id, String bars, String prname, String qunn, String UOM){
+    public ProductsModel(String id, String bars, String prname, String qunn, String UOM, String Edate){
 
         this.barcode = bars;
         this.name = prname;
         this.qun = qunn;
         this.unit = UOM;
         this.id = id;
+        this.Edate = Edate;
     }
 
 }

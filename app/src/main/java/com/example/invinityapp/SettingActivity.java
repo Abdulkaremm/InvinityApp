@@ -2,6 +2,7 @@ package com.example.invinityapp;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
@@ -30,6 +31,7 @@ public class SettingActivity extends AppCompatActivity {
     private Dialog dialog;
     LinearLayout DeviceConfig;
     LinearLayout removeAllData;
+    Switch UseDateInGoods;
 
 
     @Override
@@ -42,7 +44,37 @@ public class SettingActivity extends AppCompatActivity {
         removeAllData = findViewById(R.id.removeAllDate);
         usecamera = findViewById(R.id.UseCamera);
         syncDate = findViewById(R.id.SyncDatePage);
+        UseDateInGoods = findViewById(R.id.useDate);
 
+
+        final InfinityDB db = new InfinityDB(this);
+        Cursor res = db.ExbordSetting();
+        res.moveToFirst();
+        if(res.getString(12).compareTo("1") == 0)
+            UseDateInGoods.setChecked(true);
+        else
+            UseDateInGoods.setChecked(false);
+
+        res.close();
+
+        UseDateInGoods.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+                ContentValues val = new ContentValues();
+
+                if(isChecked){
+                    val.put("requiredExDateInGoods", 1);
+
+                }else{
+
+                    val.put("requiredExDateInGoods", 2);
+                }
+
+                db.updateSetting(val);
+
+            }
+        });
 
 
         DeviceConfig.setOnClickListener(new View.OnClickListener() {

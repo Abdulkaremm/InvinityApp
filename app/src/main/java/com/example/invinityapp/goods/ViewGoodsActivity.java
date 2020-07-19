@@ -114,7 +114,7 @@ public class ViewGoodsActivity extends AppCompatActivity {
                     res1.moveToFirst();
 
                 }
-                productAdabter.add(new ProductsModel(res.getString(0), res.getString(3),res.getString(1), res.getString(2), res1.getString(0)));
+                productAdabter.add(new ProductsModel(res.getString(0), res.getString(3),res.getString(1), res.getString(2), res1.getString(0), res.getString(0)));
             }
 
 

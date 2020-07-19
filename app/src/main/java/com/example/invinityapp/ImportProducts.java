@@ -55,6 +55,7 @@ public class ImportProducts extends AsyncTask<Context,Void,Integer> {
         result.moveToFirst();
 
         String url = "http://"+result.getString(7)+"/api/InfinityRetail/GetAllProducts";
+        String url2 = "http://"+result.getString(7)+"/api/InfinityRetail/GetAllProductsConfirmation";
 
 
         try {  // set connection to url
@@ -145,11 +146,25 @@ public class ImportProducts extends AsyncTask<Context,Void,Integer> {
                 tabel1.clear();
 
 
-
                 Log.i("Count OF PRODUCTS", Integer.toString(i));
 
 
             }
+
+            urlConnection.disconnect();
+            stream.close();
+            reader.close();
+
+            urlConnection = (HttpURLConnection) (new URL(url2)).openConnection();
+            urlConnection.setRequestMethod("GET");
+            urlConnection.setRequestProperty("Content-Type", "application/json");
+            urlConnection.setRequestProperty("Accept", "application/json");
+            urlConnection.connect();
+
+            stream = urlConnection.getInputStream();
+            reader = new BufferedReader(new InputStreamReader(stream,"utf-8"));
+
+            reader.readLine();
 
 
             return i; // if the response is ok
@@ -182,10 +197,14 @@ public class ImportProducts extends AsyncTask<Context,Void,Integer> {
 
             Toast.makeText(context, "فشلت عملية الاستراد", Toast.LENGTH_SHORT).show();
 
-        }else{
+        }else if(response > 0){
 
             String msg = "تم أستراد ( " + response + ") صنف";
             Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
+
+        }else{
+
+            Toast.makeText(context, "لديك احدث نسخة من الاصناف", Toast.LENGTH_SHORT).show();
 
         }
 

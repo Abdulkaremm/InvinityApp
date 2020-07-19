@@ -132,7 +132,7 @@
                 android:width="20dp"
                 android:background="@drawable/edittext"
                 android:hint="0.."
-                android:textSize="14dp"
+                android:textSize="14sp"
                 android:inputType="number" />
 
         </LinearLayout>
