@@ -130,7 +130,7 @@ public class SyncDataActivity extends AppCompatActivity {
         }
         if(prudects.isChecked()){
             progressDialog.show();
-            new ImportProducts().execute(this);
+            new ImportProducts(2).execute(this);
         }
         if(purchase.isChecked()){
             progressDialog.show();

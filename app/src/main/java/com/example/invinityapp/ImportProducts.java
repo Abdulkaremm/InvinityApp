@@ -29,6 +29,12 @@ public class ImportProducts extends AsyncTask<Context,Void,Integer> {
 
     public Context context;
     public String bdate , edate;
+    private int from;
+
+    public ImportProducts(int from){
+
+        this.from = from;
+    }
 
     @Override
     protected void onPreExecute() {
@@ -189,8 +195,15 @@ public class ImportProducts extends AsyncTask<Context,Void,Integer> {
         Log.i("Begin Date", bdate);
         Log.i("End Date", edate);
 
+        if(from == 1){
 
-        SyncDataActivity.progressDialog.dismiss();
+            MainActivity.progressDialog.dismiss();
+
+        }else{
+
+            SyncDataActivity.progressDialog.dismiss();
+
+        }
 
 
         if(response == -1){

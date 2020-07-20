@@ -32,7 +32,13 @@ public class MainActivity extends AppCompatActivity {
     private static Context activity;
     public static Activity This;
     public static ProgressDialog progressDialog;
+
+    private static int lansh = 1;
     Dialog TypeInventroryScan;
+
+    String title = "مزامنة البايانات",
+            msg = "الرجاء الانظار حتى تتم مزامنة البيانات";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,11 +50,26 @@ public class MainActivity extends AppCompatActivity {
 
         This = this;
         TypeInventroryScan = new Dialog(this);
+        InfinityDB db = new InfinityDB(this);
 
-        progressDialog = new ProgressDialog(this);
-        progressDialog.setTitle("أستراد الاصناف");
-        progressDialog.setMessage("يتم العمل على أستراد بيانات الاصناف...");
-        progressDialog.setCanceledOnTouchOutside(false);
+
+
+       if(db.ifIhaveProduct() != 0 ){
+            if(lansh == 1) {
+                progressDialog = new ProgressDialog(MainActivity.this);
+                progressDialog.setTitle(title);
+                progressDialog.setMessage(msg);
+                progressDialog.setCanceledOnTouchOutside(false);
+
+                progressDialog.show();
+                new ImportProducts(1).execute(this);
+                lansh = 2;
+            }
+
+
+        }
+
+
 
         activity = this;
 
@@ -107,7 +128,7 @@ public class MainActivity extends AppCompatActivity {
 
                 progressDialog.show();
 
-                new ImportProducts().execute(this);
+                new ImportProducts(1).execute(this);
 
                 return true;
 

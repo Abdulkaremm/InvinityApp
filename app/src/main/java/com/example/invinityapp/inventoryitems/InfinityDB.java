@@ -260,7 +260,8 @@ public class InfinityDB extends SQLiteOpenHelper {
                 " QYN VARCHAR(200) NOT NULL," +
                 " Price VARCHAR(200) NOT NULL," +
                 " Date VARCHAR(200) NOT NULL," +
-                " CreateDate DATETIME)");
+                " CreateDate DATETIME," +
+                " PurchaseInvoiceItemID_PK INTEGER NOT NULL)");
 
 
         ContentValues values = new ContentValues();
@@ -318,6 +319,14 @@ public class InfinityDB extends SQLiteOpenHelper {
 
         SQLiteDatabase db  = this.getWritableDatabase();
         db.delete(TABLE_NAME, null, null);
+    }
+
+    public int ifIhaveProduct(){
+
+        SQLiteDatabase db  = this.getWritableDatabase();
+
+        Cursor res =   db.rawQuery("SELECT * FROM " + DATA_PRODUCTS, null);
+        return res.getCount();
     }
 
 
@@ -1539,36 +1548,58 @@ public class InfinityDB extends SQLiteOpenHelper {
 
     //****************************** purchase bills methods } ******************************************\\\\\\\\\
 
+    public boolean UpdatePurchaseHistory(ContentValues values){
+        SQLiteDatabase db  = this.getWritableDatabase();
+
+        int res =  db.update(PRODUCT_PURCHASE_HISTORY, values, "PurchaseInvoiceItemID_PK = ?", new String[]{values.get("PurchaseInvoiceItemID_PK").toString()});
+
+        if(res > 0)
+            return true;
+        else
+            return false;
+    }
 
     public boolean AddPurchaseHistory(ContentValues values){
 
-
         SQLiteDatabase db  = this.getWritableDatabase();
 
-        long result = db.insert(PRODUCT_PURCHASE_HISTORY,null, values);
 
-        if(result == -1){
 
-            return false;
+        if(CheckIfProductExist(values.get("PurchaseInvoiceItemID_PK").toString())){
+
+            return  UpdatePurchaseHistory(values);
 
         }else{
 
-            return true;
+            long result = db.insert(PRODUCT_PURCHASE_HISTORY,null, values);
+
+            if(result == -1){
+
+                return false;
+
+            }else{
+
+                return true;
+            }
         }
+
+
     }
 
-    public boolean CheckIfProductExist(String ProductID){
+    public boolean CheckIfProductExist(String PurchaseInvoiceItemID_PK){
 
         SQLiteDatabase db  = this.getWritableDatabase();
-        String query = "SELECT * FROM "+DATA_PRODUCTS+" WHERE Product_ID_PK ="+ ProductID ;
+        String query = "SELECT * FROM "+PRODUCT_PURCHASE_HISTORY+" WHERE PurchaseInvoiceItemID_PK ="+ PurchaseInvoiceItemID_PK ;
 
         Cursor res = db.rawQuery(query,null);
 
-        if(res.getCount() > 0)
+        if(res.getCount() > 0) {
+            res.close();
             return true;
-         else
-             return false;
-
+        }else {
+            res.close();
+            return false;
+        }
     }
 
     public void DeleteAllHistory(){
