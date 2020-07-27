@@ -23,6 +23,7 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.ProtocolException;
 import java.net.URL;
+import java.util.Objects;
 
 public class ExportDocumntsAndProducts extends AsyncTask<Context, Void, Boolean> {
 
@@ -157,6 +158,7 @@ public class ExportDocumntsAndProducts extends AsyncTask<Context, Void, Boolean>
                 // write
                 OutputStream outputStream = urlConnection.getOutputStream();
                 BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
+
                 writer.write(MainArray.toString());
                 writer.close();
                 outputStream.close();
@@ -182,12 +184,9 @@ public class ExportDocumntsAndProducts extends AsyncTask<Context, Void, Boolean>
 
 
 
-        }catch (ProtocolException e) {
+        } catch (IOException | JSONException e) {
             e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (JSONException e) {
-            e.printStackTrace();
+
         }
 
         return false;
@@ -196,6 +195,9 @@ public class ExportDocumntsAndProducts extends AsyncTask<Context, Void, Boolean>
     @Override
     protected void onPostExecute(Boolean aBoolean) {
         super.onPostExecute(aBoolean);
+
+
+
 
         if(ifHaveDocument){
 
